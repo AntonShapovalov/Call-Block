@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Call Block</string>
+
+    <!-- main activity -->
+    <string name="main_activity_title">Incoming Call Block</string>
+    <string name="main_activity_action_search">Search</string>
+    
+</resources>
