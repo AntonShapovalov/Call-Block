@@ -1,11 +1,10 @@
 package ru.org.adons.cblock;
 
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuInflater;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatListActivity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -13,6 +12,8 @@ public class MainActivity extends AppCompatActivity {
 		getSupportActionBar().setDisplayShowHomeEnabled(true);
 		getSupportActionBar().setIcon(R.drawable.ic_launcher);
 		setContentView(R.layout.activity_main);
+		
+		
 	}
 
 	@Override
