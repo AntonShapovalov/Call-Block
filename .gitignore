@@ -1,3 +1,10 @@
+# Android Studio
+.gradle
+/local.properties
+/.idea/workspace.xml
+/.idea/libraries
+/build
+
 # Windows image file caches
 Thumbs.db
 ehthumbs.db
@@ -24,7 +31,6 @@ $RECYCLE.BIN/
 # OSX
 # =========================
 
-.DS_Store
 .AppleDouble
 .LSOverride
 

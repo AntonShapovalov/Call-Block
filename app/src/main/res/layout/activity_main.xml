@@ -1,0 +1,67 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="ru.org.adons.cblock.MainActivity" >
+
+    <View
+        android:id="@+id/main_view_status_backgroud"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/main_button_switch_service"
+        android:layout_alignTop="@id/main_button_switch_service"
+        android:background="@color/orange01" />
+
+    <ToggleButton
+        android:id="@id/main_button_switch_service"
+        android:layout_width="64dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:textOff="OFF"
+        android:textOn="ON" />
+
+    <TextView
+        android:id="@+id/main_text_service_status"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@id/main_button_switch_service"
+        android:layout_alignTop="@id/main_button_switch_service"
+        android:layout_toLeftOf="@id/main_button_switch_service"
+        android:layout_toStartOf="@id/main_button_switch_service"
+        android:gravity="center"
+        android:text="@string/main_text_service_status_text"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="@android:color/white" />
+
+    <ImageButton
+        android:id="@+id/main_button_add_number"
+        android:layout_width="64dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_below="@id/main_button_switch_service"
+        android:contentDescription="@string/main_button_add_number_description"
+        android:src="@android:drawable/ic_input_add" />
+
+    <AutoCompleteTextView
+        android:id="@+id/main_auto_text_phone_number"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@id/main_button_add_number"
+        android:layout_alignTop="@id/main_button_add_number"
+        android:layout_below="@id/main_text_service_status"
+        android:layout_gravity="center"
+        android:layout_toLeftOf="@id/main_button_add_number"
+        android:layout_toStartOf="@id/main_button_add_number"
+        android:dropDownVerticalOffset="5dp"
+        android:dropDownWidth="wrap_content"
+        android:inputType="textAutoComplete|textAutoCorrect" />
+
+    <ListView
+        android:id="@android:id/list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/main_auto_text_phone_number" />
+
+</RelativeLayout>
