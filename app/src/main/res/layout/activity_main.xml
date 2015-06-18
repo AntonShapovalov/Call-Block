@@ -2,55 +2,26 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="ru.org.adons.cblock.MainActivity" >
-
-    <View
-        android:id="@+id/main_view_status_backgroud"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/main_button_switch_service"
-        android:layout_alignTop="@id/main_button_switch_service"
-        android:background="@color/orange01" />
-
-    <ToggleButton
-        android:id="@id/main_button_switch_service"
-        android:layout_width="64dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        android:textOff="OFF"
-        android:textOn="ON" />
-
-    <TextView
-        android:id="@+id/main_text_service_status"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@id/main_button_switch_service"
-        android:layout_alignTop="@id/main_button_switch_service"
-        android:layout_toLeftOf="@id/main_button_switch_service"
-        android:layout_toStartOf="@id/main_button_switch_service"
-        android:gravity="center"
-        android:text="@string/main_text_service_status_text"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:textColor="@android:color/white" />
+    android:descendantFocusability="beforeDescendants"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
+    tools:context="ru.org.adons.cblock.MainActivity">
 
     <ImageButton
         android:id="@+id/main_button_add_number"
-        android:layout_width="64dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
-        android:layout_below="@id/main_button_switch_service"
+        android:layout_marginRight="6dp"
+        android:background="@android:color/transparent"
         android:contentDescription="@string/main_button_add_number_description"
-        android:src="@android:drawable/ic_input_add" />
+        android:layout_marginTop="2dp"
+        android:src="@drawable/ic_add_circle_outline_black_36dp" />
 
     <AutoCompleteTextView
         android:id="@+id/main_auto_text_phone_number"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@id/main_button_add_number"
-        android:layout_alignTop="@id/main_button_add_number"
-        android:layout_below="@id/main_text_service_status"
         android:layout_gravity="center"
         android:layout_toLeftOf="@id/main_button_add_number"
         android:layout_toStartOf="@id/main_button_add_number"
