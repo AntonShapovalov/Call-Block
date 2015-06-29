@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:cblock="http://schemas.android.com/apk/res-auto">
-    <!-- Search, should appear as action button -->
     <item
         android:id="@+id/main_activity_action_on"
         android:icon="@drawable/ic_power_settings_new_white_36dp"
-        android:title="@string/main_activity_action_on"
         android:onClick="startService"
+        android:title="@string/main_activity_action_on"
         cblock:showAsAction="always" />
 </menu>

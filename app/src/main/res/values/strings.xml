@@ -5,7 +5,9 @@
 
     <!-- main activity -->
     <string name="main_activity_title">Incoming Call Block</string>
-    <string name="main_activity_action_on">On/Off</string>
+    <string name="main_activity_action_on">Start/Stop</string>
+    <string name="main_text_incoming_title_text">Incoming Phone Numbers</string>
+    <string name="main_text_blocking_title_text">Blocking Phone Numbers</string>
     <string name="main_button_add_number_description">Add Incoming Number</string>
     
 </resources>

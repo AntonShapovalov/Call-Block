@@ -5,34 +5,57 @@
     android:descendantFocusability="beforeDescendants"
     android:focusable="true"
     android:focusableInTouchMode="true"
+    android:paddingBottom="8dp"
+    android:paddingLeft="6dp"
+    android:paddingRight="6dp"
+    android:paddingTop="8dp"
     tools:context="ru.org.adons.cblock.MainActivity">
+
+    <TextView
+        android:id="@+id/main_text_incoming_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:text="@string/main_text_incoming_title_text"
+        android:textColor="@color/blue01"
+        android:textStyle="bold" />
 
     <ImageButton
         android:id="@+id/main_button_add_number"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        style="@style/Widget.AppCompat.Button.Borderless"
+        android:layout_width="36dp"
+        android:layout_height="36dp"
         android:layout_alignParentRight="true"
-        android:layout_marginRight="6dp"
-        android:background="@android:color/transparent"
+        android:layout_below="@id/main_text_incoming_title"
         android:contentDescription="@string/main_button_add_number_description"
-        android:layout_marginTop="2dp"
         android:src="@drawable/ic_add_circle_outline_black_36dp" />
 
     <AutoCompleteTextView
         android:id="@+id/main_auto_text_phone_number"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        android:layout_below="@id/main_text_incoming_title"
         android:layout_gravity="center"
         android:layout_toLeftOf="@id/main_button_add_number"
         android:layout_toStartOf="@id/main_button_add_number"
-        android:dropDownVerticalOffset="5dp"
-        android:dropDownWidth="wrap_content"
         android:inputType="textAutoComplete|textAutoCorrect" />
 
-    <ListView
-        android:id="@android:id/list"
+    <TextView
+        android:id="@+id/main_text_blocking_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/main_auto_text_phone_number"
+        android:layout_marginLeft="10dp"
+        android:text="@string/main_text_blocking_title_text"
+        android:textColor="@color/red01"
+        android:textStyle="bold" />
+
+    <fragment
+        android:id="@+id/main_list_fragment"
+        android:name="ru.org.adons.cblock.list.CursorLoaderListFragment"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@id/main_auto_text_phone_number" />
+        android:layout_height="wrap_content"
+        android:layout_below="@id/main_text_blocking_title"
+        android:layout_marginTop="8dp" />
 
 </RelativeLayout>
