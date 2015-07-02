@@ -7,14 +7,11 @@ import android.os.Bundle;
 import android.provider.CallLog;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.CursorLoader;
-import android.util.Log;
 
-import ru.org.adons.cblock.MainActivity;
-
-public class AutoIncomingCallLoader implements LoaderManager.LoaderCallbacks<Cursor> {
+public class IncomingCallLoader implements LoaderManager.LoaderCallbacks<Cursor> {
 
     private Context context;
-    private AutoTextDataAdapter adapter;
+    private IncomingListDataAdapter adapter;
     public static final String[] CALLS_SUMMARY_PROJECTION = new String[]{
             CallLog.Calls._ID,
             CallLog.Calls.NUMBER,
@@ -23,7 +20,7 @@ public class AutoIncomingCallLoader implements LoaderManager.LoaderCallbacks<Cur
     private static final int COLUMN_NUMBER_INDEX = 1;
     private static final int COLUMN_DATE_INDEX = 2;
 
-    public AutoIncomingCallLoader(Context context, AutoTextDataAdapter adapter) {
+    public IncomingCallLoader(Context context, IncomingListDataAdapter adapter) {
         this.context = context;
         this.adapter = adapter;
     }
@@ -42,16 +39,14 @@ public class AutoIncomingCallLoader implements LoaderManager.LoaderCallbacks<Cur
     @Override
     public void onLoadFinished(android.support.v4.content.Loader<Cursor> loader, Cursor data) {
         adapter.clear();
-        AutoTextItem item;
+        IncomingListItem item;
         String phone_number;
         String date;
-        Log.d(MainActivity.LOG_TAG, "---------AUTO LOADER---------");
         boolean isData = data.moveToFirst();
         while (isData) {
-            phone_number = data.getString(AutoIncomingCallLoader.COLUMN_NUMBER_INDEX);
-            date = data.getString(AutoIncomingCallLoader.COLUMN_DATE_INDEX);
-            Log.d(MainActivity.LOG_TAG, "phone_number=" + phone_number);
-            item = new AutoTextItem(context, phone_number, date);
+            phone_number = data.getString(IncomingCallLoader.COLUMN_NUMBER_INDEX);
+            date = data.getString(IncomingCallLoader.COLUMN_DATE_INDEX);
+            item = new IncomingListItem(context, phone_number, date);
             adapter.add(item);
             isData = data.moveToNext();
         }

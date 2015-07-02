@@ -8,10 +8,7 @@ import android.widget.ListView;
 
 import ru.org.adons.cblock.MainActivity;
 
-/**
- * A placeholder fragment containing a simple view.
- */
-public class CursorLoaderListFragment extends ListFragment {
+public class BlockingListFragment extends ListFragment {
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
@@ -20,9 +17,9 @@ public class CursorLoaderListFragment extends ListFragment {
         setEmptyText("No phone numbers");
         setListShown(false);
 
-        IncomingCallAdapter adapter = new IncomingCallAdapter(getActivity());
+        BlockingListDataAdapter adapter = new BlockingListDataAdapter(getActivity());
         setListAdapter(adapter);
-        getLoaderManager().initLoader(0, null, new IncomingCallLoader(getActivity(), adapter));
+        getLoaderManager().initLoader(0, null, new BlockingCallLoader(getActivity(), adapter));
     }
 
     @Override

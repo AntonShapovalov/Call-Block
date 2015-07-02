@@ -28,6 +28,7 @@
         android:layout_alignParentRight="true"
         android:layout_below="@id/main_text_incoming_title"
         android:contentDescription="@string/main_button_add_number_description"
+        android:onClick="addPhone"
         android:src="@drawable/ic_add_circle_outline_black_36dp" />
 
     <AutoCompleteTextView
@@ -38,6 +39,7 @@
         android:layout_gravity="center"
         android:layout_toLeftOf="@id/main_button_add_number"
         android:layout_toStartOf="@id/main_button_add_number"
+        android:hint="@string/main_auto_text_hint"
         android:inputType="textAutoComplete|textAutoCorrect" />
 
     <TextView
@@ -46,16 +48,17 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/main_auto_text_phone_number"
         android:layout_marginLeft="10dp"
+        android:layout_marginTop="8dp"
         android:text="@string/main_text_blocking_title_text"
         android:textColor="@color/red01"
         android:textStyle="bold" />
 
     <fragment
         android:id="@+id/main_list_fragment"
-        android:name="ru.org.adons.cblock.list.CursorLoaderListFragment"
+        android:name="ru.org.adons.cblock.list.BlockingListFragment"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/main_text_blocking_title"
-        android:layout_marginTop="8dp" />
+        tools:layout="@android:layout/list_content" />
 
 </RelativeLayout>

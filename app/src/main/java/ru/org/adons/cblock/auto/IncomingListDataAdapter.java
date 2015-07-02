@@ -7,7 +7,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
-public class AutoTextDataAdapter extends ArrayAdapter<AutoTextItem> {
+public class IncomingListDataAdapter extends ArrayAdapter<IncomingListItem> {
 
     private Context context;
 
@@ -16,7 +16,7 @@ public class AutoTextDataAdapter extends ArrayAdapter<AutoTextItem> {
         TextView date;
     }
 
-    public AutoTextDataAdapter(Context context, int resource) {
+    public IncomingListDataAdapter(Context context, int resource) {
         super(context, resource);
         this.context = context;
     }
