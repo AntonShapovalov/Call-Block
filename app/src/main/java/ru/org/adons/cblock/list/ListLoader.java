@@ -14,12 +14,12 @@ import ru.org.adons.cblock.R;
 import ru.org.adons.cblock.db.DBContentProvider;
 import ru.org.adons.cblock.db.PhonesTable;
 
-public class BlockingCallLoader implements LoaderManager.LoaderCallbacks<Cursor> {
+public class ListLoader implements LoaderManager.LoaderCallbacks<Cursor> {
 
     private Context context;
     private CursorAdapter adapter;
 
-    public BlockingCallLoader(Context context, CursorAdapter adapter) {
+    public ListLoader(Context context, CursorAdapter adapter) {
         this.context = context;
         this.adapter = adapter;
     }
@@ -34,7 +34,7 @@ public class BlockingCallLoader implements LoaderManager.LoaderCallbacks<Cursor>
     public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
         adapter.swapCursor(data);
         FragmentManager fragmentManager = ((MainActivity) context).getSupportFragmentManager();
-        BlockingListFragment listFragment = (BlockingListFragment) fragmentManager.findFragmentById(R.id.main_list_fragment);
+        MainListFragment listFragment = (MainListFragment) fragmentManager.findFragmentById(R.id.main_list_fragment);
         if (listFragment != null) {
             if (listFragment.isResumed()) {
                 listFragment.setListShown(true);

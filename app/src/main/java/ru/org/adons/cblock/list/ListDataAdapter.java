@@ -15,9 +15,9 @@ import java.util.Date;
 
 import ru.org.adons.cblock.db.PhonesTable;
 
-public class BlockingListDataAdapter extends CursorAdapter implements Filterable {
+public class ListDataAdapter extends CursorAdapter implements Filterable {
 
-    public BlockingListDataAdapter(Context context) {
+    public ListDataAdapter(Context context) {
         super(context, null, false);
     }
 

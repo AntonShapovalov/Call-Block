@@ -5,13 +5,13 @@ import android.text.format.DateFormat;
 
 import java.util.Date;
 
-public class IncomingListItem {
+public class AutoListItem {
 
     private Context context;
     private String phoneNumber;
     private String date;
 
-    public IncomingListItem(Context context, String phoneNumber, String date) {
+    public AutoListItem(Context context, String phoneNumber, String date) {
         this.context = context;
         this.phoneNumber = phoneNumber;
         setDate(date);

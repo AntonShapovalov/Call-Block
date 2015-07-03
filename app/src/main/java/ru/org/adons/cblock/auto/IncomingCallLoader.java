@@ -11,7 +11,7 @@ import android.support.v4.content.CursorLoader;
 public class IncomingCallLoader implements LoaderManager.LoaderCallbacks<Cursor> {
 
     private Context context;
-    private IncomingListDataAdapter adapter;
+    private AutoDataAdapter adapter;
     public static final String[] CALLS_SUMMARY_PROJECTION = new String[]{
             CallLog.Calls._ID,
             CallLog.Calls.NUMBER,
@@ -20,7 +20,7 @@ public class IncomingCallLoader implements LoaderManager.LoaderCallbacks<Cursor>
     private static final int COLUMN_NUMBER_INDEX = 1;
     private static final int COLUMN_DATE_INDEX = 2;
 
-    public IncomingCallLoader(Context context, IncomingListDataAdapter adapter) {
+    public IncomingCallLoader(Context context, AutoDataAdapter adapter) {
         this.context = context;
         this.adapter = adapter;
     }
@@ -39,14 +39,14 @@ public class IncomingCallLoader implements LoaderManager.LoaderCallbacks<Cursor>
     @Override
     public void onLoadFinished(android.support.v4.content.Loader<Cursor> loader, Cursor data) {
         adapter.clear();
-        IncomingListItem item;
+        AutoListItem item;
         String phone_number;
         String date;
         boolean isData = data.moveToFirst();
         while (isData) {
             phone_number = data.getString(IncomingCallLoader.COLUMN_NUMBER_INDEX);
             date = data.getString(IncomingCallLoader.COLUMN_DATE_INDEX);
-            item = new IncomingListItem(context, phone_number, date);
+            item = new AutoListItem(context, phone_number, date);
             adapter.add(item);
             isData = data.moveToNext();
         }

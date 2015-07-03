@@ -6,11 +6,10 @@
     <!-- main activity -->
     <string name="main_activity_title">Incoming Call Block</string>
     <string name="main_activity_action_on">Start/Stop</string>
-
-    <string name="main_text_incoming_title_text">Incoming Phone Numbers</string>
-    <string name="main_auto_text_hint">Type number or select from list</string>
-
-    <string name="main_text_blocking_title_text">Blocking Phone Numbers</string>
+    <string name="main_auto_text_hint">Type number</string>
+    <string name="main_auto_text_validation">Incorrect number</string>
     <string name="main_button_add_number_description">Add Incoming Number</string>
 
+    <!-- list fragment -->
+    <string name="list_alert_dialog_delete_title">Delete number from list?</string>
 </resources>

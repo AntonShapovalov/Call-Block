@@ -1,7 +1,9 @@
 package ru.org.adons.cblock;
 
+import android.content.ContentUris;
 import android.content.ContentValues;
 import android.graphics.drawable.ColorDrawable;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
@@ -17,7 +19,7 @@ import android.widget.AutoCompleteTextView;
 
 import java.util.Date;
 
-import ru.org.adons.cblock.auto.IncomingListDataAdapter;
+import ru.org.adons.cblock.auto.AutoDataAdapter;
 import ru.org.adons.cblock.auto.IncomingCallLoader;
 import ru.org.adons.cblock.db.DBContentProvider;
 import ru.org.adons.cblock.db.PhonesTable;
@@ -37,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
         }
         setContentView(R.layout.activity_main);
 
-        IncomingListDataAdapter adapter = new IncomingListDataAdapter(this, android.R.id.text1);
+        AutoDataAdapter adapter = new AutoDataAdapter(this, android.R.id.text1);
         incomingPhoneView = (AutoCompleteTextView) findViewById(R.id.main_auto_text_phone_number);
         incomingPhoneView.setAdapter(adapter);
         getSupportLoaderManager().initLoader(0, null, new IncomingCallLoader(this, adapter));
@@ -59,7 +61,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /**
-     * Click Action Button 'Start/Stop Service'
+     * Handle click Action Button 'Start/Stop Service'
      */
     public void startService(MenuItem item) {
         int color = getResources().getColor(R.color.green01);
@@ -70,11 +72,16 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /**
-     * Click Image Button 'Add Phone Number'
+     * Handle click Image Button 'Add Phone Number'
      */
     public void addPhone(View view) {
         String phoneNumber = incomingPhoneView.getText().toString();
         if (!(TextUtils.isEmpty(phoneNumber))) {
+            // check Phone Number is valid
+            if (!phoneNumber.matches("\\+\\d+")) {
+                incomingPhoneView.setError(getString(R.string.main_auto_text_validation));
+                return;
+            }
             new AddPhone().execute(phoneNumber);
         }
     }
@@ -86,6 +93,24 @@ public class MainActivity extends AppCompatActivity {
             values.put(PhonesTable.NUMBER, params[0]);
             values.put(PhonesTable.DATE, new Date().getTime());
             getContentResolver().insert(DBContentProvider.CONTENT_URI, values);
+            return null;
+        }
+    }
+
+    /**
+     * Handle LongClick FragmentList : Delete item
+     */
+    public void deletePhone(long rowID) {
+        new DeletePhone().execute(rowID);
+    }
+
+    private class DeletePhone extends AsyncTask<Long, Void, Void> {
+        @Override
+        protected Void doInBackground(Long... params) {
+            long rowID = params[0];
+            String where = "(" + PhonesTable._ID + " = " + rowID + ")";
+            Uri uri = ContentUris.withAppendedId(DBContentProvider.CONTENT_ID_URI, rowID);
+            getContentResolver().delete(uri, where, null);
             return null;
         }
     }
