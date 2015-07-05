@@ -5,8 +5,6 @@ import android.content.ContentUris;
 import android.content.ContentValues;
 import android.content.UriMatcher;
 import android.database.Cursor;
-import android.database.SQLException;
-import android.database.sqlite.SQLiteConstraintException;
 import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.util.Log;
@@ -45,7 +43,8 @@ public class DBContentProvider extends ContentProvider {
             cursor.setNotificationUri(getContext().getContentResolver(), uri);
             return cursor;
         } else {
-            throw new IllegalArgumentException("Unknown URI " + uri);
+            Log.e(MainActivity.LOG_TAG, "Unknown URI " + uri);
+            return null;
         }
     }
 
@@ -58,22 +57,31 @@ public class DBContentProvider extends ContentProvider {
     public Uri insert(Uri uri, ContentValues values) {
         if (uriMatcher.match(uri) == PHONES) {
             SQLiteDatabase db = dbHelper.getWritableDatabase();
-            long rowId = 0;
-            try {
-                rowId = db.insert(PhonesTable.TABLE_NAME, null, values);
-            } catch (SQLiteConstraintException e) {
-                Log.e(MainActivity.LOG_TAG, "Unique constraint");
-                return null;
+
+            // check Phone Number have not already in list
+            String phoneNumber = values.getAsString(PhonesTable.NUMBER);
+            String where = "(" + PhonesTable.NUMBER + " = '" + phoneNumber + "')";
+            Cursor cursor = db.query(PhonesTable.TABLE_NAME, PhonesTable.PHONES_SUMMARY_PROJECTION, where, null, null, null, null);
+            if (cursor != null) {
+                if (cursor.getCount() > 0) {
+                    cursor.close();
+                    return null;
+                }
+                cursor.close();
             }
+
+            long rowId = db.insert(PhonesTable.TABLE_NAME, null, values);
             if (rowId > 0) {
                 Uri noteUri = ContentUris.withAppendedId(CONTENT_ID_URI, rowId);
                 getContext().getContentResolver().notifyChange(noteUri, null);
                 return noteUri;
             } else {
-                throw new SQLException("Failed to insert row into " + uri);
+                Log.e(MainActivity.LOG_TAG, "Failed to insert row into " + uri);
+                return null;
             }
         } else {
-            throw new IllegalArgumentException("Unknown URI " + uri);
+            Log.e(MainActivity.LOG_TAG, "Unknown URI " + uri);
+            return null;
         }
     }
 
@@ -86,10 +94,12 @@ public class DBContentProvider extends ContentProvider {
                 getContext().getContentResolver().notifyChange(uri, null);
                 return rowId;
             } else {
-                throw new SQLException("Failed to delete row " + uri);
+                Log.e(MainActivity.LOG_TAG, "Failed to delete row " + uri);
+                return 0;
             }
         } else {
-            throw new IllegalArgumentException("Unknown URI " + uri);
+            Log.e(MainActivity.LOG_TAG, "Unknown URI " + uri);
+            return 0;
         }
     }
 

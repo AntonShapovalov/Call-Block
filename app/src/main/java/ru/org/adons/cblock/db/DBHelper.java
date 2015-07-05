@@ -10,7 +10,7 @@ import ru.org.adons.cblock.MainActivity;
 public class DBHelper extends SQLiteOpenHelper {
 
     private static final String DATABASE_NAME = "cblock.db";
-    private static final int DATABASE_VERSION = 2;
+    private static final int DATABASE_VERSION = 1;
 
     public DBHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -20,7 +20,7 @@ public class DBHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         db.execSQL("CREATE TABLE " + PhonesTable.TABLE_NAME + " ("
                 + PhonesTable._ID + " INTEGER PRIMARY KEY,"
-                + PhonesTable.NUMBER + " TEXT UNIQUE,"
+                + PhonesTable.NUMBER + " TEXT,"
                 + PhonesTable.DATE + " INTEGER"
                 + ");");
     }

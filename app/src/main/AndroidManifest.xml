@@ -28,6 +28,7 @@
             android:name=".db.DBContentProvider"
             android:authorities="ru.org.adons.cblock.db"
             android:exported="false" />
+        <service android:name=".BlockService" />
     </application>
 
 </manifest>

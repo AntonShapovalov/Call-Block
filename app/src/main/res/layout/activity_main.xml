@@ -31,7 +31,7 @@
             android:layout_toLeftOf="@id/main_button_add_number"
             android:layout_toStartOf="@id/main_button_add_number"
             android:hint="@string/main_auto_text_hint"
-            android:inputType="textAutoComplete|textAutoCorrect" />
+            android:inputType="textAutoComplete|textAutoCorrect|phone" />
 
     </RelativeLayout>
 
