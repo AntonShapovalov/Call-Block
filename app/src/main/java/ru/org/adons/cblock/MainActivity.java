@@ -12,6 +12,7 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -30,6 +31,7 @@ import ru.org.adons.cblock.db.PhonesTable;
 public class MainActivity extends AppCompatActivity {
 
     public static final String LOG_TAG = "CBLOCK";
+    public static final int NOTIFICATION_ID = 201507;
     // Action Bar and Action Button 'Start/Stop Service'
     private ActionBar actionBar;
     private SharedPreferences pref;
@@ -80,15 +82,20 @@ public class MainActivity extends AppCompatActivity {
      * Handle click Action Button 'Start/Stop Service'
      */
     public void startService(MenuItem item) {
+        Toast toast;
         if (isServiceEnabled) {
             isServiceEnabled = false;
             stopService(serviceIntent);
-            Toast.makeText(this, R.string.main_service_disabled_message, Toast.LENGTH_LONG).show();
+            toast = Toast.makeText(this, R.string.main_service_disabled_message, Toast.LENGTH_LONG);
+            toast.setGravity(Gravity.TOP, 0, 8);
+            toast.show();
             Log.d(LOG_TAG, "stopService");
         } else {
             isServiceEnabled = true;
             startService(serviceIntent);
-            Toast.makeText(this, R.string.main_service_enabled_message, Toast.LENGTH_LONG).show();
+            toast = Toast.makeText(this, R.string.main_service_enabled_message, Toast.LENGTH_LONG);
+            toast.setGravity(Gravity.TOP, 0, 8);
+            toast.show();
             Log.d(LOG_TAG, "startService");
         }
         setActionBarBackground();

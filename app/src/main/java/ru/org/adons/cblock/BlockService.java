@@ -1,10 +1,13 @@
 package ru.org.adons.cblock;
 
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.IBinder;
-import android.os.RemoteException;
+import android.support.v4.app.NotificationCompat;
+import android.support.v4.app.TaskStackBuilder;
 import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
 import android.telephony.PhoneStateListener;
@@ -46,7 +49,7 @@ public class BlockService extends Service implements Loader.OnLoadCompleteListen
             m.setAccessible(true);
             telephony = (ITelephony) m.invoke(manager);
         } catch (Exception e) {
-            Log.e(MainActivity.LOG_TAG, e.getLocalizedMessage());
+            Log.e(MainActivity.LOG_TAG, e.getMessage());
         }
     }
 
@@ -74,8 +77,8 @@ public class BlockService extends Service implements Loader.OnLoadCompleteListen
                     if (telephony != null && phones.contains(incomingNumber)) {
                         try {
                             telephony.endCall();
-                        } catch (RemoteException e) {
-                            e.printStackTrace();
+                        } catch (Exception e) {
+                            Log.d(MainActivity.LOG_TAG, e.getMessage());
                         }
                         Log.d(MainActivity.LOG_TAG, "blocked number:" + incomingNumber);
                     }
@@ -90,8 +93,25 @@ public class BlockService extends Service implements Loader.OnLoadCompleteListen
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
+        // set Notification - prevent service from stop by system
+        NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(this)
+                .setSmallIcon(R.drawable.ic_notify)
+                .setContentTitle(getApplicationContext().getString(R.string.main_notification_title))
+                .setContentText(getApplicationContext().getString(R.string.main_notification_text))
+                .setAutoCancel(true)
+                .setPriority(NotificationCompat.PRIORITY_MIN);
+        // handle notification click
+        Intent resultIntent = new Intent(this, MainActivity.class);
+        TaskStackBuilder stackBuilder = TaskStackBuilder.create(this);
+        stackBuilder.addParentStack(MainActivity.class);
+        stackBuilder.addNextIntent(resultIntent);
+        PendingIntent resultPendingIntent = stackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
+        mBuilder.setContentIntent(resultPendingIntent);
+        // start notification
+        startForeground(MainActivity.NOTIFICATION_ID, mBuilder.build());
+
         Log.d(MainActivity.LOG_TAG, "Service Started");
-        return Service.START_NOT_STICKY;
+        return Service.START_STICKY;
     }
 
     @Override
@@ -104,6 +124,10 @@ public class BlockService extends Service implements Loader.OnLoadCompleteListen
         }
         // unregister Phone State Listener
         manager.listen(listener, PhoneStateListener.LISTEN_NONE);
+        // cancel notification
+        NotificationManager notificationManager = (NotificationManager) getSystemService(getApplicationContext().NOTIFICATION_SERVICE);
+        notificationManager.cancel(MainActivity.NOTIFICATION_ID);
+
         super.onDestroy();
     }
 
