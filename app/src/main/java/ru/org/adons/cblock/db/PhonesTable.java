@@ -11,9 +11,11 @@ public final class PhonesTable extends CallLog.Calls {
     public static final String[] PHONES_SUMMARY_PROJECTION = new String[]{
             _ID,
             NUMBER,
-            DATE
+            DATE,
+            CACHED_NAME
     };
     public static final int COLUMN_NUMBER_INDEX = 1;
     public static final int COLUMN_DATE_INDEX = 2;
+    public static final int COLUMN_NAME_INDEX = 3;
 
 }

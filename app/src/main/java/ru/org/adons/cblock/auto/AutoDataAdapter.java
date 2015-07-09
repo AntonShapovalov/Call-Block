@@ -15,6 +15,7 @@ public class AutoDataAdapter extends ArrayAdapter<AutoListItem> {
 
     private static class ViewHolder {
         TextView phone_number;
+        TextView name;
         TextView date;
     }
 
@@ -32,7 +33,8 @@ public class AutoDataAdapter extends ArrayAdapter<AutoListItem> {
             convertView = inflater.inflate(R.layout.list_item, parent, false);
             holder = new ViewHolder();
             holder.phone_number = (TextView) convertView.findViewById(R.id.list_item_text1);
-            holder.date = (TextView) convertView.findViewById(R.id.list_item_text2);
+            holder.name = (TextView) convertView.findViewById(R.id.list_item_text2);
+            holder.date = (TextView) convertView.findViewById(R.id.list_item_text4);
             convertView.setTag(holder);
         } else {
             holder = (ViewHolder) convertView.getTag();
@@ -40,6 +42,7 @@ public class AutoDataAdapter extends ArrayAdapter<AutoListItem> {
         // set list item values
         holder.phone_number.setText(this.getItem(position).getPhoneNumber());
         holder.date.setText(this.getItem(position).getDate());
+        holder.name.setText(this.getItem(position).getName());
 
         return convertView;
     }

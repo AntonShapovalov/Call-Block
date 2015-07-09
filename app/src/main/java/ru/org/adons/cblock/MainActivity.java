@@ -18,12 +18,14 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.AutoCompleteTextView;
 import android.widget.Toast;
 
 import java.util.Date;
 
 import ru.org.adons.cblock.auto.AutoDataAdapter;
+import ru.org.adons.cblock.auto.AutoListItem;
 import ru.org.adons.cblock.auto.IncomingCallLoader;
 import ru.org.adons.cblock.db.DBContentProvider;
 import ru.org.adons.cblock.db.PhonesTable;
@@ -39,6 +41,7 @@ public class MainActivity extends AppCompatActivity {
     private Intent serviceIntent;
     // Auto Text View for Incoming call
     private AutoCompleteTextView incomingPhoneView;
+    private AutoListItem autoListItem;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,13 +63,20 @@ public class MainActivity extends AppCompatActivity {
         incomingPhoneView = (AutoCompleteTextView) findViewById(R.id.main_auto_text_phone_number);
         incomingPhoneView.setAdapter(adapter);
         getSupportLoaderManager().initLoader(0, null, new IncomingCallLoader(this, adapter));
-
+        // always show all drop down on touch
         incomingPhoneView.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 incomingPhoneView.showDropDown();
                 incomingPhoneView.setError(null);
                 return false;
+            }
+        });
+        // store selected list item to get name
+        incomingPhoneView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                autoListItem = (AutoListItem) parent.getAdapter().getItem(position);
             }
         });
     }
@@ -118,7 +128,13 @@ public class MainActivity extends AppCompatActivity {
             } else {
                 incomingPhoneView.setError(null);
             }
-            new AddPhone().execute(phoneNumber);
+            // get Name
+            String name = null;
+            if (autoListItem != null) {
+                name = autoListItem.getName();
+                autoListItem = null;
+            }
+            new AddPhone().execute(new String[]{phoneNumber, name});
         }
     }
 
@@ -128,6 +144,7 @@ public class MainActivity extends AppCompatActivity {
             ContentValues values = new ContentValues();
             values.put(PhonesTable.NUMBER, params[0]);
             values.put(PhonesTable.DATE, new Date().getTime());
+            values.put(PhonesTable.CACHED_NAME, params[1]);
             getContentResolver().insert(DBContentProvider.CONTENT_URI, values);
             return null;
         }

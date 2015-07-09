@@ -10,10 +10,12 @@ public class AutoListItem {
     private Context context;
     private String phoneNumber;
     private String date;
+    private String name;
 
-    public AutoListItem(Context context, String phoneNumber, String date) {
+    public AutoListItem(Context context, String phoneNumber, String date, String name) {
         this.context = context;
         this.phoneNumber = phoneNumber;
+        this.name = name;
         setDate(date);
     }
 
@@ -32,6 +34,10 @@ public class AutoListItem {
 
     public String getDate() {
         return date;
+    }
+
+    public String getName() {
+        return name;
     }
 
     // AutoCompleteTextView call this to get Text

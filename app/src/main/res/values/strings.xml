@@ -12,7 +12,7 @@
     <string name="main_service_enabled_message">Block Service Enabled</string>
     <string name="main_service_disabled_message">Block Service Disabled</string>
     <string name="main_notification_title">Incoming Call Block</string>
-    <string name="main_notification_text">Service Enabled. Incoming calls will dismissed</string>
+    <string name="main_notification_text">Service Enabled. Calls will dismissed.</string>
 
     <string name="main_auto_text_hint">Type or select number</string>
     <string name="main_auto_text_validation">Incorrect number, correct number is\n +1 222 333 44 55</string>
@@ -20,4 +20,8 @@
 
     <!-- list fragment -->
     <string name="list_alert_dialog_delete_title">Delete number from list?</string>
+
+    <!-- list item -->
+    <string name="list_item_text1_default">Phone Number</string>
+    <string name="list_item_text4_default">Date</string>
 </resources>

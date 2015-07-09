@@ -15,10 +15,12 @@ public class IncomingCallLoader implements LoaderManager.LoaderCallbacks<Cursor>
     public static final String[] CALLS_SUMMARY_PROJECTION = new String[]{
             CallLog.Calls._ID,
             CallLog.Calls.NUMBER,
-            CallLog.Calls.DATE
+            CallLog.Calls.DATE,
+            CallLog.Calls.CACHED_NAME
     };
     private static final int COLUMN_NUMBER_INDEX = 1;
     private static final int COLUMN_DATE_INDEX = 2;
+    private static final int COLUMN_NAME_INDEX = 3;
 
     public IncomingCallLoader(Context context, AutoDataAdapter adapter) {
         this.context = context;
@@ -42,11 +44,13 @@ public class IncomingCallLoader implements LoaderManager.LoaderCallbacks<Cursor>
         AutoListItem item;
         String phone_number;
         String date;
+        String name;
         boolean isData = data.moveToFirst();
         while (isData) {
-            phone_number = data.getString(IncomingCallLoader.COLUMN_NUMBER_INDEX);
-            date = data.getString(IncomingCallLoader.COLUMN_DATE_INDEX);
-            item = new AutoListItem(context, phone_number, date);
+            phone_number = data.getString(COLUMN_NUMBER_INDEX);
+            date = data.getString(COLUMN_DATE_INDEX);
+            name = data.getString(COLUMN_NAME_INDEX);
+            item = new AutoListItem(context, phone_number, date, name);
             adapter.add(item);
             isData = data.moveToNext();
         }
