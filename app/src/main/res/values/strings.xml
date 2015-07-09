@@ -11,8 +11,8 @@
     <string name="main_pref_key_switch">switch_key</string>
     <string name="main_service_enabled_message">Block Service Enabled</string>
     <string name="main_service_disabled_message">Block Service Disabled</string>
-    <string name="main_notification_title">Service Started</string>
-    <string name="main_notification_text">Incoming call block Service started</string>
+    <string name="main_notification_title">Incoming Call Block</string>
+    <string name="main_notification_text">Service Enabled. Incoming calls will dismissed</string>
 
     <string name="main_auto_text_hint">Type or select number</string>
     <string name="main_auto_text_validation">Incorrect number, correct number is\n +1 222 333 44 55</string>

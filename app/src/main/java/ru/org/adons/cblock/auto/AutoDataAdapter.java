@@ -7,6 +7,8 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
+import ru.org.adons.cblock.R;
+
 public class AutoDataAdapter extends ArrayAdapter<AutoListItem> {
 
     private Context context;
@@ -27,10 +29,10 @@ public class AutoDataAdapter extends ArrayAdapter<AutoListItem> {
         // set list item view
         if (convertView == null) {
             LayoutInflater inflater = LayoutInflater.from(context);
-            convertView = inflater.inflate(android.R.layout.simple_list_item_2, parent, false);
+            convertView = inflater.inflate(R.layout.list_item, parent, false);
             holder = new ViewHolder();
-            holder.phone_number = (TextView) convertView.findViewById(android.R.id.text1);
-            holder.date = (TextView) convertView.findViewById(android.R.id.text2);
+            holder.phone_number = (TextView) convertView.findViewById(R.id.list_item_text1);
+            holder.date = (TextView) convertView.findViewById(R.id.list_item_text2);
             convertView.setTag(holder);
         } else {
             holder = (ViewHolder) convertView.getTag();
