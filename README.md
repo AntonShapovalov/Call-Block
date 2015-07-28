@@ -15,4 +15,4 @@
 4. When Service enabled, notification appears
   * ![link](../../../img/blob/master/cblock/notification.png)
 
-5. To delete phone from block list long press list item and confirm delete
+5. To delete phone from block list just long press list item and confirm delete
