@@ -48,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         actionBar = getSupportActionBar();
         if (actionBar != null) {
-            actionBar.setDisplayShowHomeEnabled(true);
+            actionBar.setDisplayShowTitleEnabled(true);
         }
         setContentView(R.layout.activity_main);
 
