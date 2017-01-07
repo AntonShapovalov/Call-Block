@@ -9,7 +9,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.util.Log;
 
-import ru.org.adons.cblock.MainActivity;
+import ru.org.adons.cblock.ui.main.MainActivity;
 
 public class DBContentProvider extends ContentProvider {
 

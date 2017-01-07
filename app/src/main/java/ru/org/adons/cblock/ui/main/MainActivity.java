@@ -1,9 +1,8 @@
-package ru.org.adons.cblock;
+package ru.org.adons.cblock.ui.main;
 
 import android.content.ContentUris;
 import android.content.ContentValues;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -24,11 +23,17 @@ import android.widget.Toast;
 
 import java.util.Date;
 
-import ru.org.adons.cblock.auto.AutoDataAdapter;
-import ru.org.adons.cblock.auto.AutoListItem;
-import ru.org.adons.cblock.auto.IncomingCallLoader;
+import javax.inject.Inject;
+
+import ru.org.adons.cblock.R;
+import ru.org.adons.cblock.app.CBlockApplication;
+import ru.org.adons.cblock.app.Preferences;
+import ru.org.adons.cblock.ui.callog.AutoDataAdapter;
+import ru.org.adons.cblock.ui.callog.AutoListItem;
+import ru.org.adons.cblock.ui.callog.IncomingCallLoader;
 import ru.org.adons.cblock.db.DBContentProvider;
 import ru.org.adons.cblock.db.PhonesTable;
+import ru.org.adons.cblock.service.BlockService;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -36,12 +41,13 @@ public class MainActivity extends AppCompatActivity {
     public static final int NOTIFICATION_ID = 201507;
     // Action Bar and Action Button 'Start/Stop Service'
     private ActionBar actionBar;
-    private SharedPreferences pref;
     private boolean isServiceEnabled;
     private Intent serviceIntent;
     // Auto Text View for Incoming call
     private AutoCompleteTextView incomingPhoneView;
     private AutoListItem autoListItem;
+
+    @Inject Preferences pref;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,9 +58,10 @@ public class MainActivity extends AppCompatActivity {
         }
         setContentView(R.layout.activity_main);
 
+        ((CBlockApplication) getApplication()).applicationComponent().inject(this);
+
         // set background for Action Bar and Action Button 'Start/Stop Service'
-        pref = getSharedPreferences(getString(R.string.app_preferences_file), MODE_PRIVATE);
-        isServiceEnabled = pref.getBoolean(getString(R.string.main_pref_key_switch), false);
+        isServiceEnabled = pref.getBoolean(getString(R.string.main_pref_key_switch));
         setActionBarBackground();
         serviceIntent = new Intent(this, BlockService.class);
 
@@ -109,9 +116,7 @@ public class MainActivity extends AppCompatActivity {
             Log.d(LOG_TAG, "startService");
         }
         setActionBarBackground();
-        SharedPreferences.Editor editor = pref.edit();
-        editor.putBoolean(getString(R.string.main_pref_key_switch), isServiceEnabled);
-        editor.commit();
+        pref.putBoolean(getString(R.string.main_pref_key_switch), isServiceEnabled);
     }
 
     /**
@@ -172,9 +177,9 @@ public class MainActivity extends AppCompatActivity {
         if (actionBar != null) {
             int color;
             if (isServiceEnabled) {
-                color = getResources().getColor(R.color.green01);
+                color = getResources().getColor(R.color.green);
             } else {
-                color = getResources().getColor(R.color.orange01);
+                color = getResources().getColor(R.color.orange);
             }
             actionBar.setBackgroundDrawable(new ColorDrawable(color));
         }

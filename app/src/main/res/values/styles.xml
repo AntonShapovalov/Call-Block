@@ -1,14 +1,12 @@
 <resources>
 
-    <style name="AppBaseTheme" parent="@style/Theme.AppCompat.Light.DarkActionBar" />
-
     <!-- Application theme. -->
-    <style name="AppTheme" parent="AppBaseTheme">
-        <item name="actionBarStyle">@style/ActionBarStyle</item>
-    </style>
+    <style name="AppTheme" parent="Base.AppTheme"/>
 
-    <style name="ActionBarStyle" parent="@style/Widget.AppCompat.Light.ActionBar.Solid.Inverse">
-        <item name="background">@color/orange01</item>
+    <style name="Base.AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimary">@color/red_500</item>
+        <item name="colorPrimaryDark">@color/red_700</item>
+        <item name="colorAccent">@color/light_blue_accent_200</item>
     </style>
 
 </resources>

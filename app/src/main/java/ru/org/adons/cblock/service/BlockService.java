@@ -1,4 +1,4 @@
-package ru.org.adons.cblock;
+package ru.org.adons.cblock.service;
 
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -20,6 +20,8 @@ import java.lang.reflect.Method;
 import java.util.HashSet;
 import java.util.Set;
 
+import ru.org.adons.cblock.ui.main.MainActivity;
+import ru.org.adons.cblock.R;
 import ru.org.adons.cblock.db.DBContentProvider;
 import ru.org.adons.cblock.db.PhonesTable;
 

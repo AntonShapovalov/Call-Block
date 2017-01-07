@@ -5,7 +5,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
-import ru.org.adons.cblock.MainActivity;
+import ru.org.adons.cblock.ui.main.MainActivity;
 
 public class DBHelper extends SQLiteOpenHelper {
 

@@ -1,4 +1,4 @@
-package ru.org.adons.cblock.auto;
+package ru.org.adons.cblock.ui.callog;
 
 import android.content.Context;
 import android.database.Cursor;

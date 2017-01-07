@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="ru.org.adons.cblock.MainActivity">
+    tools:context="ru.org.adons.cblock.ui.main.MainActivity">
 
     <!-- Incoming Phones AutoTextList container -->
     <RelativeLayout
@@ -38,9 +38,17 @@
     <!-- Blocking Phones List -->
     <fragment
         android:id="@+id/main_list_fragment"
-        android:name="ru.org.adons.cblock.list.MainListFragment"
+        android:name="ru.org.adons.cblock.ui.main.MainListFragment"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         tools:layout="@android:layout/list_content" />
+
+    <ProgressBar
+        android:id="@android:id/progress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:indeterminate="true"
+        android:visibility="visible" />
 
 </LinearLayout>

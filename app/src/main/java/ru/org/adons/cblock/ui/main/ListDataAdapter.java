@@ -1,4 +1,4 @@
-package ru.org.adons.cblock.list;
+package ru.org.adons.cblock.ui.main;
 
 import android.content.Context;
 import android.database.Cursor;

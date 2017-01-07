@@ -1,4 +1,4 @@
-package ru.org.adons.cblock.list;
+package ru.org.adons.cblock.ui.main;
 
 import android.app.Dialog;
 import android.content.DialogInterface;
@@ -10,7 +10,6 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 
-import ru.org.adons.cblock.MainActivity;
 import ru.org.adons.cblock.R;
 
 public class MainListFragment extends ListFragment {

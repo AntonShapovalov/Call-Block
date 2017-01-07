@@ -1,4 +1,4 @@
-package ru.org.adons.cblock.list;
+package ru.org.adons.cblock.ui.main;
 
 import android.content.Context;
 import android.database.Cursor;
@@ -9,7 +9,6 @@ import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
 import android.support.v4.widget.CursorAdapter;
 
-import ru.org.adons.cblock.MainActivity;
 import ru.org.adons.cblock.R;
 import ru.org.adons.cblock.db.DBContentProvider;
 import ru.org.adons.cblock.db.PhonesTable;
