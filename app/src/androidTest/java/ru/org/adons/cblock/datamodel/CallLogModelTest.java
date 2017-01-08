@@ -2,7 +2,6 @@ package ru.org.adons.cblock.datamodel;
 
 import android.app.UiAutomation;
 import android.os.Build;
-import android.support.test.InstrumentationRegistry;
 import android.support.test.runner.AndroidJUnit4;
 
 import org.junit.Before;
@@ -14,10 +13,6 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-import ru.org.adons.cblock.app.CBlockApplication;
-import ru.org.adons.cblock.app.DaggerTestComponent;
-import ru.org.adons.cblock.app.TestComponent;
-import ru.org.adons.cblock.app.TestModule;
 import ru.org.adons.cblock.model.CallLogItem;
 import ru.org.adons.cblock.utils.Logging;
 import ru.org.adons.cblock.utils.SubscriptionUtils;
@@ -35,7 +30,7 @@ import static junit.framework.Assert.assertTrue;
  */
 
 @RunWith(AndroidJUnit4.class)
-public class CallLogModelTest {
+public class CallLogModelTest extends BaseModelTest {
 
     @Inject CallLogModel callLogModel;
     private final List<CallLogItem> callLogItems = new ArrayList<>();
@@ -51,12 +46,7 @@ public class CallLogModelTest {
         }
 
         // provide dependencies
-        CBlockApplication application = (CBlockApplication) InstrumentationRegistry.getTargetContext().getApplicationContext();
-        TestComponent component = DaggerTestComponent.builder()
-                .applicationComponent(application.applicationComponent())
-                .testModule(new TestModule())
-                .build();
-        component.inject(this);
+        testComponent().inject(this);
     }
 
     /**

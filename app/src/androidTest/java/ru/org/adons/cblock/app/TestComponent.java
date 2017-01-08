@@ -1,6 +1,7 @@
 package ru.org.adons.cblock.app;
 
 import dagger.Component;
+import ru.org.adons.cblock.datamodel.BlockListModelTest;
 import ru.org.adons.cblock.datamodel.CallLogModelTest;
 import ru.org.adons.cblock.ui.base.ViewScope;
 
@@ -13,5 +14,7 @@ import ru.org.adons.cblock.ui.base.ViewScope;
 public interface TestComponent {
 
     void inject(CallLogModelTest test);
+
+    void inject(BlockListModelTest test);
 
 }

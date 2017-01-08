@@ -5,10 +5,14 @@ import android.content.Context;
 import com.squareup.sqlbrite.BriteContentResolver;
 import com.squareup.sqlbrite.SqlBrite;
 
+import org.greenrobot.greendao.database.Database;
+
 import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
+import ru.org.adons.cblock.model.DaoMaster;
+import ru.org.adons.cblock.model.DaoSession;
 import rx.schedulers.Schedulers;
 
 /**
@@ -46,6 +50,14 @@ class ApplicationModule {
     @Provides
     SqlBrite provideSqlBrite() {
         return new SqlBrite.Builder().build();
+    }
+
+    @Singleton
+    @Provides
+    DaoSession provideDaoSession() {
+        DaoMaster.DevOpenHelper helper = new DaoMaster.DevOpenHelper(context, "cblock-db");
+        Database db = helper.getWritableDb();
+        return new DaoMaster(db).newSession();
     }
 
 }

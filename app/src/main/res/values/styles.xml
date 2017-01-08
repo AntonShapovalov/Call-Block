@@ -4,8 +4,8 @@
     <style name="AppTheme" parent="Base.AppTheme"/>
 
     <style name="Base.AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
-        <item name="colorPrimary">@color/red_500</item>
-        <item name="colorPrimaryDark">@color/red_700</item>
+        <item name="colorPrimary">@color/red_600</item>
+        <item name="colorPrimaryDark">@color/red_800</item>
         <item name="colorAccent">@color/light_blue_accent_200</item>
     </style>
 

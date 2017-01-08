@@ -5,6 +5,7 @@ import com.squareup.sqlbrite.BriteContentResolver;
 import javax.inject.Singleton;
 
 import dagger.Component;
+import ru.org.adons.cblock.model.DaoSession;
 import ru.org.adons.cblock.ui.main.MainActivity;
 
 /**
@@ -18,5 +19,7 @@ public interface ApplicationComponent {
     void inject(MainActivity activity); // TODO: move this into MainComponent
 
     BriteContentResolver resolver();
+
+    DaoSession daoSession();
 
 }
