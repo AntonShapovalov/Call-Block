@@ -43,7 +43,6 @@ public class DBContentProvider extends ContentProvider {
             cursor.setNotificationUri(getContext().getContentResolver(), uri);
             return cursor;
         } else {
-            Log.e(MainActivity.LOG_TAG, "Unknown URI " + uri);
             return null;
         }
     }
@@ -76,11 +75,9 @@ public class DBContentProvider extends ContentProvider {
                 getContext().getContentResolver().notifyChange(noteUri, null);
                 return noteUri;
             } else {
-                Log.e(MainActivity.LOG_TAG, "Failed to insert row into " + uri);
                 return null;
             }
         } else {
-            Log.e(MainActivity.LOG_TAG, "Unknown URI " + uri);
             return null;
         }
     }
@@ -94,11 +91,9 @@ public class DBContentProvider extends ContentProvider {
                 getContext().getContentResolver().notifyChange(uri, null);
                 return rowId;
             } else {
-                Log.e(MainActivity.LOG_TAG, "Failed to delete row " + uri);
                 return 0;
             }
         } else {
-            Log.e(MainActivity.LOG_TAG, "Unknown URI " + uri);
             return 0;
         }
     }

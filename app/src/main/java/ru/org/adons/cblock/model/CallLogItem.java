@@ -6,7 +6,7 @@ import com.google.auto.value.AutoValue;
 
 import javax.annotation.Nullable;
 
-import ru.org.adons.cblock.datamodel.CallLogModel;
+import ru.org.adons.cblock.data.CallLogModel;
 
 /**
  * Model for {@link CallLog.Calls} item, used in {@link CallLogModel}

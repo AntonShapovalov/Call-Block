@@ -1,4 +1,4 @@
-package ru.org.adons.cblock.datamodel;
+package ru.org.adons.cblock.data;
 
 import java.util.List;
 
@@ -9,14 +9,16 @@ import ru.org.adons.cblock.model.DaoSession;
 import rx.Observable;
 
 /**
- * Provide data for list of blocking phones
+ * Provide data for block list
  */
 
 public class BlockListModel {
 
+    private final DaoSession daoSession;
     private final BlockListItemDao blockListDao;
 
     public BlockListModel(DaoSession daoSession) {
+        this.daoSession = daoSession;
         this.blockListDao = daoSession.getBlockListItemDao();
     }
 
@@ -25,10 +27,9 @@ public class BlockListModel {
      * If number already exists in list  - it will not added
      *
      * @param logItem incoming or missed call
-     * @return added block list item
      */
-    Observable<BlockListItem> addNumber(CallLogItem logItem) {
-        return Observable.fromCallable(() -> {
+    void addNumber(CallLogItem logItem) {
+        daoSession.runInTx(() -> {
             BlockListItem dbItem = blockListDao.queryBuilder()
                     .where(BlockListItemDao.Properties.PhoneNumber.eq(logItem.phoneNumber()))
                     .limit(1)
@@ -40,7 +41,6 @@ public class BlockListModel {
                 dbItem.setName(logItem.name());
                 blockListDao.insert(dbItem);
             }
-            return dbItem;
         });
     }
 

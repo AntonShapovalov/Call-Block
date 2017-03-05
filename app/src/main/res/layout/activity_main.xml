@@ -1,47 +1,22 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     tools:context="ru.org.adons.cblock.ui.main.MainActivity">
 
-    <!-- Incoming Phones AutoTextList container -->
-    <RelativeLayout
+    <FrameLayout
+        android:id="@+id/fragment_container"
         android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/main_fab"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="#E0E0E0"
-        android:paddingLeft="16dp">
-
-        <ImageButton
-            android:id="@+id/main_button_add_number"
-            style="@style/Widget.AppCompat.Button.Borderless"
-            android:layout_width="48dp"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:contentDescription="@string/main_button_add_number_description"
-            android:onClick="addPhone"
-            android:src="@drawable/ic_add_circle_outline_black_36dp" />
-
-        <AutoCompleteTextView
-            android:id="@+id/main_auto_text_phone_number"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_toLeftOf="@id/main_button_add_number"
-            android:layout_toStartOf="@id/main_button_add_number"
-            android:hint="@string/main_auto_text_hint"
-            android:inputType="textAutoComplete|textAutoCorrect|phone" />
-
-    </RelativeLayout>
-
-    <!-- Blocking Phones List -->
-    <fragment
-        android:id="@+id/main_list_fragment"
-        android:name="ru.org.adons.cblock.ui.main.MainListFragment"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        tools:layout="@android:layout/list_content" />
+        android:layout_gravity="end|bottom"
+        android:layout_margin="16dp"
+        android:src="@drawable/ic_add_white_24dp"/>
 
     <ProgressBar
         android:id="@android:id/progress"
@@ -49,6 +24,6 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:indeterminate="true"
-        android:visibility="visible" />
+        android:visibility="visible"/>
 
-</LinearLayout>
+</android.support.design.widget.CoordinatorLayout>

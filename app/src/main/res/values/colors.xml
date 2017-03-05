@@ -9,6 +9,6 @@
     <color name="red_800">#C62828</color>
     <color name="red_900">#B71C1C</color>
     <!-- blue -->
-    <color name="light_blue_accent_200">#40C4FF</color>
-    <color name="light_blue_accent_700">#0091EA</color>
+    <color name="light_blue_a200">#40C4FF</color>
+    <color name="light_blue_a700">#0091EA</color>
 </resources>

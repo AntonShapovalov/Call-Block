@@ -4,8 +4,8 @@ import com.squareup.sqlbrite.BriteContentResolver;
 
 import dagger.Module;
 import dagger.Provides;
-import ru.org.adons.cblock.datamodel.BlockListModel;
-import ru.org.adons.cblock.datamodel.CallLogModel;
+import ru.org.adons.cblock.data.BlockListModel;
+import ru.org.adons.cblock.data.CallLogModel;
 import ru.org.adons.cblock.model.DaoSession;
 import ru.org.adons.cblock.ui.base.ViewScope;
 

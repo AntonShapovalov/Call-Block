@@ -1,8 +1,8 @@
 package ru.org.adons.cblock.app;
 
 import dagger.Component;
-import ru.org.adons.cblock.datamodel.BlockListModelTest;
-import ru.org.adons.cblock.datamodel.CallLogModelTest;
+import ru.org.adons.cblock.data.BlockListModelTest;
+import ru.org.adons.cblock.data.CallLogModelTest;
 import ru.org.adons.cblock.ui.base.ViewScope;
 
 /**

@@ -1,4 +1,4 @@
-package ru.org.adons.cblock.datamodel;
+package ru.org.adons.cblock.data;
 
 import android.support.test.InstrumentationRegistry;
 

@@ -15,11 +15,11 @@ public class Logging implements Action0 {
     private String tag;
     private String message;
 
-    public Logging(String message) {
+    private Logging(String message) {
         this.message = message;
     }
 
-    public Logging(String tag, String message) {
+    private Logging(String tag, String message) {
         this.tag = tag;
         this.message = message;
     }
@@ -46,30 +46,14 @@ public class Logging implements Action0 {
         }
     }
 
-    public static void dSubscribe(Class parent, String subscription) {
-        d(parent.getSimpleName(), subscription + ":subscribe");
-    }
-
-    public static void dUnsubscribe(Class parent, String subscription) {
-        d(parent.getSimpleName(), subscription + ":un-subscribe");
-    }
-
     /**
      * Logging for rx {@link Action0}
      */
-    public static Logging action(String message) {
-        return new Logging(message);
-    }
-
-    public static Logging action(String tag, String message) {
-        return new Logging(tag, message);
-    }
-
-    public static Logging actionSubscribe(Class parent, String subscription) {
+    public static Logging subscribe(Class parent, String subscription) {
         return new Logging(parent.getSimpleName(), subscription + ":subscribe");
     }
 
-    public static Logging actionUnsubscribe(Class parent, String subscription) {
+    public static Logging unsubscribe(Class parent, String subscription) {
         return new Logging(parent.getSimpleName(), subscription + ":un-subscribe");
     }
 

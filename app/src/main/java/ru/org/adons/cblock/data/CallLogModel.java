@@ -1,4 +1,4 @@
-package ru.org.adons.cblock.datamodel;
+package ru.org.adons.cblock.data;
 
 import android.net.Uri;
 import android.provider.CallLog;
@@ -11,7 +11,7 @@ import ru.org.adons.cblock.model.CallLogItem;
 import rx.Observable;
 
 /**
- * Provide data from {@link CallLog}
+ * Provide data from {@link CallLog} for incoming or missed calls list
  */
 
 public class CallLogModel {

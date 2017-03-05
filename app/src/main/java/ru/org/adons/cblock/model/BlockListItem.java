@@ -5,7 +5,7 @@ import org.greenrobot.greendao.annotation.Generated;
 import org.greenrobot.greendao.annotation.Id;
 import org.greenrobot.greendao.annotation.Index;
 
-import ru.org.adons.cblock.datamodel.BlockListModel;
+import ru.org.adons.cblock.data.BlockListModel;
 
 /**
  * DB entity for blocked number, used in {@link BlockListModel}

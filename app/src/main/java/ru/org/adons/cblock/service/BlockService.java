@@ -3,6 +3,7 @@ package ru.org.adons.cblock.service;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.Service;
+import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.IBinder;
@@ -12,7 +13,6 @@ import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
 import android.telephony.PhoneStateListener;
 import android.telephony.TelephonyManager;
-import android.util.Log;
 
 import com.android.internal.telephony.ITelephony;
 
@@ -20,18 +20,28 @@ import java.lang.reflect.Method;
 import java.util.HashSet;
 import java.util.Set;
 
-import ru.org.adons.cblock.ui.main.MainActivity;
 import ru.org.adons.cblock.R;
 import ru.org.adons.cblock.db.DBContentProvider;
 import ru.org.adons.cblock.db.PhonesTable;
+import ru.org.adons.cblock.ui.main.MainActivity;
+import ru.org.adons.cblock.utils.Logging;
 
 public class BlockService extends Service implements Loader.OnLoadCompleteListener<Cursor> {
 
+    public static final int NOTIFICATION_ID = 201507;
     private CursorLoader loader;
-    private Set<String> phones = new HashSet<String>();
+    private Set<String> phones = new HashSet<>();
     private StateListener listener;
     private TelephonyManager manager;
     private ITelephony telephony;
+
+    public static void enable(Context context) {
+        context.startService(new Intent(context, BlockService.class));
+    }
+
+    public static void disable(Context context) {
+        context.stopService(new Intent(context, BlockService.class));
+    }
 
     @Override
     public void onCreate() {
@@ -43,15 +53,16 @@ public class BlockService extends Service implements Loader.OnLoadCompleteListen
         loader.startLoading();
         // register Phone State Listener
         listener = new StateListener();
-        manager = (TelephonyManager) getSystemService(getApplicationContext().TELEPHONY_SERVICE);
+        manager = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
         manager.listen(listener, PhoneStateListener.LISTEN_CALL_STATE);
         try {
-            Class c = Class.forName(manager.getClass().getName());
+            Class<TelephonyManager> c = TelephonyManager.class;
+            //Class c = Class.forName(manager.getClass().getName());
             Method m = c.getDeclaredMethod("getITelephony");
             m.setAccessible(true);
             telephony = (ITelephony) m.invoke(manager);
         } catch (Exception e) {
-            Log.e(MainActivity.LOG_TAG, e.getMessage());
+            Logging.d(e.getMessage());
         }
     }
 
@@ -63,11 +74,6 @@ public class BlockService extends Service implements Loader.OnLoadCompleteListen
             phones.add(data.getString(PhonesTable.COLUMN_NUMBER_INDEX));
             isData = data.moveToNext();
         }
-        StringBuilder sb = new StringBuilder();
-        for (String s : phones) {
-            sb.append(s).append(";");
-        }
-        Log.d(MainActivity.LOG_TAG, "Service Updated:" + sb.toString());
     }
 
     private class StateListener extends PhoneStateListener {
@@ -80,9 +86,9 @@ public class BlockService extends Service implements Loader.OnLoadCompleteListen
                         try {
                             telephony.endCall();
                         } catch (Exception e) {
-                            Log.d(MainActivity.LOG_TAG, e.getMessage());
+                            Logging.d(e.getMessage());
                         }
-                        Log.d(MainActivity.LOG_TAG, "blocked number:" + incomingNumber);
+                        Logging.d("blocked number:" + incomingNumber);
                     }
                     break;
                 case TelephonyManager.CALL_STATE_OFFHOOK:
@@ -110,9 +116,8 @@ public class BlockService extends Service implements Loader.OnLoadCompleteListen
         PendingIntent resultPendingIntent = stackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
         mBuilder.setContentIntent(resultPendingIntent);
         // start notification
-        startForeground(MainActivity.NOTIFICATION_ID, mBuilder.build());
+        startForeground(NOTIFICATION_ID, mBuilder.build());
 
-        Log.d(MainActivity.LOG_TAG, "Service Started");
         return Service.START_STICKY;
     }
 
@@ -127,8 +132,8 @@ public class BlockService extends Service implements Loader.OnLoadCompleteListen
         // unregister Phone State Listener
         manager.listen(listener, PhoneStateListener.LISTEN_NONE);
         // cancel notification
-        NotificationManager notificationManager = (NotificationManager) getSystemService(getApplicationContext().NOTIFICATION_SERVICE);
-        notificationManager.cancel(MainActivity.NOTIFICATION_ID);
+        NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+        notificationManager.cancel(NOTIFICATION_ID);
 
         super.onDestroy();
     }
