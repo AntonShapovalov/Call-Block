@@ -5,11 +5,11 @@ apply plugin: 'org.greenrobot.greendao'
 
 android {
     compileSdkVersion 25
-    buildToolsVersion "25.0.1"
+    buildToolsVersion "25.0.2"
 
     defaultConfig {
         applicationId "ru.org.adons.cblock"
-        minSdkVersion 14
+        minSdkVersion 17
         targetSdkVersion 25
         versionCode 1
         versionName "1.0"
@@ -34,11 +34,12 @@ greendao {
 }
 
 dependencies {
-    compile 'com.android.support:appcompat-v7:25.1.0'
-    compile 'com.android.support:design:25.1.0'
+    compile 'com.android.support:appcompat-v7:25.2.0'
+    compile 'com.android.support:design:25.2.0'
+    compile 'com.android.support:cardview-v7:25.2.0'
     // unit testing
     testCompile 'junit:junit:4.12'
-    androidTestCompile 'com.android.support:support-annotations:25.1.0'
+    androidTestCompile 'com.android.support:support-annotations:25.2.0'
     androidTestCompile 'com.android.support.test:runner:0.5'
     // dagger
     compile 'com.google.dagger:dagger:2.6'
@@ -61,4 +62,7 @@ dependencies {
     androidTestCompile 'com.google.code.findbugs:jsr305:3.0.1'
     // green dao
     compile 'org.greenrobot:greendao:3.2.0'
+    // butter knife
+    compile 'com.jakewharton:butterknife:8.4.0'
+    apt 'com.jakewharton:butterknife-compiler:8.4.0'
 }

@@ -90,11 +90,7 @@ public abstract class BaseFragment<T extends IBaseFragmentListener> extends RxFr
     }
 
     protected <V extends Context> void setListener(V context, Class<T> tClass) {
-        try {
-            listener = tClass.cast(context);
-        } catch (ClassCastException e) {
-            Logging.d(context.getClass().getSimpleName() + " must implement FragmentInteractionListener");
-        }
+        listener = tClass.cast(context);
     }
 
 }

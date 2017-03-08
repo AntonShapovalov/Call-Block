@@ -6,6 +6,7 @@
 
     <!-- main activity -->
     <string name="main_activity_title">Incoming Call Block</string>
+    <string name="main_text_block_service">Block Service</string>
 
     <string name="main_activity_action_on">Start/Stop</string>
     <string name="main_pref_key_switch">switch_key</string>

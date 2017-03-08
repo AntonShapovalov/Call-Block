@@ -11,7 +11,7 @@ import ru.org.adons.cblock.app.CBlockApplication;
 import ru.org.adons.cblock.app.Preferences;
 import ru.org.adons.cblock.service.BlockService;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements IMainListener {
 
     @Inject Preferences pref;
     private boolean isServiceEnabled;
@@ -24,6 +24,16 @@ public class MainActivity extends AppCompatActivity {
         ((CBlockApplication) getApplication()).applicationComponent().inject(this);
 
         isServiceEnabled = pref.getBoolean(getString(R.string.main_pref_key_switch));
+
+        MainFragment fragment = getMainFragment();
+        if (fragment == null) {
+            fragment = new MainFragment();
+            getFragmentManager().beginTransaction().add(R.id.fragment_container, fragment, MainFragment.MAIN_FRAGMENT_TAG).commit();
+        }
+    }
+
+    private MainFragment getMainFragment() {
+        return (MainFragment) getFragmentManager().findFragmentByTag(MainFragment.MAIN_FRAGMENT_TAG);
     }
 
     /**

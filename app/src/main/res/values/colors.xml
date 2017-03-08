@@ -4,11 +4,7 @@
     <color name="orange">#FF8A00</color>
     <!-- red -->
     <color name="red_500">#F44336</color>
-    <color name="red_600">#E53935</color>
     <color name="red_700">#D32F2F</color>
-    <color name="red_800">#C62828</color>
-    <color name="red_900">#B71C1C</color>
     <!-- blue -->
-    <color name="light_blue_a200">#40C4FF</color>
-    <color name="light_blue_a700">#0091EA</color>
+    <color name="blue_a200">#448AFF</color>
 </resources>
