@@ -13,7 +13,6 @@ import rx.Observable;
 /**
  * Provide data from {@link CallLog} for incoming or missed calls list
  */
-
 public class CallLogModel {
 
     private static final Uri CALLS_URI = CallLog.Calls.CONTENT_URI;

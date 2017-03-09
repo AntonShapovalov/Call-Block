@@ -22,12 +22,12 @@ import static junit.framework.Assert.assertNotNull;
 /**
  * Android test for {@link BlockListModel}
  */
-
 public class BlockListModelTest extends BaseModelTest {
 
     @Inject BlockListModel blockListModel;
-    private final String phoneNumber1 = "123456789";
-    private final String phoneNumber2 = "987654321";
+    private final String phoneNumber1 = "+380123456789";
+    private final String phoneNumber2 = "+380987654321";
+    private final String name1 = "Test Name";
 
     @Before
     public void setUp() {
@@ -54,7 +54,7 @@ public class BlockListModelTest extends BaseModelTest {
 
     private void addNumber(String phoneNumber) {
         TestSubscriber<BlockListItem> testSubscriber = new TestSubscriber<>();
-        blockListModel.addNumber(getLogItem(phoneNumber));
+        blockListModel.addNumber(getLogItem(phoneNumber, name1));
         blockListModel.getBlockList()
                 .flatMap(Observable::from)
                 .map(listItem -> {
@@ -71,7 +71,7 @@ public class BlockListModelTest extends BaseModelTest {
 
     private void addOtherNumber() {
         TestSubscriber<BlockListItem> testSubscriber = new TestSubscriber<>();
-        blockListModel.addNumber(getLogItem(phoneNumber2));
+        blockListModel.addNumber(getLogItem(phoneNumber2, null));
         blockListModel.getBlockList()
                 .map(blockList -> {
                     BlockListItem listItem = blockList.get(0);
@@ -90,8 +90,8 @@ public class BlockListModelTest extends BaseModelTest {
 
     private void addSameTwoNumbers() {
         TestSubscriber<BlockListItem> testSubscriber = new TestSubscriber<>();
-        blockListModel.addNumber(getLogItem(phoneNumber1));
-        blockListModel.addNumber(getLogItem(phoneNumber2));
+        blockListModel.addNumber(getLogItem(phoneNumber1, name1));
+        blockListModel.addNumber(getLogItem(phoneNumber2, null));
         blockListModel.getBlockList()
                 .flatMap(Observable::from)
                 .map(this::printItemDetails)
@@ -102,11 +102,12 @@ public class BlockListModelTest extends BaseModelTest {
         testSubscriber.assertUnsubscribed();
     }
 
-    private CallLogItem getLogItem(String phoneNumber) {
+    private CallLogItem getLogItem(String phoneNumber, String name) {
         return CallLogItem.builder()
                 .setId(1L)
                 .setPhoneNumber(phoneNumber)
                 .setDate(new Date().getTime())
+                .setName(name)
                 .build();
     }
 

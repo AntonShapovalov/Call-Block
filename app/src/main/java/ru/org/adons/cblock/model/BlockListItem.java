@@ -10,7 +10,6 @@ import ru.org.adons.cblock.data.BlockListModel;
 /**
  * DB entity for blocked number, used in {@link BlockListModel}
  */
-
 @SuppressWarnings({"WeakerAccess", "unused"})
 @Entity
 public class BlockListItem {

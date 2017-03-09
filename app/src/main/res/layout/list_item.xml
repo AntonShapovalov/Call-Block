@@ -1,41 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:minHeight="72dp"
-    android:paddingEnd="16dp"
-    android:paddingStart="16dp">
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             xmlns:tools="http://schemas.android.com/tools"
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+             android:minHeight="?android:listPreferredItemHeight">
 
-    <TextView
-        android:id="@+id/list_item_text1"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="@string/list_item_text1_default"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
+        android:layout_gravity="center_vertical"
+        android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/list_item_text2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@id/list_item_text1"
-        android:layout_toLeftOf="@+id/list_item_text4"
-        android:layout_toStartOf="@+id/list_item_text4" />
+        <TextView
+            android:id="@+id/text_view_phone_number"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingEnd="16dp"
+            android:paddingStart="16dp"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            tools:text="+38-012-345-67-89"/>
 
-    <TextView
-        android:id="@+id/list_item_text3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@id/list_item_text1"
-        android:layout_alignParentRight="true" />
+        <TextView
+            android:id="@+id/text_view_desc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingEnd="16dp"
+            android:paddingStart="16dp"
+            tools:text="Test Name, 1 hour ago"/>
+    </LinearLayout>
 
-    <TextView
-        android:id="@id/list_item_text4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_below="@id/list_item_text3"
-        android:text="@string/list_item_text4_default" />
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_gravity="bottom"
+        android:background="?android:attr/listDivider"/>
 
-</RelativeLayout>
+</FrameLayout>

@@ -5,12 +5,9 @@ import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
-import android.database.Cursor;
 import android.os.IBinder;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.TaskStackBuilder;
-import android.support.v4.content.CursorLoader;
-import android.support.v4.content.Loader;
 import android.telephony.PhoneStateListener;
 import android.telephony.TelephonyManager;
 
@@ -21,16 +18,13 @@ import java.util.HashSet;
 import java.util.Set;
 
 import ru.org.adons.cblock.R;
-import ru.org.adons.cblock.db.DBContentProvider;
-import ru.org.adons.cblock.db.PhonesTable;
 import ru.org.adons.cblock.ui.main.MainActivity;
 import ru.org.adons.cblock.utils.Logging;
 
-public class BlockService extends Service implements Loader.OnLoadCompleteListener<Cursor> {
+public class BlockService extends Service {
 
-    public static final int NOTIFICATION_ID = 201507;
-    private CursorLoader loader;
-    private Set<String> phones = new HashSet<>();
+    private static final int NOTIFICATION_ID = 201507;
+    private final Set<String> phones = new HashSet<>();
     private StateListener listener;
     private TelephonyManager manager;
     private ITelephony telephony;
@@ -46,11 +40,7 @@ public class BlockService extends Service implements Loader.OnLoadCompleteListen
     @Override
     public void onCreate() {
         super.onCreate();
-        // load DB to local variable
-        loader = new CursorLoader(getApplicationContext(), DBContentProvider.CONTENT_URI,
-                PhonesTable.PHONES_SUMMARY_PROJECTION, null, null, PhonesTable.DEFAULT_SORT_ORDER);
-        loader.registerListener(1, this);
-        loader.startLoading();
+        // TODO: load DB to local variable "phones"
         // register Phone State Listener
         listener = new StateListener();
         manager = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
@@ -63,16 +53,6 @@ public class BlockService extends Service implements Loader.OnLoadCompleteListen
             telephony = (ITelephony) m.invoke(manager);
         } catch (Exception e) {
             Logging.d(e.getMessage());
-        }
-    }
-
-    @Override
-    public void onLoadComplete(Loader<Cursor> loader, Cursor data) {
-        phones.clear();
-        boolean isData = data.moveToFirst();
-        while (isData) {
-            phones.add(data.getString(PhonesTable.COLUMN_NUMBER_INDEX));
-            isData = data.moveToNext();
         }
     }
 
@@ -123,12 +103,7 @@ public class BlockService extends Service implements Loader.OnLoadCompleteListen
 
     @Override
     public void onDestroy() {
-        // Stop the cursor loader
-        if (loader != null) {
-            loader.unregisterListener(this);
-            loader.cancelLoad();
-            loader.stopLoading();
-        }
+        // TODO: unregister from callbacks
         // unregister Phone State Listener
         manager.listen(listener, PhoneStateListener.LISTEN_NONE);
         // cancel notification

@@ -11,7 +11,6 @@ import rx.Observable;
 /**
  * Provide data for block list
  */
-
 public class BlockListModel {
 
     private final DaoSession daoSession;
@@ -47,7 +46,7 @@ public class BlockListModel {
     /**
      * @return all blocked numbers
      */
-    Observable<List<BlockListItem>> getBlockList() {
+    public Observable<List<BlockListItem>> getBlockList() {
         return Observable.fromCallable(blockListDao::loadAll);
     }
 

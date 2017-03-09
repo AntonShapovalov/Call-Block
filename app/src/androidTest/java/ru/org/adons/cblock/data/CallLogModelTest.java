@@ -28,7 +28,6 @@ import static junit.framework.Assert.assertTrue;
 /**
  * Android test for {@link CallLogModel}
  */
-
 @RunWith(AndroidJUnit4.class)
 public class CallLogModelTest extends BaseModelTest {
 

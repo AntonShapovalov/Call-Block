@@ -1,4 +1,4 @@
-package ru.org.adons.cblock.app;
+package ru.org.adons.cblock.ui.base;
 
 import com.squareup.sqlbrite.BriteContentResolver;
 
@@ -7,13 +7,12 @@ import dagger.Provides;
 import ru.org.adons.cblock.data.BlockListModel;
 import ru.org.adons.cblock.data.CallLogModel;
 import ru.org.adons.cblock.model.DaoSession;
-import ru.org.adons.cblock.ui.base.ViewScope;
 
 /**
- * Provide Application and data-model dependencies for test
+ * Provide Application and data-model dependencies for View-Models
  */
 @Module
-public class TestModule {
+public class BaseAppModule {
 
     @ViewScope
     @Provides

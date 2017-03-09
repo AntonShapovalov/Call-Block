@@ -10,7 +10,6 @@ import ru.org.adons.cblock.app.TestModule;
 /**
  * Base class for data model testing
  */
-
 abstract class BaseModelTest {
 
     TestComponent testComponent() {

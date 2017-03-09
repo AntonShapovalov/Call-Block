@@ -10,7 +10,6 @@ import static android.content.Context.MODE_PRIVATE;
 /**
  * Wrapper for {@link SharedPreferences}
  */
-
 public class Preferences {
 
     private final SharedPreferences pref;

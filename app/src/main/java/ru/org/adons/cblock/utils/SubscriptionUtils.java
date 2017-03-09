@@ -5,7 +5,6 @@ import rx.Subscription;
 /**
  * Helper for {@link rx.Subscription}
  */
-
 public class SubscriptionUtils {
 
     /**
@@ -14,6 +13,7 @@ public class SubscriptionUtils {
      * @param subscription subscription
      * @return null
      */
+    @SuppressWarnings("SameReturnValue")
     public static Subscription release(Subscription subscription) {
         unsubscribe(subscription);
         return null;

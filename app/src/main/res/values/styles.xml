@@ -6,7 +6,7 @@
     <style name="Base.AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="colorPrimary">@color/red_500</item>
         <item name="colorPrimaryDark">@color/red_700</item>
-        <item name="colorAccent">@color/blue_a200</item>
+        <item name="colorAccent">@color/light_blue_a700</item>
     </style>
 
 </resources>

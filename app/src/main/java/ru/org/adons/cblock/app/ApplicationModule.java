@@ -18,7 +18,6 @@ import rx.schedulers.Schedulers;
 /**
  * Provide application scope dependencies (Context, DaoSession, Preferences)
  */
-
 @Module
 class ApplicationModule {
 

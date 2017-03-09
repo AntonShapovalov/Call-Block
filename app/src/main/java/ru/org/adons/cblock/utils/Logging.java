@@ -7,17 +7,14 @@ import ru.org.adons.cblock.BuildConfig;
 import rx.functions.Action0;
 
 /**
- * Wrapper for {@link Log#d(String, String)}
+ * Wrapper for {@link Log}
  */
-
 public class Logging implements Action0 {
 
-    private String tag;
-    private String message;
+    private enum Type {d, e}
 
-    private Logging(String message) {
-        this.message = message;
-    }
+    private final String tag;
+    private final String message;
 
     private Logging(String tag, String message) {
         this.tag = tag;
@@ -30,24 +27,32 @@ public class Logging implements Action0 {
      * @param message log message
      */
     public static void d(String message) {
-        d("LOG", message);
+        log("LOG", message, Type.d);
     }
 
-    public static void d(String tag, Class tClass, String message) {
-        d(tag, tClass.getSimpleName() + ":" + message);
+    public static void e(String message) {
+        log("LOG", message, Type.e);
     }
 
-    private static void d(String tag, String message) {
+    private static void log(String tag, String message, Type type) {
         if (BuildConfig.DEBUG) {
             if (!tag.startsWith("***")) {
                 tag = "***" + tag;
             }
-            Log.d(tag, message);
+            switch (type) {
+                case e:
+                    Log.e(tag, message);
+                    break;
+                default:
+                    Log.d(tag, message);
+            }
         }
     }
 
     /**
-     * Logging for rx {@link Action0}
+     * Logging for {@link rx.Observable}
+     *
+     * @return Logging object and invoke call()
      */
     public static Logging subscribe(Class parent, String subscription) {
         return new Logging(parent.getSimpleName(), subscription + ":subscribe");
@@ -60,7 +65,7 @@ public class Logging implements Action0 {
     @Override
     public void call() {
         if (!TextUtils.isEmpty(tag)) {
-            d(tag, message);
+            log(tag, message, Type.d);
         } else {
             d(message);
         }

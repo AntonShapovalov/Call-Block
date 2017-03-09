@@ -9,7 +9,6 @@ import ru.org.adons.cblock.data.CallLogModelTest;
 /**
  * Suite to run all tests together
  */
-
 @RunWith(Suite.class)
 @Suite.SuiteClasses({
         CallLogModelTest.class,

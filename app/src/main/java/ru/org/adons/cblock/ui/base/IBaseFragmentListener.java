@@ -5,4 +5,13 @@ package ru.org.adons.cblock.ui.base;
  * {@link BaseFragment#setListener} method used to set Activity as listener on Fragment events
  */
 public interface IBaseFragmentListener {
+
+    BaseAppComponent getBaseAppComponent();
+
+    void showProgress();
+
+    void hideProgress();
+
+    void showError(String message);
+
 }

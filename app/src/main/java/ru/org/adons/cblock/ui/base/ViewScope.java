@@ -10,7 +10,6 @@ import ru.org.adons.cblock.app.ApplicationComponent;
 /**
  * Scope for all sub-component of {@link ApplicationComponent}
  */
-
 @Scope
 @Retention(RetentionPolicy.RUNTIME)
 public @interface ViewScope {

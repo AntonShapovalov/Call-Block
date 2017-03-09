@@ -11,7 +11,6 @@ import ru.org.adons.cblock.data.CallLogModel;
 /**
  * Model for {@link CallLog.Calls} item, used in {@link CallLogModel}
  */
-
 @AutoValue
 public abstract class CallLogItem {
 
@@ -24,7 +23,7 @@ public abstract class CallLogItem {
     @Nullable
     public abstract String name();
 
-    public static CallLogItem.Builder builder() {
+    public static Builder builder() {
         return new AutoValue_CallLogItem.Builder();
     }
 
@@ -32,13 +31,13 @@ public abstract class CallLogItem {
     @AutoValue.Builder
     public static abstract class Builder {
 
-        public abstract CallLogItem.Builder setId(Long id);
+        public abstract Builder setId(Long id);
 
-        public abstract CallLogItem.Builder setPhoneNumber(String phoneNumber);
+        public abstract Builder setPhoneNumber(String phoneNumber);
 
-        public abstract CallLogItem.Builder setDate(Long date);
+        public abstract Builder setDate(Long date);
 
-        public abstract CallLogItem.Builder setName(@Nullable String name);
+        public abstract Builder setName(@Nullable String name);
 
         public abstract CallLogItem build();
     }

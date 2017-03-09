@@ -1,10 +1,7 @@
 <resources>
-    <!-- old -->
-    <color name="green">#669900</color>
-    <color name="orange">#FF8A00</color>
     <!-- red -->
     <color name="red_500">#F44336</color>
     <color name="red_700">#D32F2F</color>
     <!-- blue -->
-    <color name="blue_a200">#448AFF</color>
+    <color name="light_blue_a700">#0091EA</color>
 </resources>
