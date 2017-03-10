@@ -7,6 +7,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -26,6 +27,7 @@ public class AddFragment extends BaseFragment<IAddListener> {
     static final String ADD_FRAGMENT_TAG = "ADD_FRAGMENT_TAG";
 
     @BindView(R.id.recycler_view_call_log) RecyclerView callList;
+    @BindView(R.id.image_button_close) ImageButton buttonClose;
     private Unbinder unbinder;
 
     private final AddViewModel addViewModel = new AddViewModel();
@@ -55,6 +57,7 @@ public class AddFragment extends BaseFragment<IAddListener> {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         initList(getActivity(), callList, adapter);
+        buttonClose.setOnClickListener(v -> listener.onBackPressed());
     }
 
     @Override

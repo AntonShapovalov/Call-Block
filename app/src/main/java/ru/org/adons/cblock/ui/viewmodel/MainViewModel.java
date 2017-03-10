@@ -30,21 +30,22 @@ public class MainViewModel {
                 .doOnUnsubscribe(Logging.unsubscribe(this.getClass(), "getBlockList"));
     }
 
-    public Observable<Boolean> getSwitchState() {
-        return Observable.just(Preferences.SERVICE_SWITCH_KEY).map(pref::getBoolean);
+    public Observable<Boolean> getServiceState() {
+        return Observable.fromCallable(pref::getServiceState);
     }
 
     public Observable<String> changeServiceState(boolean isEnable) {
-        return Observable.just(isEnable).map(bool -> {
-            pref.putBoolean(Preferences.SERVICE_SWITCH_KEY, isEnable);
-            if (bool){
-                BlockService.enable(context);
-                return context.getString(R.string.main_notification_text_enable);
-            } else {
-                BlockService.disable(context);
-                return context.getString(R.string.main_toast_text_disable);
-            }
-        });
+        return Observable.just(isEnable)
+                .map(bool -> {
+                    pref.setServiceState(isEnable);
+                    if (bool) {
+                        BlockService.enable(context);
+                        return context.getString(R.string.main_notification_text_enable);
+                    } else {
+                        BlockService.disable(context);
+                        return context.getString(R.string.main_toast_text_disable);
+                    }
+                });
     }
 
 }

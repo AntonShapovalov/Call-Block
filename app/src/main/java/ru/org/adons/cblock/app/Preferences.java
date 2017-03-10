@@ -12,7 +12,7 @@ import static android.content.Context.MODE_PRIVATE;
  */
 public class Preferences {
 
-    public static final String SERVICE_SWITCH_KEY = "SERVICE_SWITCH_KEY";
+    private static final String SERVICE_SWITCH_KEY = "SERVICE_SWITCH_KEY";
 
     private final SharedPreferences pref;
 
@@ -20,13 +20,13 @@ public class Preferences {
         pref = context.getSharedPreferences(context.getString(R.string.app_preferences_file), MODE_PRIVATE);
     }
 
-    public boolean getBoolean(String key) {
-        return pref.getBoolean(key, false);
+    public boolean getServiceState() {
+        return pref.getBoolean(SERVICE_SWITCH_KEY, false);
     }
 
-    public void putBoolean(String key, boolean value) {
+    public void setServiceState(boolean value) {
         SharedPreferences.Editor editor = pref.edit();
-        editor.putBoolean(key, value);
+        editor.putBoolean(SERVICE_SWITCH_KEY, value);
         editor.apply();
     }
 

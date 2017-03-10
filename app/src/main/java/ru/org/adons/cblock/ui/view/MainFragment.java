@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,6 +19,7 @@ import ru.org.adons.cblock.R;
 import ru.org.adons.cblock.ui.adapter.BlockListAdapter;
 import ru.org.adons.cblock.ui.base.BaseFragment;
 import ru.org.adons.cblock.ui.viewmodel.MainViewModel;
+import rx.Observable;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
@@ -27,6 +29,7 @@ import rx.schedulers.Schedulers;
 public class MainFragment extends BaseFragment<IMainListener> {
 
     static final String MAIN_FRAGMENT_TAG = "MAIN_FRAGMENT_TAG";
+    private static final String SWITCH_KEY = "SWITCH_KEY";
 
     @BindView(R.id.recycler_view_block_list) RecyclerView blockList;
     @BindView(R.id.switch_block_service) Switch switchService;
@@ -35,6 +38,8 @@ public class MainFragment extends BaseFragment<IMainListener> {
 
     private final MainViewModel mainViewModel = new MainViewModel();
     private final BlockListAdapter adapter = new BlockListAdapter();
+
+    private boolean isSwitchChecked = false;
 
     @Override
     public void onAttach(Activity activity) {
@@ -46,6 +51,9 @@ public class MainFragment extends BaseFragment<IMainListener> {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         listener.getBaseAppComponent().inject(mainViewModel);
+        if (savedInstanceState != null) {
+            isSwitchChecked = savedInstanceState.getBoolean(SWITCH_KEY);
+        }
     }
 
     @Nullable
@@ -63,7 +71,16 @@ public class MainFragment extends BaseFragment<IMainListener> {
         //
         fabAdd.setOnClickListener(v -> listener.showAddFragment());
         //
-        switchService.setOnCheckedChangeListener((v, isChecked) -> mainViewModel.changeServiceState(isChecked)
+        mainViewModel.getServiceState()
+                .subscribeOn(Schedulers.computation())
+                .observeOn(AndroidSchedulers.mainThread())
+                .compose(bindToLifecycle())
+                .subscribe(switchService::setChecked, this::onError);
+        //
+        switchService.setOnCheckedChangeListener((v, isChecked) -> Observable.just(isChecked)
+                .filter(bool -> isSwitchChecked != bool)
+                .map(bool -> isSwitchChecked = bool)
+                .flatMap(mainViewModel::changeServiceState)
                 .subscribeOn(Schedulers.computation())
                 .observeOn(AndroidSchedulers.mainThread())
                 .compose(bindToLifecycle())
@@ -80,12 +97,12 @@ public class MainFragment extends BaseFragment<IMainListener> {
                 .doOnSubscribe(() -> listener.showProgress())
                 .doOnUnsubscribe(() -> listener.hideProgress())
                 .subscribe(adapter::setItems, this::onError);
-        //
-        mainViewModel.getSwitchState()
-                .subscribeOn(Schedulers.computation())
-                .observeOn(AndroidSchedulers.mainThread())
-                .compose(bindToLifecycle())
-                .subscribe(switchService::setChecked, this::onError);
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        outState.putBoolean(SWITCH_KEY, isSwitchChecked);
+        super.onSaveInstanceState(outState);
     }
 
     @Override
@@ -95,7 +112,9 @@ public class MainFragment extends BaseFragment<IMainListener> {
     }
 
     private void showToast(String text) {
-        Toast.makeText(getActivity(), text, Toast.LENGTH_LONG).show();
+        if (!TextUtils.isEmpty(text)) {
+            Toast.makeText(getActivity(), text, Toast.LENGTH_LONG).show();
+        }
     }
 
 }
