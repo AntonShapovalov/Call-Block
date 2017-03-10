@@ -23,6 +23,8 @@ public abstract class CallLogItem {
     @Nullable
     public abstract String name();
 
+    public boolean isBlocked = false;
+
     public static Builder builder() {
         return new AutoValue_CallLogItem.Builder();
     }

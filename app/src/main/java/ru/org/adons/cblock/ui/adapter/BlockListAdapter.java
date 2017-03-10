@@ -26,7 +26,7 @@ public class BlockListAdapter extends RecyclerView.Adapter<BlockListAdapter.View
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_item, parent, false);
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_item_block, parent, false);
         return new BlockListAdapter.ViewHolder(v);
     }
 

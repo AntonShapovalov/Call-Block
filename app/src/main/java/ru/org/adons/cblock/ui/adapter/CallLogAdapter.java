@@ -4,6 +4,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -26,7 +27,7 @@ public class CallLogAdapter extends RecyclerView.Adapter<CallLogAdapter.ViewHold
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_item, parent, false);
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_item_call_log, parent, false);
         return new CallLogAdapter.ViewHolder(v);
     }
 
@@ -35,6 +36,13 @@ public class CallLogAdapter extends RecyclerView.Adapter<CallLogAdapter.ViewHold
         CallLogItem item = items.get(position);
         holder.textPhone.setText(formatPhoneNumber(item.phoneNumber()));
         holder.textDesc.setText(getDescription(item.name(), item.date()));
+        if (item.isBlocked) {
+            holder.isBlocked.setChecked(true);
+            holder.isBlocked.setEnabled(false);
+        } else {
+            holder.isBlocked.setChecked(false);
+            holder.isBlocked.setEnabled(true);
+        }
     }
 
     @Override
@@ -49,6 +57,7 @@ public class CallLogAdapter extends RecyclerView.Adapter<CallLogAdapter.ViewHold
     }
 
     static class ViewHolder extends RecyclerView.ViewHolder {
+        @BindView(R.id.checkbox_is_blocked) CheckBox isBlocked;
         @BindView(R.id.text_view_phone_number) TextView textPhone;
         @BindView(R.id.text_view_desc) TextView textDesc;
 

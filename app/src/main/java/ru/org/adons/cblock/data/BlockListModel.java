@@ -1,5 +1,6 @@
 package ru.org.adons.cblock.data;
 
+import java.util.HashSet;
 import java.util.List;
 
 import ru.org.adons.cblock.model.BlockListItem;
@@ -44,10 +45,22 @@ public class BlockListModel {
     }
 
     /**
-     * @return all blocked numbers
+     * @return all blocked numbers list
      */
     public Observable<List<BlockListItem>> getBlockList() {
         return Observable.fromCallable(blockListDao::loadAll);
+    }
+
+    /**
+     * @return set of blocking phones, to filter incoming call by them
+     */
+    public Observable<HashSet<String>> getBlockedPhones() {
+        final HashSet<String> phones = new HashSet<>();
+        return getBlockList()
+                .flatMap(Observable::from)
+                .map(item -> phones.add(item.getPhoneNumber()))
+                .toList()
+                .flatMap(list -> Observable.just(phones));
     }
 
     /**

@@ -9,10 +9,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 
+import java.util.List;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 import ru.org.adons.cblock.R;
+import ru.org.adons.cblock.model.CallLogItem;
 import ru.org.adons.cblock.ui.adapter.CallLogAdapter;
 import ru.org.adons.cblock.ui.base.BaseFragment;
 import ru.org.adons.cblock.ui.viewmodel.AddViewModel;
@@ -68,14 +71,23 @@ public class AddFragment extends BaseFragment<IAddListener> {
                 .observeOn(AndroidSchedulers.mainThread())
                 .compose(bindToLifecycle())
                 .doOnSubscribe(() -> listener.showProgress())
-                .doOnNext(items -> listener.hideProgress())
-                .subscribe(adapter::setItems, this::onError);
+                .subscribe(this::setBlockedItems, this::onError);
     }
 
     @Override
     public void onDestroyView() {
         super.onDestroyView();
         unbinder.unbind();
+    }
+
+    private void setBlockedItems(List<CallLogItem> items) {
+        addViewModel.setBlockedItems(items)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .compose(bindToLifecycle())
+                .doOnSubscribe(() -> listener.showProgress())
+                .doOnUnsubscribe(() -> listener.hideProgress())
+                .subscribe(adapter::setItems, this::onError);
     }
 
 }

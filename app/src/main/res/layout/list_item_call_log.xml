@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:layout_width="match_parent"
+                android:layout_height="?android:listPreferredItemHeight">
+
+    <CheckBox
+        android:id="@+id/checkbox_is_blocked"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginStart="8dp"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_gravity="center_vertical"
+        android:layout_toEndOf="@+id/checkbox_is_blocked"
+        android:orientation="vertical"
+        android:paddingEnd="16dp"
+        android:paddingStart="8dp">
+
+        <TextView
+            android:id="@+id/text_view_phone_number"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            tools:text="+38-012-345-67-89"/>
+
+        <TextView
+            android:id="@+id/text_view_desc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:maxLines="1"
+            tools:text="Test Name, 1 hour ago"/>
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_alignParentBottom="true"
+        android:background="?android:attr/listDivider"/>
+
+</RelativeLayout>
