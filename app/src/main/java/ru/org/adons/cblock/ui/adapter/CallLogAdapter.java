@@ -1,8 +1,6 @@
-package ru.org.adons.cblock.ui.main;
+package ru.org.adons.cblock.ui.adapter;
 
 import android.support.v7.widget.RecyclerView;
-import android.text.TextUtils;
-import android.text.format.DateUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,32 +12,29 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import ru.org.adons.cblock.R;
-import ru.org.adons.cblock.model.BlockListItem;
-import ru.org.adons.cblock.utils.StringUtils;
+import ru.org.adons.cblock.model.CallLogItem;
+
+import static ru.org.adons.cblock.ui.adapter.ListItemDecorator.formatPhoneNumber;
+import static ru.org.adons.cblock.ui.adapter.ListItemDecorator.getDescription;
 
 /**
- * Recycler adapter for Block List View
+ * Recycler adapter for Call Log list
  */
-class BlockListAdapter extends RecyclerView.Adapter<BlockListAdapter.ViewHolder> {
+public class CallLogAdapter extends RecyclerView.Adapter<CallLogAdapter.ViewHolder> {
 
-    private final ArrayList<BlockListItem> items = new ArrayList<>();
+    private final ArrayList<CallLogItem> items = new ArrayList<>();
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_item, parent, false);
-        return new BlockListAdapter.ViewHolder(v);
+        return new CallLogAdapter.ViewHolder(v);
     }
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        BlockListItem item = items.get(position);
-        //
-        String phone = StringUtils.formatPhoneNumber(item.getPhoneNumber());
-        holder.textPhone.setText(phone);
-        //
-        String desc = !TextUtils.isEmpty(item.getName()) ? item.getName() + ", " : "";
-        desc += DateUtils.getRelativeTimeSpanString(item.getDate());
-        holder.textDesc.setText(desc);
+        CallLogItem item = items.get(position);
+        holder.textPhone.setText(formatPhoneNumber(item.phoneNumber()));
+        holder.textDesc.setText(getDescription(item.name(), item.date()));
     }
 
     @Override
@@ -47,7 +42,7 @@ class BlockListAdapter extends RecyclerView.Adapter<BlockListAdapter.ViewHolder>
         return items.size();
     }
 
-    void setItems(List<BlockListItem> newItems) {
+    public void setItems(List<CallLogItem> newItems) {
         items.clear();
         items.addAll(newItems);
         notifyDataSetChanged();

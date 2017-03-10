@@ -1,5 +1,6 @@
-package ru.org.adons.cblock.ui.main;
+package ru.org.adons.cblock.ui.view;
 
+import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -19,7 +20,7 @@ import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action0;
 import rx.schedulers.Schedulers;
 
-public class MainActivity extends AppCompatActivity implements IMainListener {
+public class MainActivity extends AppCompatActivity implements IMainListener, IAddListener {
 
     private BaseAppComponent baseAppComponent;
 
@@ -63,7 +64,13 @@ public class MainActivity extends AppCompatActivity implements IMainListener {
         return (MainFragment) getFragmentManager().findFragmentByTag(MainFragment.MAIN_FRAGMENT_TAG);
     }
 
+    private AddFragment getAddFragment() {
+        return (AddFragment) getFragmentManager().findFragmentByTag(AddFragment.ADD_FRAGMENT_TAG);
+    }
 
+    /**
+     * @return {@link BaseAppComponent} to provide data dependencies fot all View-Models
+     */
     public BaseAppComponent getBaseAppComponent() {
         if (baseAppComponent == null) {
             CBlockApplication application = (CBlockApplication) getApplication();
@@ -74,7 +81,6 @@ public class MainActivity extends AppCompatActivity implements IMainListener {
         }
         return baseAppComponent;
     }
-
 
     @Override
     public void showProgress() {
@@ -89,6 +95,19 @@ public class MainActivity extends AppCompatActivity implements IMainListener {
     @Override
     public void showError(String message) {
         runOnUiThread(() -> Toast.makeText(MainActivity.this, message, Toast.LENGTH_SHORT).show());
+    }
+
+    @Override
+    public void showAddFragment() {
+        AddFragment fragment = getAddFragment();
+        if (fragment == null) {
+            fragment = new AddFragment();
+        }
+        FragmentTransaction transaction = getFragmentManager().beginTransaction();
+        transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
+        transaction.replace(R.id.fragment_container, fragment, AddFragment.ADD_FRAGMENT_TAG);
+        transaction.addToBackStack(MainFragment.MAIN_FRAGMENT_TAG);
+        transaction.commit();
     }
 
 }

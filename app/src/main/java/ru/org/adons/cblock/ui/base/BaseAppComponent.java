@@ -2,7 +2,8 @@ package ru.org.adons.cblock.ui.base;
 
 import dagger.Component;
 import ru.org.adons.cblock.app.ApplicationComponent;
-import ru.org.adons.cblock.ui.main.MainViewModel;
+import ru.org.adons.cblock.ui.viewmodel.AddViewModel;
+import ru.org.adons.cblock.ui.viewmodel.MainViewModel;
 
 /**
  * Provide Application and data-model dependencies for View-Models
@@ -13,5 +14,7 @@ import ru.org.adons.cblock.ui.main.MainViewModel;
 public interface BaseAppComponent {
 
     void inject(MainViewModel mainViewModel);
+
+    void inject(AddViewModel addViewModel);
 
 }

@@ -42,7 +42,7 @@ public class CallLogModel {
     /**
      * @return list of incoming or missed calls
      */
-    Observable<List<CallLogItem>> getCallLogList() {
+    public Observable<List<CallLogItem>> getCallLogList() {
         return resolver.createQuery(CALLS_URI, CALLS_SUMMARY_PROJECTION,
                 CALL_SELECT, null, CallLog.Calls.DEFAULT_SORT_ORDER, false)
                 .mapToList(cursor -> CallLogItem.builder()

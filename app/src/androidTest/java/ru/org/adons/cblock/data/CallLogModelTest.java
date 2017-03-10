@@ -58,6 +58,7 @@ public class CallLogModelTest extends BaseModelTest {
         // check subscription without errors and not completed (wait for update from call log)
         Subscription subscription = callLogModel.getCallLogList()
                 .doOnSubscribe(Logging.subscribe(this.getClass(), "getCallLogList"))
+                .doOnNext(callLogItems -> Logging.d(this.getClass() + "getCallLogList:OnNext"))
                 .doOnUnsubscribe(Logging.unsubscribe(this.getClass(), "getCallLogList"))
                 .flatMap(Observable::from)
                 .map(this::printItemDetails)

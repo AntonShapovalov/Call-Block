@@ -1,18 +1,23 @@
-package ru.org.adons.cblock.ui.main;
+package ru.org.adons.cblock.ui.view;
 
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Switch;
+import android.widget.Toast;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 import ru.org.adons.cblock.R;
+import ru.org.adons.cblock.ui.adapter.BlockListAdapter;
 import ru.org.adons.cblock.ui.base.BaseFragment;
+import ru.org.adons.cblock.ui.viewmodel.MainViewModel;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
@@ -24,6 +29,8 @@ public class MainFragment extends BaseFragment<IMainListener> {
     static final String MAIN_FRAGMENT_TAG = "MAIN_FRAGMENT_TAG";
 
     @BindView(R.id.recycler_view_block_list) RecyclerView blockList;
+    @BindView(R.id.switch_block_service) Switch switchService;
+    @BindView(R.id.fab_add) FloatingActionButton fabAdd;
     private Unbinder unbinder;
 
     private final MainViewModel mainViewModel = new MainViewModel();
@@ -53,6 +60,14 @@ public class MainFragment extends BaseFragment<IMainListener> {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         initList(getActivity(), blockList, adapter);
+        //
+        fabAdd.setOnClickListener(v -> listener.showAddFragment());
+        //
+        switchService.setOnCheckedChangeListener((v, isChecked) -> mainViewModel.changeServiceState(isChecked)
+                .subscribeOn(Schedulers.computation())
+                .observeOn(AndroidSchedulers.mainThread())
+                .compose(bindToLifecycle())
+                .subscribe(this::showToast, this::onError));
     }
 
     @Override
@@ -65,12 +80,22 @@ public class MainFragment extends BaseFragment<IMainListener> {
                 .doOnSubscribe(() -> listener.showProgress())
                 .doOnUnsubscribe(() -> listener.hideProgress())
                 .subscribe(adapter::setItems, this::onError);
+        //
+        mainViewModel.getSwitchState()
+                .subscribeOn(Schedulers.computation())
+                .observeOn(AndroidSchedulers.mainThread())
+                .compose(bindToLifecycle())
+                .subscribe(switchService::setChecked, this::onError);
     }
 
     @Override
     public void onDestroyView() {
         super.onDestroyView();
         unbinder.unbind();
+    }
+
+    private void showToast(String text) {
+        Toast.makeText(getActivity(), text, Toast.LENGTH_LONG).show();
     }
 
 }

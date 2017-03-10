@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
     <string name="app_name">Call Block</string>
     <string name="app_preferences_file">ru.org.adons.cblock.preferences_file</string>
 
-    <!-- main activity -->
-    <string name="main_activity_title">Incoming Call Block</string>
+    <!-- main fragment -->
     <string name="main_text_block_service">Block Service</string>
-
-    <string name="main_pref_key_switch">switch_key</string>
     <string name="main_notification_title">Incoming Call Block</string>
-    <string name="main_notification_text">Service Enabled. Calls will dismissed.</string>
+    <string name="main_notification_text_enable">Service Enabled. Calls will dismissed.</string>
+    <string name="main_toast_text_disable">Service Disabled</string>
 
+    <!-- add fragment -->
+    <string name="add_button_close_desc">Close</string>
+    <string name="add_button_done_desc">Done</string>
 </resources>

@@ -18,7 +18,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import ru.org.adons.cblock.R;
-import ru.org.adons.cblock.ui.main.MainActivity;
+import ru.org.adons.cblock.ui.view.MainActivity;
 import ru.org.adons.cblock.utils.Logging;
 
 public class BlockService extends Service {
@@ -28,12 +28,17 @@ public class BlockService extends Service {
     private StateListener listener;
     private TelephonyManager manager;
     private ITelephony telephony;
+    private static volatile boolean isEnabled = false;
 
-    public static void enable(Context context) {
-        context.startService(new Intent(context, BlockService.class));
+    public static synchronized void enable(Context context) {
+        if (!isEnabled) {
+            isEnabled = true;
+            context.startService(new Intent(context, BlockService.class));
+        }
     }
 
-    public static void disable(Context context) {
+    public static synchronized void disable(Context context) {
+        isEnabled = false;
         context.stopService(new Intent(context, BlockService.class));
     }
 
@@ -85,7 +90,7 @@ public class BlockService extends Service {
         NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(this)
                 .setSmallIcon(R.drawable.ic_notify)
                 .setContentTitle(getApplicationContext().getString(R.string.main_notification_title))
-                .setContentText(getApplicationContext().getString(R.string.main_notification_text))
+                .setContentText(getApplicationContext().getString(R.string.main_notification_text_enable))
                 .setAutoCancel(true)
                 .setPriority(NotificationCompat.PRIORITY_MIN);
         // handle notification click
@@ -97,7 +102,7 @@ public class BlockService extends Service {
         mBuilder.setContentIntent(resultPendingIntent);
         // start notification
         startForeground(NOTIFICATION_ID, mBuilder.build());
-
+        //
         return Service.START_STICKY;
     }
 
@@ -109,7 +114,8 @@ public class BlockService extends Service {
         // cancel notification
         NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
         notificationManager.cancel(NOTIFICATION_ID);
-
+        //
+        isEnabled = false;
         super.onDestroy();
     }
 

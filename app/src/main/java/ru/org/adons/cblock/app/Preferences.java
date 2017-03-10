@@ -12,6 +12,8 @@ import static android.content.Context.MODE_PRIVATE;
  */
 public class Preferences {
 
+    public static final String SERVICE_SWITCH_KEY = "SERVICE_SWITCH_KEY";
+
     private final SharedPreferences pref;
 
     Preferences(Context context) {

@@ -1,5 +1,7 @@
 package ru.org.adons.cblock.app;
 
+import android.content.Context;
+
 import com.squareup.sqlbrite.BriteContentResolver;
 
 import javax.inject.Singleton;
@@ -13,6 +15,8 @@ import ru.org.adons.cblock.model.DaoSession;
 @Singleton
 @Component(modules = ApplicationModule.class)
 public interface ApplicationComponent {
+
+    Context context();
 
     Preferences preferences();
 
