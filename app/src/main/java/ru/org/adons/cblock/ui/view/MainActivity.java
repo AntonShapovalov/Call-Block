@@ -1,7 +1,10 @@
 package ru.org.adons.cblock.ui.view;
 
+import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ProgressBar;
@@ -14,49 +17,86 @@ import ru.org.adons.cblock.app.CBlockApplication;
 import ru.org.adons.cblock.ui.base.BaseAppComponent;
 import ru.org.adons.cblock.ui.base.BaseAppModule;
 import ru.org.adons.cblock.ui.base.DaggerBaseAppComponent;
+import ru.org.adons.cblock.ui.viewmodel.PermViewModel;
 import ru.org.adons.cblock.utils.Logging;
 import rx.Completable;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.functions.Action0;
 import rx.schedulers.Schedulers;
 
 public class MainActivity extends AppCompatActivity implements IMainListener, IAddListener {
 
-    private BaseAppComponent baseAppComponent;
+    private static final int PERMISSIONS_REQUEST = 311;
 
     @BindView(android.R.id.progress) ProgressBar progressBar;
+
+    private final PermViewModel permViewModel = new PermViewModel();
+
+    private BaseAppComponent baseAppComponent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
-        initComponents(this::getBaseAppComponent);
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        hideProgress();
+        requestPermissions();
+    }
+
+    private void requestPermissions() {
+        permViewModel.getRequestPermissions(this)
+                .subscribe(request -> {
+                    if (request.size() > 0) {
+                        String[] permissions = request.toArray(new String[request.size()]);
+                        ActivityCompat.requestPermissions(this, permissions, PERMISSIONS_REQUEST);
+                    } else {
+                        initComponents();
+                    }
+                });
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        if (requestCode == PERMISSIONS_REQUEST) {
+            permViewModel.isPermissionsGranted(permissions, grantResults)
+                    .subscribe(bool -> {
+                        if (bool) {
+                            initComponents();
+                        } else {
+                            clearFragmentBackStack();
+                            PermFragment fragment = getPermFragment();
+                            if (fragment == null) {
+                                fragment = new PermFragment();
+                                getFragmentManager().beginTransaction().replace(R.id.fragment_container, fragment, PermFragment.PERM_FRAGMENT_TAG).commit();
+                            }
+                        }
+                    });
+        }
+    }
+
 
     /**
      * Init all required Dagger components in background thread
      */
-    private void initComponents(Action0 action) {
-        Completable.fromAction(action)
-                .doOnSubscribe(s -> {
-                    showProgress();
-                    Logging.d(this.getClass() + ":initComponents: subscribe");
-                })
-                .doOnUnsubscribe(() -> {
-                    Logging.d(this.getClass() + ":initComponents: unsubscribe");
-                    hideProgress();
-                })
+    private void initComponents() {
+        showProgress();
+        Logging.d(this.getClass() + ":initComponents");
+        Completable.fromAction(this::getBaseAppComponent)
+                .doOnUnsubscribe(this::hideProgress)
                 .subscribeOn(Schedulers.computation())
-                .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(this::onComponentsReady);
     }
 
     private void onComponentsReady() {
+        Logging.d(this.getClass() + ":onComponentsReady");
+        clearFragmentBackStack();
         MainFragment fragment = getMainFragment();
         if (fragment == null) {
             fragment = new MainFragment();
-            getFragmentManager().beginTransaction().add(R.id.fragment_container, fragment, MainFragment.MAIN_FRAGMENT_TAG).commit();
+            getFragmentManager().beginTransaction().replace(R.id.fragment_container, fragment, MainFragment.MAIN_FRAGMENT_TAG).commit();
         }
     }
 
@@ -66,6 +106,16 @@ public class MainActivity extends AppCompatActivity implements IMainListener, IA
 
     private AddFragment getAddFragment() {
         return (AddFragment) getFragmentManager().findFragmentByTag(AddFragment.ADD_FRAGMENT_TAG);
+    }
+
+    private PermFragment getPermFragment() {
+        return (PermFragment) getFragmentManager().findFragmentByTag(PermFragment.PERM_FRAGMENT_TAG);
+    }
+
+    private void clearFragmentBackStack() {
+        if (getFragmentManager().getBackStackEntryCount() > 0) {
+            getFragmentManager().popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+        }
     }
 
     /**

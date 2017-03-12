@@ -3,7 +3,9 @@
     <string name="app_name">Call Block</string>
     <string name="app_preferences_file">ru.org.adons.cblock.preferences_file</string>
 
-    <!-- main fragment -->
+    <!-- main activity, fragment -->
+    <string name="main_text_perm_warning">Please grant all required permissions!</string>
+    <string name="main_button_settings">Settings</string>
     <string name="main_text_block_service">Block Service</string>
     <string name="main_notification_title">Incoming Call Block</string>
     <string name="main_notification_text_enable">Service Enabled. Calls will dismissed.</string>
