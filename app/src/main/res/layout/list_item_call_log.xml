@@ -5,7 +5,7 @@
                 android:layout_height="?android:listPreferredItemHeight">
 
     <CheckBox
-        android:id="@+id/checkbox_is_blocked"
+        android:id="@+id/checkbox_is_selected"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
@@ -16,7 +16,7 @@
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
         android:layout_gravity="center_vertical"
-        android:layout_toEndOf="@+id/checkbox_is_blocked"
+        android:layout_toEndOf="@+id/checkbox_is_selected"
         android:orientation="vertical"
         android:paddingEnd="16dp"
         android:paddingStart="8dp">

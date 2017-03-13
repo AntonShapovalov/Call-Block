@@ -81,7 +81,7 @@ public class BlockService extends Service {
         Subscription dataSubscription = blockListModel.getBlockedPhones()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(phones::addAll);
+                .subscribe(this::setPhones);
         subscription.add(dataSubscription);
 
         // subscribe to block list update from BlockManager
@@ -89,7 +89,7 @@ public class BlockService extends Service {
                 .flatMap(blockListModel::getBlockedPhones)
                 .subscribeOn(Schedulers.computation())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(phones::addAll);
+                .subscribe(this::setPhones);
         subscription.add(updateSubscription);
 
         // register Phone State Listener
@@ -134,7 +134,7 @@ public class BlockService extends Service {
         // set Notification - prevent service from stop by system
         NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(this)
                 .setSmallIcon(R.drawable.ic_notify)
-                .setContentTitle(getApplicationContext().getString(R.string.app_name))
+                .setContentTitle(getApplicationContext().getString(R.string.main_notification_title))
                 .setContentText(getApplicationContext().getString(R.string.main_notification_text_enable))
                 .setAutoCancel(true)
                 .setPriority(NotificationCompat.PRIORITY_MIN);
@@ -165,13 +165,20 @@ public class BlockService extends Service {
         notificationManager.cancel(NOTIFICATION_ID);
 
         // stop service
-        isEnabled = false;
+        synchronized (this){
+            isEnabled = false;
+        }
         super.onDestroy();
     }
 
     @Override
     public IBinder onBind(Intent intent) {
         return null;
+    }
+
+    private void setPhones(Set<String> values) {
+        phones.clear();
+        phones.addAll(values);
     }
 
 }

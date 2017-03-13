@@ -4,6 +4,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -23,6 +24,11 @@ import static ru.org.adons.cblock.ui.adapter.ListItemDecorator.getDescription;
 public class BlockListAdapter extends RecyclerView.Adapter<BlockListAdapter.ViewHolder> {
 
     private final ArrayList<BlockListItem> items = new ArrayList<>();
+    private final IBlockListListener listener;
+
+    public BlockListAdapter(IBlockListListener listener) {
+        this.listener = listener;
+    }
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -35,6 +41,7 @@ public class BlockListAdapter extends RecyclerView.Adapter<BlockListAdapter.View
         BlockListItem item = items.get(position);
         holder.textPhone.setText(formatPhoneNumber(item.getPhoneNumber()));
         holder.textDesc.setText(getDescription(item.getName(), item.getDate()));
+        holder.buttonDelete.setOnClickListener(v -> listener.deletePhone(item.getId()));
     }
 
     @Override
@@ -51,6 +58,7 @@ public class BlockListAdapter extends RecyclerView.Adapter<BlockListAdapter.View
     static class ViewHolder extends RecyclerView.ViewHolder {
         @BindView(R.id.text_view_phone_number) TextView textPhone;
         @BindView(R.id.text_view_desc) TextView textDesc;
+        @BindView(R.id.image_button_delete) ImageButton buttonDelete;
 
         ViewHolder(View itemView) {
             super(itemView);

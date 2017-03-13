@@ -36,14 +36,23 @@ public class CallLogAdapter extends RecyclerView.Adapter<CallLogAdapter.ViewHold
         CallLogItem item = items.get(position);
         holder.textPhone.setText(formatPhoneNumber(item.phoneNumber()));
         holder.textDesc.setText(getDescription(item.name(), item.date()));
+        // disable checkbox if item already in block list
         if (item.isBlocked) {
-            holder.isBlocked.setChecked(true);
-            holder.isBlocked.setEnabled(false);
-            holder.isBlocked.setOnCheckedChangeListener(null);
+            holder.checkBox.setEnabled(false);
+            holder.checkBox.setChecked(true);
+            holder.itemView.setOnClickListener(null);
+            holder.checkBox.setOnClickListener(null);
         } else {
-            holder.isBlocked.setChecked(false);
-            holder.isBlocked.setEnabled(true);
-            holder.isBlocked.setOnCheckedChangeListener((v, isChecked) -> item.isSelected = isChecked);
+            holder.checkBox.setEnabled(true);
+            // set selected if list scrolled
+            if (item.isSelected) {
+                holder.checkBox.setChecked(true);
+            } else {
+                holder.checkBox.setChecked(false);
+            }
+            //
+            holder.checkBox.setOnClickListener(v -> setSelected(item, holder.checkBox));
+            holder.itemView.setOnClickListener(v -> setSelected(item, holder.checkBox));
         }
     }
 
@@ -62,8 +71,13 @@ public class CallLogAdapter extends RecyclerView.Adapter<CallLogAdapter.ViewHold
         return items;
     }
 
+    private void setSelected(CallLogItem item, CheckBox checkBox) {
+        item.isSelected = !item.isSelected;
+        checkBox.setChecked(item.isSelected);
+    }
+
     static class ViewHolder extends RecyclerView.ViewHolder {
-        @BindView(R.id.checkbox_is_blocked) CheckBox isBlocked;
+        @BindView(R.id.checkbox_is_selected) CheckBox checkBox;
         @BindView(R.id.text_view_phone_number) TextView textPhone;
         @BindView(R.id.text_view_desc) TextView textDesc;
 

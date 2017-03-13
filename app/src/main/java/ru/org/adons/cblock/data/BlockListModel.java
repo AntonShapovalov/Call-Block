@@ -47,10 +47,20 @@ public class BlockListModel {
     }
 
     /**
+     * Delete phone number from block list
+     *
+     * @param itemId db item id
+     */
+    public void deleteNumber(long itemId) {
+        blockListDao.deleteByKeyInTx(itemId);
+    }
+
+    /**
      * @return all blocked numbers list
      */
     public Observable<List<BlockListItem>> getBlockList() {
-        return Observable.fromCallable(blockListDao::loadAll);
+        return Observable.fromCallable(() ->
+                blockListDao.queryBuilder().orderDesc(BlockListItemDao.Properties.Date).list());
     }
 
     /**

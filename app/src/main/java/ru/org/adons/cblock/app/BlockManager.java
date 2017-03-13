@@ -41,6 +41,23 @@ public class BlockManager {
     }
 
     /**
+     * Delete phone from block list and notify all subscribers
+     */
+    public void deletePhone(BlockListModel blockListModel, long itemId) {
+        Observable.just(itemId)
+                .doOnSubscribe(Logging.subscribe(this.getClass(), "DELETE_PHONE"))
+                .doOnUnsubscribe(Logging.unsubscribe(this.getClass(), "DELETE_PHONE"))
+                .map(id -> {
+                    blockListModel.deleteNumber(id);
+                    return id;
+                })
+                .flatMap(id -> blockListModel.getBlockList())
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(blockListSubject::onNext);
+    }
+
+    /**
      * Subscribe to block list update
      *
      * @return list of blocked phones

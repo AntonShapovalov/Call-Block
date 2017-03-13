@@ -20,6 +20,7 @@ import butterknife.Unbinder;
 import ru.org.adons.cblock.R;
 import ru.org.adons.cblock.app.BlockManager;
 import ru.org.adons.cblock.ui.adapter.BlockListAdapter;
+import ru.org.adons.cblock.ui.adapter.IBlockListListener;
 import ru.org.adons.cblock.ui.base.BaseFragment;
 import ru.org.adons.cblock.ui.viewmodel.MainViewModel;
 import rx.Observable;
@@ -29,7 +30,7 @@ import rx.schedulers.Schedulers;
 /**
  * Main View, show list of blocking numbers
  */
-public class MainFragment extends BaseFragment<IMainListener> {
+public class MainFragment extends BaseFragment<IMainListener> implements IBlockListListener {
 
     static final String MAIN_FRAGMENT_TAG = "MAIN_FRAGMENT_TAG";
     private static final String SWITCH_KEY = "SWITCH_KEY";
@@ -42,7 +43,7 @@ public class MainFragment extends BaseFragment<IMainListener> {
     @Inject BlockManager blockManager;
 
     private final MainViewModel mainViewModel = new MainViewModel();
-    private final BlockListAdapter adapter = new BlockListAdapter();
+    private final BlockListAdapter adapter = new BlockListAdapter(this);
 
     private boolean isSwitchChecked = false;
 
@@ -123,6 +124,11 @@ public class MainFragment extends BaseFragment<IMainListener> {
         if (!TextUtils.isEmpty(text)) {
             Toast.makeText(getActivity(), text, Toast.LENGTH_LONG).show();
         }
+    }
+
+    @Override
+    public void deletePhone(long itemId) {
+        mainViewModel.deletePhone(itemId);
     }
 
 }

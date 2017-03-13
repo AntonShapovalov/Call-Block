@@ -7,6 +7,7 @@ import java.util.List;
 import javax.inject.Inject;
 
 import ru.org.adons.cblock.R;
+import ru.org.adons.cblock.app.BlockManager;
 import ru.org.adons.cblock.app.Preferences;
 import ru.org.adons.cblock.data.BlockListModel;
 import ru.org.adons.cblock.model.BlockListItem;
@@ -23,6 +24,7 @@ public class MainViewModel {
     @Inject Context context;
     @Inject Preferences pref;
     @Inject BlockListModel blockListModel;
+    @Inject BlockManager blockManager;
 
     public Observable<List<BlockListItem>> getBlockList() {
         return blockListModel.getBlockList()
@@ -46,6 +48,10 @@ public class MainViewModel {
                         return context.getString(R.string.main_toast_text_disable);
                     }
                 });
+    }
+
+    public void deletePhone(long itemId) {
+        blockManager.deletePhone(blockListModel, itemId);
     }
 
 }

@@ -4,6 +4,15 @@
              android:layout_width="match_parent"
              android:layout_height="?android:listPreferredItemHeight">
 
+    <ImageButton
+        android:id="@+id/image_button_delete"
+        style="@style/Widget.AppCompat.ActionButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end|top"
+        android:contentDescription="@string/add_button_close_desc"
+        android:src="@drawable/ic_close_small"/>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
