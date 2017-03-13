@@ -8,18 +8,6 @@ import rx.Subscription;
 public class SubscriptionUtils {
 
     /**
-     * Unsubscribe and set subscription to null
-     *
-     * @param subscription subscription
-     * @return null
-     */
-    @SuppressWarnings("SameReturnValue")
-    public static Subscription release(Subscription subscription) {
-        unsubscribe(subscription);
-        return null;
-    }
-
-    /**
      * Safe unsubscribe
      *
      * @param subscription subscription

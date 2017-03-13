@@ -14,6 +14,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import ru.org.adons.cblock.R;
 import ru.org.adons.cblock.app.CBlockApplication;
+import ru.org.adons.cblock.service.BlockService;
 import ru.org.adons.cblock.ui.base.BaseAppComponent;
 import ru.org.adons.cblock.ui.base.BaseAppModule;
 import ru.org.adons.cblock.ui.base.DaggerBaseAppComponent;
@@ -62,10 +63,11 @@ public class MainActivity extends AppCompatActivity implements IMainListener, IA
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         if (requestCode == PERMISSIONS_REQUEST) {
             permViewModel.isPermissionsGranted(permissions, grantResults)
-                    .subscribe(bool -> {
-                        if (bool) {
+                    .subscribe(yes -> {
+                        if (yes) {
                             initComponents();
                         } else {
+                            BlockService.stop(this);
                             clearFragmentBackStack();
                             PermFragment fragment = getPermFragment();
                             if (fragment == null) {
@@ -76,7 +78,6 @@ public class MainActivity extends AppCompatActivity implements IMainListener, IA
                     });
         }
     }
-
 
     /**
      * Init all required Dagger components in background thread
@@ -92,9 +93,9 @@ public class MainActivity extends AppCompatActivity implements IMainListener, IA
 
     private void onComponentsReady() {
         Logging.d(this.getClass() + ":onComponentsReady");
-        clearFragmentBackStack();
         MainFragment fragment = getMainFragment();
         if (fragment == null) {
+            clearFragmentBackStack(); // remove PermFragment if exists in back stack
             fragment = new MainFragment();
             getFragmentManager().beginTransaction().replace(R.id.fragment_container, fragment, MainFragment.MAIN_FRAGMENT_TAG).commit();
         }

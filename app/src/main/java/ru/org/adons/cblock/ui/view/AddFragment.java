@@ -31,6 +31,7 @@ public class AddFragment extends BaseFragment<IAddListener> {
 
     @BindView(R.id.recycler_view_call_log) RecyclerView callList;
     @BindView(R.id.image_button_close) ImageButton buttonClose;
+    @BindView(R.id.image_button_done) ImageButton buttonDone;
     private Unbinder unbinder;
 
     private final AddViewModel addViewModel = new AddViewModel();
@@ -61,6 +62,10 @@ public class AddFragment extends BaseFragment<IAddListener> {
         super.onViewCreated(view, savedInstanceState);
         initList(getActivity(), callList, adapter);
         buttonClose.setOnClickListener(v -> listener.onBackPressed());
+        buttonDone.setOnClickListener(v -> {
+            addViewModel.addPhones(adapter.getItems());
+            listener.onBackPressed();
+        });
     }
 
     @Override

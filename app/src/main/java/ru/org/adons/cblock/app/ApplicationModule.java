@@ -59,4 +59,10 @@ class ApplicationModule {
         return new DaoMaster(db).newSession();
     }
 
+    @Singleton
+    @Provides
+    BlockManager provideBlockManager() {
+        return new BlockManager();
+    }
+
 }

@@ -12,10 +12,13 @@ import android.view.ViewGroup;
 import android.widget.Switch;
 import android.widget.Toast;
 
+import javax.inject.Inject;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 import ru.org.adons.cblock.R;
+import ru.org.adons.cblock.app.BlockManager;
 import ru.org.adons.cblock.ui.adapter.BlockListAdapter;
 import ru.org.adons.cblock.ui.base.BaseFragment;
 import ru.org.adons.cblock.ui.viewmodel.MainViewModel;
@@ -36,6 +39,8 @@ public class MainFragment extends BaseFragment<IMainListener> {
     @BindView(R.id.fab_add) FloatingActionButton fabAdd;
     private Unbinder unbinder;
 
+    @Inject BlockManager blockManager;
+
     private final MainViewModel mainViewModel = new MainViewModel();
     private final BlockListAdapter adapter = new BlockListAdapter();
 
@@ -51,6 +56,7 @@ public class MainFragment extends BaseFragment<IMainListener> {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         listener.getBaseAppComponent().inject(mainViewModel);
+        listener.getBaseAppComponent().inject(this);
         if (savedInstanceState != null) {
             isSwitchChecked = savedInstanceState.getBoolean(SWITCH_KEY);
         }
@@ -97,6 +103,8 @@ public class MainFragment extends BaseFragment<IMainListener> {
                 .doOnSubscribe(() -> listener.showProgress())
                 .doOnUnsubscribe(() -> listener.hideProgress())
                 .subscribe(adapter::setItems, this::onError);
+        // get update event from BlockManager
+        blockManager.getBlockList().compose(bindToLifecycle()).subscribe(adapter::setItems);
     }
 
     @Override

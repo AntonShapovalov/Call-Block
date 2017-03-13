@@ -39,9 +39,11 @@ public class CallLogAdapter extends RecyclerView.Adapter<CallLogAdapter.ViewHold
         if (item.isBlocked) {
             holder.isBlocked.setChecked(true);
             holder.isBlocked.setEnabled(false);
+            holder.isBlocked.setOnCheckedChangeListener(null);
         } else {
             holder.isBlocked.setChecked(false);
             holder.isBlocked.setEnabled(true);
+            holder.isBlocked.setOnCheckedChangeListener((v, isChecked) -> item.isSelected = isChecked);
         }
     }
 
@@ -54,6 +56,10 @@ public class CallLogAdapter extends RecyclerView.Adapter<CallLogAdapter.ViewHold
         items.clear();
         items.addAll(newItems);
         notifyDataSetChanged();
+    }
+
+    public List<CallLogItem> getItems() {
+        return items;
     }
 
     static class ViewHolder extends RecyclerView.ViewHolder {

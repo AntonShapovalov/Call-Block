@@ -7,6 +7,8 @@ import ru.org.adons.cblock.model.BlockListItem;
 import ru.org.adons.cblock.model.BlockListItemDao;
 import ru.org.adons.cblock.model.CallLogItem;
 import ru.org.adons.cblock.model.DaoSession;
+import ru.org.adons.cblock.service.BlockService;
+import ru.org.adons.cblock.ui.adapter.CallLogAdapter;
 import rx.Observable;
 
 /**
@@ -28,7 +30,7 @@ public class BlockListModel {
      *
      * @param logItem incoming or missed call
      */
-    void addNumber(CallLogItem logItem) {
+    public void addNumber(CallLogItem logItem) {
         daoSession.runInTx(() -> {
             BlockListItem dbItem = blockListDao.queryBuilder()
                     .where(BlockListItemDao.Properties.PhoneNumber.eq(logItem.phoneNumber()))
@@ -52,12 +54,18 @@ public class BlockListModel {
     }
 
     /**
-     * @return set of blocking phones, to filter incoming call by them
+     * @return set of blocking phones, used in {@link CallLogAdapter} and {@link BlockService}
      */
     public Observable<HashSet<String>> getBlockedPhones() {
+        return getBlockList().flatMap(this::getBlockedPhones);
+    }
+
+    /**
+     * @return set of blocking phones, used in {@link BlockService}
+     */
+    public Observable<HashSet<String>> getBlockedPhones(List<BlockListItem> items) {
         final HashSet<String> phones = new HashSet<>();
-        return getBlockList()
-                .flatMap(Observable::from)
+        return Observable.from(items)
                 .map(item -> phones.add(item.getPhoneNumber()))
                 .toList()
                 .flatMap(list -> Observable.just(phones));

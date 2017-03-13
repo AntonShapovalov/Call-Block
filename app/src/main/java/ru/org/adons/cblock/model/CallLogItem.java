@@ -25,6 +25,8 @@ public abstract class CallLogItem {
 
     public boolean isBlocked = false;
 
+    public boolean isSelected = false;
+
     public static Builder builder() {
         return new AutoValue_CallLogItem.Builder();
     }

@@ -17,27 +17,51 @@ import java.lang.reflect.Method;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.inject.Inject;
+
 import ru.org.adons.cblock.R;
+import ru.org.adons.cblock.app.BlockManager;
+import ru.org.adons.cblock.app.CBlockApplication;
+import ru.org.adons.cblock.data.BlockListModel;
+import ru.org.adons.cblock.ui.base.BaseAppComponent;
+import ru.org.adons.cblock.ui.base.BaseAppModule;
+import ru.org.adons.cblock.ui.base.DaggerBaseAppComponent;
 import ru.org.adons.cblock.ui.view.MainActivity;
 import ru.org.adons.cblock.utils.Logging;
+import ru.org.adons.cblock.utils.SubscriptionUtils;
+import rx.Subscription;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
+import rx.subscriptions.CompositeSubscription;
 
 public class BlockService extends Service {
 
     private static final int NOTIFICATION_ID = 201507;
+    private static volatile boolean isEnabled = false;
+
+    @Inject BlockListModel blockListModel;
+    @Inject BlockManager blockManager;
+    private final CompositeSubscription subscription = new CompositeSubscription();
     private final Set<String> phones = new HashSet<>();
+
     private StateListener listener;
     private TelephonyManager manager;
     private ITelephony telephony;
-    private static volatile boolean isEnabled = false;
 
-    public static synchronized void enable(Context context) {
+    /**
+     * Start Block Service in foreground mode
+     */
+    public static synchronized void start(Context context) {
         if (!isEnabled) {
             isEnabled = true;
             context.startService(new Intent(context, BlockService.class));
         }
     }
 
-    public static synchronized void disable(Context context) {
+    /**
+     * Stop Block Service
+     */
+    public static synchronized void stop(Context context) {
         isEnabled = false;
         context.stopService(new Intent(context, BlockService.class));
     }
@@ -45,14 +69,35 @@ public class BlockService extends Service {
     @Override
     public void onCreate() {
         super.onCreate();
-        // TODO: load DB to local variable "phones"
+        // inject dependencies
+        CBlockApplication application = (CBlockApplication) getApplication();
+        BaseAppComponent baseAppComponent = DaggerBaseAppComponent.builder()
+                .applicationComponent(application.applicationComponent())
+                .baseAppModule(new BaseAppModule())
+                .build();
+        baseAppComponent.inject(this);
+
+        // get blocked phones list
+        Subscription dataSubscription = blockListModel.getBlockedPhones()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(phones::addAll);
+        subscription.add(dataSubscription);
+
+        // subscribe to block list update from BlockManager
+        Subscription updateSubscription = blockManager.getBlockList()
+                .flatMap(blockListModel::getBlockedPhones)
+                .subscribeOn(Schedulers.computation())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(phones::addAll);
+        subscription.add(updateSubscription);
+
         // register Phone State Listener
         listener = new StateListener();
         manager = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
         manager.listen(listener, PhoneStateListener.LISTEN_CALL_STATE);
         try {
             Class<TelephonyManager> c = TelephonyManager.class;
-            //Class c = Class.forName(manager.getClass().getName());
             Method m = c.getDeclaredMethod("getITelephony");
             m.setAccessible(true);
             telephony = (ITelephony) m.invoke(manager);
@@ -89,10 +134,11 @@ public class BlockService extends Service {
         // set Notification - prevent service from stop by system
         NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(this)
                 .setSmallIcon(R.drawable.ic_notify)
-                .setContentTitle(getApplicationContext().getString(R.string.main_notification_title))
+                .setContentTitle(getApplicationContext().getString(R.string.app_name))
                 .setContentText(getApplicationContext().getString(R.string.main_notification_text_enable))
                 .setAutoCancel(true)
                 .setPriority(NotificationCompat.PRIORITY_MIN);
+
         // handle notification click
         Intent resultIntent = new Intent(this, MainActivity.class);
         TaskStackBuilder stackBuilder = TaskStackBuilder.create(this);
@@ -100,21 +146,25 @@ public class BlockService extends Service {
         stackBuilder.addNextIntent(resultIntent);
         PendingIntent resultPendingIntent = stackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
         mBuilder.setContentIntent(resultPendingIntent);
+
         // start notification
         startForeground(NOTIFICATION_ID, mBuilder.build());
-        //
         return Service.START_STICKY;
     }
 
     @Override
     public void onDestroy() {
-        // TODO: unregister from callbacks
+        // unsubscribe from all data update
+        SubscriptionUtils.unsubscribe(subscription);
+
         // unregister Phone State Listener
         manager.listen(listener, PhoneStateListener.LISTEN_NONE);
+
         // cancel notification
         NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
         notificationManager.cancel(NOTIFICATION_ID);
-        //
+
+        // stop service
         isEnabled = false;
         super.onDestroy();
     }

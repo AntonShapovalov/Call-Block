@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import ru.org.adons.cblock.app.BlockManager;
 import ru.org.adons.cblock.data.BlockListModel;
 import ru.org.adons.cblock.data.CallLogModel;
 import ru.org.adons.cblock.model.CallLogItem;
@@ -20,6 +21,7 @@ public class AddViewModel {
 
     @Inject CallLogModel callLogModel;
     @Inject BlockListModel blockListModel;
+    @Inject BlockManager blockManager;
 
     public Observable<List<CallLogItem>> getCallLogList() {
         return callLogModel.getCallLogList()
@@ -41,6 +43,10 @@ public class AddViewModel {
                     return item;
                 })
                 .toList();
+    }
+
+    public void addPhones(List<CallLogItem> items) {
+        blockManager.addPhones(blockListModel, items);
     }
 
 }

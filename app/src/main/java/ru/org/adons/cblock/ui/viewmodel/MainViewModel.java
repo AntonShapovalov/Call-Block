@@ -39,10 +39,10 @@ public class MainViewModel {
                 .map(bool -> {
                     pref.setServiceState(isEnable);
                     if (bool) {
-                        BlockService.enable(context);
+                        BlockService.start(context);
                         return context.getString(R.string.main_notification_text_enable);
                     } else {
-                        BlockService.disable(context);
+                        BlockService.stop(context);
                         return context.getString(R.string.main_toast_text_disable);
                     }
                 });

@@ -24,4 +24,6 @@ public interface ApplicationComponent {
 
     DaoSession daoSession();
 
+    BlockManager blockManager();
+
 }
