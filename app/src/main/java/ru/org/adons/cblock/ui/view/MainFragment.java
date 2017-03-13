@@ -105,7 +105,7 @@ public class MainFragment extends BaseFragment<IMainListener> implements IBlockL
                 .doOnUnsubscribe(() -> listener.hideProgress())
                 .subscribe(adapter::setItems, this::onError);
         // get update event from BlockManager
-        blockManager.getBlockList().compose(bindToLifecycle()).subscribe(adapter::setItems);
+        blockManager.getBlockListUpdate().compose(bindToLifecycle()).subscribe(adapter::setItems);
     }
 
     @Override

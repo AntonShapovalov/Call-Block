@@ -155,7 +155,6 @@ public class MainActivity extends AppCompatActivity implements IMainListener, IA
             fragment = new AddFragment();
         }
         FragmentTransaction transaction = getFragmentManager().beginTransaction();
-        transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
         transaction.replace(R.id.fragment_container, fragment, AddFragment.ADD_FRAGMENT_TAG);
         transaction.addToBackStack(MainFragment.MAIN_FRAGMENT_TAG);
         transaction.commit();

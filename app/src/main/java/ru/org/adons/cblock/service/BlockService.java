@@ -5,6 +5,7 @@ import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
+import android.media.AudioManager;
 import android.os.IBinder;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.TaskStackBuilder;
@@ -47,6 +48,7 @@ public class BlockService extends Service {
     private StateListener listener;
     private TelephonyManager manager;
     private ITelephony telephony;
+    private AudioManager audio;
 
     /**
      * Start Block Service in foreground mode
@@ -85,7 +87,7 @@ public class BlockService extends Service {
         subscription.add(dataSubscription);
 
         // subscribe to block list update from BlockManager
-        Subscription updateSubscription = blockManager.getBlockList()
+        Subscription updateSubscription = blockManager.getBlockListUpdate()
                 .flatMap(blockListModel::getBlockedPhones)
                 .subscribeOn(Schedulers.computation())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -104,6 +106,9 @@ public class BlockService extends Service {
         } catch (Exception e) {
             Logging.d(e.getMessage());
         }
+
+        // init AudioManager
+        audio = (AudioManager) getApplicationContext().getSystemService(Context.AUDIO_SERVICE);
     }
 
     private class StateListener extends PhoneStateListener {
@@ -112,11 +117,27 @@ public class BlockService extends Service {
             super.onCallStateChanged(state, incomingNumber);
             switch (state) {
                 case TelephonyManager.CALL_STATE_RINGING:
-                    if (telephony != null && phones.contains(incomingNumber)) {
-                        try {
-                            telephony.endCall();
-                        } catch (Exception e) {
-                            Logging.d(e.getMessage());
+                    if (phones.contains(incomingNumber)) {
+                        // mute
+                        int ringState = audio.getRingerMode();
+                        boolean isMuted = false;
+                        if (ringState != AudioManager.RINGER_MODE_SILENT) {
+                            audio.setRingerMode(AudioManager.RINGER_MODE_SILENT);
+                            isMuted = true;
+                        }
+
+                        // try to end call
+                        if (telephony != null) {
+                            try {
+                                telephony.endCall();
+                            } catch (Exception e) {
+                                Logging.d(e.getMessage());
+                            }
+                        }
+
+                        // un-mute
+                        if (isMuted) {
+                            audio.setRingerMode(ringState);
                         }
                         Logging.d("blocked number:" + incomingNumber);
                     }
@@ -124,6 +145,8 @@ public class BlockService extends Service {
                 case TelephonyManager.CALL_STATE_OFFHOOK:
                     break;
                 case TelephonyManager.CALL_STATE_IDLE:
+                    break;
+                default:
                     break;
             }
         }
@@ -165,7 +188,7 @@ public class BlockService extends Service {
         notificationManager.cancel(NOTIFICATION_ID);
 
         // stop service
-        synchronized (this){
+        synchronized (this) {
             isEnabled = false;
         }
         super.onDestroy();

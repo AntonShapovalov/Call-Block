@@ -62,7 +62,7 @@ public class BlockManager {
      *
      * @return list of blocked phones
      */
-    public Observable<List<BlockListItem>> getBlockList() {
+    public Observable<List<BlockListItem>> getBlockListUpdate() {
         return blockListSubject;
     }
 
