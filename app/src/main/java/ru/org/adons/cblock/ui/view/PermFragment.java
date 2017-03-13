@@ -58,8 +58,11 @@ public class PermFragment extends BaseFragment<IBaseFragmentListener> {
         final Intent intent = new Intent();
         intent.setAction(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
         intent.addCategory(Intent.CATEGORY_DEFAULT);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
         intent.setData(Uri.parse("package:" + getActivity().getPackageName()));
         startActivity(intent);
+        getActivity().finish();
     }
 
 }

@@ -38,12 +38,6 @@ public class MainActivity extends AppCompatActivity implements IMainListener, IA
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        hideProgress();
         requestPermissions();
     }
 
