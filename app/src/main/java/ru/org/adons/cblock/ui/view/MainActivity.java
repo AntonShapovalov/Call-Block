@@ -41,6 +41,12 @@ public class MainActivity extends AppCompatActivity implements IMainListener, IA
         requestPermissions();
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        hideProgress();
+    }
+
     private void requestPermissions() {
         permViewModel.getRequestPermissions(this)
                 .subscribe(request -> {
@@ -89,7 +95,7 @@ public class MainActivity extends AppCompatActivity implements IMainListener, IA
         Logging.d(this.getClass() + ":onComponentsReady");
         MainFragment fragment = getMainFragment();
         if (fragment == null) {
-            clearFragmentBackStack(); // remove PermFragment if exists in back stack
+            clearFragmentBackStack();
             fragment = new MainFragment();
             getFragmentManager().beginTransaction().replace(R.id.fragment_container, fragment, MainFragment.MAIN_FRAGMENT_TAG).commit();
         }

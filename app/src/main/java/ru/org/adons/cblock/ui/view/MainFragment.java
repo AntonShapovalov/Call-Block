@@ -6,6 +6,7 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -122,7 +123,10 @@ public class MainFragment extends BaseFragment<IMainListener> implements IBlockL
 
     private void showToast(String text) {
         if (!TextUtils.isEmpty(text)) {
-            Toast.makeText(getActivity(), text, Toast.LENGTH_LONG).show();
+            int y = getResources().getDimensionPixelOffset(R.dimen.toast_margin_bottom);
+            Toast toast = Toast.makeText(getActivity(), text, Toast.LENGTH_LONG);
+            toast.setGravity(Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL, 0, y);
+            toast.show();
         }
     }
 
