@@ -1,7 +1,7 @@
 # Android-CBlock
 #### Android application to block annoying incoming calls
 
-  * ![link](../../../img/blob/master/cblock/main_screen.png) ![link](../../../img/blob/master/cblock/add_phone.png)
+![link](../../../img/blob/master/cblock/main_screen.png) &nbsp;&nbsp;&nbsp;&nbsp; ![link](../../../img/blob/master/cblock/add_phone.png)
 
 #### Add phone in block list in 3 clicks:
 
