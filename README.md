@@ -1,18 +1,20 @@
 # Android-CBlock
-#### Android application to block annoying incoming call
+#### Android application to block annoying incoming calls
 
-##### How to use:
+  * ![link](../../../img/blob/master/cblock/main_screen.png) ![link](../../../img/blob/master/cblock/add_phone.png)
 
-1. Select phone number from incoming calls or type new
-  * ![link](../../../img/blob/master/cblock/select_number.png)
+#### Add phone in block list in 3 clicks:
 
-2. Click black circle `plus` button to add phone number to block list
-  * ![link](../../../img/blob/master/cblock/add_number.png)
+1. Click floating button `add`
+2. Select phones from incoming calls list and click `done`
+3. Click switch `Block Service`
 
-3. Click `power on` button on toolbar to enable block service
-  * ![link](../../../img/blob/master/cblock/enable_service.png)
+When Service enabled, notification appears
 
-4. When Service enabled, notification appears
-  * ![link](../../../img/blob/master/cblock/notification.png)
-
-5. To delete phone from block list just long press list item and confirm delete
+#### Used libraries
+ * [RxJava](https://github.com/ReactiveX/RxJava), [RxAndroid](https://github.com/ReactiveX/RxAndroid) - the core of [MVVM](https://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93viewmodel) architecture
+ * [Dagger](https://google.github.io/dagger/) - dependency injection framework
+ * [SQLBrite](https://github.com/square/sqlbrite) - wrapper around ContentResolver, to get incoming calls list
+ * [GreenDao](http://greenrobot.org/greendao/) - ORM, to save blocked phones in local DB
+ * [AutoValue](https://github.com/google/auto/tree/master/value) - easy generate Data classes
+ * [ButterKnife](http://jakewharton.github.io/butterknife/) - elegant way of view binding
