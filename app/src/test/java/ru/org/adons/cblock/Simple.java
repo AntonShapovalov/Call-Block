@@ -2,6 +2,7 @@ package ru.org.adons.cblock;
 
 import org.junit.Test;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import rx.Observable;
@@ -14,12 +15,21 @@ public class Simple {
 
     @Test
     public void test() {
-        Integer[] arr = new Integer[]{1, 2, 3};
-        TestSubscriber<List<Integer>> testSubscriber = new TestSubscriber<>();
-        Observable.from(arr)
-                .doOnNext(System.out::print)
+        String[] list = new String[]{"1"};
+        TestSubscriber<List<String>> testSubscriber = new TestSubscriber<>();
+        Observable.from(list)
+                .map(s -> {
+                    System.out.print(s);
+                    return s;
+                })
+                .filter(s -> false)
                 .toList()
-                .doOnNext(list -> System.out.print(list.size()))
+                .flatMap(Observable::from)
+                .toList()
+                .map(l -> {
+                    System.out.print(l.size());
+                    return l;
+                })
                 .subscribe(testSubscriber);
         testSubscriber.assertNoErrors();
         testSubscriber.assertValueCount(1);

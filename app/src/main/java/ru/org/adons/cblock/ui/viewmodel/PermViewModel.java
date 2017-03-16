@@ -28,7 +28,7 @@ public class PermViewModel {
      * @param context Activity
      * @return array of required permissions
      */
-    public Observable<List<String>> getRequestPermissions(Context context) {
+    public Observable<List<String>> getPermissionsRequest(Context context) {
         final ArrayList<String> request = new ArrayList<>();
         return Observable.from(permissions)
                 .map(perm -> {

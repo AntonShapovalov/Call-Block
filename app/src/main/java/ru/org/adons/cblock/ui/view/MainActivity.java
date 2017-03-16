@@ -21,6 +21,7 @@ import ru.org.adons.cblock.ui.base.DaggerBaseAppComponent;
 import ru.org.adons.cblock.ui.viewmodel.PermViewModel;
 import ru.org.adons.cblock.utils.Logging;
 import rx.Completable;
+import rx.Observable;
 import rx.schedulers.Schedulers;
 
 public class MainActivity extends AppCompatActivity implements IMainListener, IAddListener {
@@ -30,6 +31,7 @@ public class MainActivity extends AppCompatActivity implements IMainListener, IA
     @BindView(android.R.id.progress) ProgressBar progressBar;
 
     private final PermViewModel permViewModel = new PermViewModel();
+    private boolean isShowWarning = false;
 
     private BaseAppComponent baseAppComponent;
 
@@ -38,23 +40,35 @@ public class MainActivity extends AppCompatActivity implements IMainListener, IA
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
-        requestPermissions();
     }
 
     @Override
     protected void onResume() {
         super.onResume();
         hideProgress();
+        requestPermissions();
     }
 
     private void requestPermissions() {
-        permViewModel.getRequestPermissions(this)
+        permViewModel.getPermissionsRequest(this)
+                .doOnSubscribe(() -> isShowWarning = false)
+                .flatMap(Observable::from)
+                .filter(perm -> {
+                    boolean isShow = ActivityCompat.shouldShowRequestPermissionRationale(this, perm);
+                    isShowWarning = isShow || isShowWarning;
+                    return !isShow;
+                })
+                .toList()
                 .subscribe(request -> {
                     if (request.size() > 0) {
                         String[] permissions = request.toArray(new String[request.size()]);
                         ActivityCompat.requestPermissions(this, permissions, PERMISSIONS_REQUEST);
                     } else {
-                        initComponents();
+                        if (isShowWarning) {
+                            showPermFragment();
+                        } else {
+                            initComponents();
+                        }
                     }
                 });
     }
@@ -67,13 +81,7 @@ public class MainActivity extends AppCompatActivity implements IMainListener, IA
                         if (yes) {
                             initComponents();
                         } else {
-                            BlockService.stop(this);
-                            clearFragmentBackStack();
-                            PermFragment fragment = getPermFragment();
-                            if (fragment == null) {
-                                fragment = new PermFragment();
-                                getFragmentManager().beginTransaction().replace(R.id.fragment_container, fragment, PermFragment.PERM_FRAGMENT_TAG).commit();
-                            }
+                            showPermFragment();
                         }
                     });
         }
@@ -158,6 +166,16 @@ public class MainActivity extends AppCompatActivity implements IMainListener, IA
         transaction.replace(R.id.fragment_container, fragment, AddFragment.ADD_FRAGMENT_TAG);
         transaction.addToBackStack(MainFragment.MAIN_FRAGMENT_TAG);
         transaction.commit();
+    }
+
+    private void showPermFragment() {
+        BlockService.stop(this);
+        clearFragmentBackStack();
+        PermFragment fragment = getPermFragment();
+        if (fragment == null) {
+            fragment = new PermFragment();
+            getFragmentManager().beginTransaction().replace(R.id.fragment_container, fragment, PermFragment.PERM_FRAGMENT_TAG).commit();
+        }
     }
 
 }
