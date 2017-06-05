@@ -2,6 +2,9 @@ package ru.org.adons.cblock.app;
 
 import java.util.List;
 
+import javax.inject.Inject;
+import javax.inject.Singleton;
+
 import ru.org.adons.cblock.data.BlockListModel;
 import ru.org.adons.cblock.model.BlockListItem;
 import ru.org.adons.cblock.model.CallLogItem;
@@ -16,9 +19,15 @@ import rx.subjects.PublishSubject;
 /**
  * Bus event to add phones in block list and notify all subscribers: {@link MainFragment} and {@link BlockService}
  */
+
+@Singleton
 public class BlockManager {
 
     private final PublishSubject<List<BlockListItem>> blockListSubject = PublishSubject.create();
+
+    @Inject
+    public BlockManager() {
+    }
 
     /**
      * Add phones in block list and notify all subscribers

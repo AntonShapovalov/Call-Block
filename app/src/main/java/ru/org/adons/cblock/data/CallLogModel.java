@@ -7,12 +7,17 @@ import com.squareup.sqlbrite.BriteContentResolver;
 
 import java.util.List;
 
+import javax.inject.Inject;
+
 import ru.org.adons.cblock.model.CallLogItem;
+import ru.org.adons.cblock.ui.base.ViewScope;
 import rx.Observable;
 
 /**
  * Provide data from {@link CallLog} for incoming or missed calls list
  */
+
+@ViewScope
 public class CallLogModel {
 
     private static final Uri CALLS_URI = CallLog.Calls.CONTENT_URI;
@@ -33,10 +38,10 @@ public class CallLogModel {
             + ")";
 
 
-    private final BriteContentResolver resolver;
+    @Inject BriteContentResolver resolver;
 
-    public CallLogModel(BriteContentResolver resolver) {
-        this.resolver = resolver;
+    @Inject
+    public CallLogModel() {
     }
 
     /**

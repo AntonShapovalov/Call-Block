@@ -35,12 +35,6 @@ class ApplicationModule {
 
     @Singleton
     @Provides
-    Preferences providePreferences() {
-        return new Preferences(context);
-    }
-
-    @Singleton
-    @Provides
     BriteContentResolver provideContentResolver(SqlBrite sqlBrite) {
         return sqlBrite.wrapContentProvider(context.getContentResolver(), Schedulers.immediate());
     }
@@ -57,12 +51,6 @@ class ApplicationModule {
         DaoMaster.DevOpenHelper helper = new DaoMaster.DevOpenHelper(context, "cblock-db");
         Database db = helper.getWritableDb();
         return new DaoMaster(db).newSession();
-    }
-
-    @Singleton
-    @Provides
-    BlockManager provideBlockManager() {
-        return new BlockManager();
     }
 
 }

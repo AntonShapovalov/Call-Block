@@ -5,7 +5,6 @@ import android.content.Context;
 import android.content.pm.PackageManager;
 import android.support.v4.content.ContextCompat;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import rx.Observable;
@@ -29,16 +28,9 @@ public class PermViewModel {
      * @return array of required permissions
      */
     public Observable<List<String>> getPermissionsRequest(Context context) {
-        final ArrayList<String> request = new ArrayList<>();
         return Observable.from(permissions)
-                .map(perm -> {
-                    if (ContextCompat.checkSelfPermission(context, perm) != PackageManager.PERMISSION_GRANTED) {
-                        request.add(perm);
-                    }
-                    return perm;
-                })
-                .toList()
-                .map(perms -> request);
+                .filter(perm -> ContextCompat.checkSelfPermission(context, perm) != PackageManager.PERMISSION_GRANTED)
+                .toList();
     }
 
     /**

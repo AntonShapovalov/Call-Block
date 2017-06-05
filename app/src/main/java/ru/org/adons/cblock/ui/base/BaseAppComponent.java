@@ -12,7 +12,7 @@ import ru.org.adons.cblock.ui.viewmodel.MainViewModel;
  */
 @SuppressWarnings("WeakerAccess")
 @ViewScope
-@Component(dependencies = ApplicationComponent.class, modules = BaseAppModule.class)
+@Component(dependencies = ApplicationComponent.class)
 public interface BaseAppComponent {
 
     void inject(MainViewModel mainViewModel);

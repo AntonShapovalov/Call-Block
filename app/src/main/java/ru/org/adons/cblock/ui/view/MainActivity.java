@@ -16,7 +16,6 @@ import ru.org.adons.cblock.R;
 import ru.org.adons.cblock.app.CBlockApplication;
 import ru.org.adons.cblock.service.BlockService;
 import ru.org.adons.cblock.ui.base.BaseAppComponent;
-import ru.org.adons.cblock.ui.base.BaseAppModule;
 import ru.org.adons.cblock.ui.base.DaggerBaseAppComponent;
 import ru.org.adons.cblock.ui.viewmodel.PermViewModel;
 import ru.org.adons.cblock.utils.Logging;
@@ -135,7 +134,6 @@ public class MainActivity extends AppCompatActivity implements IMainListener, IA
             CBlockApplication application = (CBlockApplication) getApplication();
             baseAppComponent = DaggerBaseAppComponent.builder()
                     .applicationComponent(application.applicationComponent())
-                    .baseAppModule(new BaseAppModule())
                     .build();
         }
         return baseAppComponent;

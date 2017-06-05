@@ -3,25 +3,31 @@ package ru.org.adons.cblock.data;
 import java.util.HashSet;
 import java.util.List;
 
+import javax.inject.Inject;
+
 import ru.org.adons.cblock.model.BlockListItem;
 import ru.org.adons.cblock.model.BlockListItemDao;
 import ru.org.adons.cblock.model.CallLogItem;
 import ru.org.adons.cblock.model.DaoSession;
 import ru.org.adons.cblock.service.BlockService;
 import ru.org.adons.cblock.ui.adapter.CallLogAdapter;
+import ru.org.adons.cblock.ui.base.ViewScope;
 import rx.Observable;
 
 /**
  * Provide data for block list
  */
+
+@ViewScope
 public class BlockListModel {
 
     private final DaoSession daoSession;
     private final BlockListItemDao blockListDao;
 
+    @Inject
     public BlockListModel(DaoSession daoSession) {
         this.daoSession = daoSession;
-        this.blockListDao = daoSession.getBlockListItemDao();
+        blockListDao = daoSession.getBlockListItemDao();
     }
 
     /**

@@ -25,7 +25,6 @@ import ru.org.adons.cblock.app.BlockManager;
 import ru.org.adons.cblock.app.CBlockApplication;
 import ru.org.adons.cblock.data.BlockListModel;
 import ru.org.adons.cblock.ui.base.BaseAppComponent;
-import ru.org.adons.cblock.ui.base.BaseAppModule;
 import ru.org.adons.cblock.ui.base.DaggerBaseAppComponent;
 import ru.org.adons.cblock.ui.view.MainActivity;
 import ru.org.adons.cblock.utils.Logging;
@@ -40,8 +39,6 @@ public class BlockService extends Service {
     private static final int NOTIFICATION_ID = 201507;
     private static volatile boolean isEnabled = false;
 
-    @Inject BlockListModel blockListModel;
-    @Inject BlockManager blockManager;
     private final CompositeSubscription subscription = new CompositeSubscription();
     private final Set<String> phones = new HashSet<>();
 
@@ -49,6 +46,9 @@ public class BlockService extends Service {
     private TelephonyManager manager;
     private ITelephony telephony;
     private AudioManager audio;
+
+    @Inject BlockListModel blockListModel;
+    @Inject BlockManager blockManager;
 
     /**
      * Start Block Service in foreground mode
@@ -75,7 +75,6 @@ public class BlockService extends Service {
         CBlockApplication application = (CBlockApplication) getApplication();
         BaseAppComponent baseAppComponent = DaggerBaseAppComponent.builder()
                 .applicationComponent(application.applicationComponent())
-                .baseAppModule(new BaseAppModule())
                 .build();
         baseAppComponent.inject(this);
 
@@ -122,8 +121,12 @@ public class BlockService extends Service {
                         int ringState = audio.getRingerMode();
                         boolean isMuted = false;
                         if (ringState != AudioManager.RINGER_MODE_SILENT) {
-                            audio.setRingerMode(AudioManager.RINGER_MODE_SILENT);
-                            isMuted = true;
+                            try {
+                                audio.setRingerMode(AudioManager.RINGER_MODE_SILENT);
+                                isMuted = true;
+                            } catch (Exception e) {
+                                Logging.d(e.getMessage());
+                            }
                         }
 
                         // try to end call

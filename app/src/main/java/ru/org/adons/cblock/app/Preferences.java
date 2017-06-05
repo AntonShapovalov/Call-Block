@@ -3,6 +3,9 @@ package ru.org.adons.cblock.app;
 import android.content.Context;
 import android.content.SharedPreferences;
 
+import javax.inject.Inject;
+import javax.inject.Singleton;
+
 import ru.org.adons.cblock.R;
 
 import static android.content.Context.MODE_PRIVATE;
@@ -10,12 +13,15 @@ import static android.content.Context.MODE_PRIVATE;
 /**
  * Wrapper for {@link SharedPreferences}
  */
+
+@Singleton
 public class Preferences {
 
     private static final String SERVICE_SWITCH_KEY = "SERVICE_SWITCH_KEY";
 
     private final SharedPreferences pref;
 
+    @Inject
     Preferences(Context context) {
         pref = context.getSharedPreferences(context.getString(R.string.app_preferences_file), MODE_PRIVATE);
     }
