@@ -1,4 +1,4 @@
-package ru.org.adons.cblock.ui.adapter;
+package ru.org.adons.cblock.ui.view.main;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -15,18 +15,18 @@ import butterknife.ButterKnife;
 import ru.org.adons.cblock.R;
 import ru.org.adons.cblock.model.BlockListItem;
 
-import static ru.org.adons.cblock.ui.adapter.ListItemDecorator.formatPhoneNumber;
-import static ru.org.adons.cblock.ui.adapter.ListItemDecorator.getDescription;
+import static ru.org.adons.cblock.utils.UiUtils.formatPhoneNumber;
+import static ru.org.adons.cblock.utils.UiUtils.getDescription;
 
 /**
  * Recycler adapter for Block list
  */
-public class BlockListAdapter extends RecyclerView.Adapter<BlockListAdapter.ViewHolder> {
+class BlockListAdapter extends RecyclerView.Adapter<BlockListAdapter.ViewHolder> {
 
     private final ArrayList<BlockListItem> items = new ArrayList<>();
     private final IBlockListListener listener;
 
-    public BlockListAdapter(IBlockListListener listener) {
+    BlockListAdapter(IBlockListListener listener) {
         this.listener = listener;
     }
 
@@ -49,7 +49,7 @@ public class BlockListAdapter extends RecyclerView.Adapter<BlockListAdapter.View
         return items.size();
     }
 
-    public void setItems(List<BlockListItem> newItems) {
+    void setItems(List<BlockListItem> newItems) {
         items.clear();
         items.addAll(newItems);
         notifyDataSetChanged();

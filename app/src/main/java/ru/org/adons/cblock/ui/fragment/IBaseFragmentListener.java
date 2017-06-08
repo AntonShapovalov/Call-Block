@@ -1,4 +1,6 @@
-package ru.org.adons.cblock.ui.base;
+package ru.org.adons.cblock.ui.fragment;
+
+import ru.org.adons.cblock.ui.activity.MainComponent;
 
 /**
  * Base interface for Fragment -> Activity interaction
@@ -6,7 +8,7 @@ package ru.org.adons.cblock.ui.base;
  */
 public interface IBaseFragmentListener {
 
-    BaseAppComponent getBaseAppComponent();
+    MainComponent getMainComponent();
 
     void showProgress();
 

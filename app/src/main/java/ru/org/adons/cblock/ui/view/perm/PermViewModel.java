@@ -1,4 +1,4 @@
-package ru.org.adons.cblock.ui.viewmodel;
+package ru.org.adons.cblock.ui.view.perm;
 
 import android.Manifest;
 import android.content.Context;
@@ -12,6 +12,7 @@ import rx.Observable;
 /**
  * Check all required permissions
  */
+
 public class PermViewModel {
 
     private final String[] permissions = new String[]{

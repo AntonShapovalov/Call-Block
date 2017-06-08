@@ -1,4 +1,4 @@
-package ru.org.adons.cblock.ui.viewmodel;
+package ru.org.adons.cblock.ui.view.add;
 
 import java.util.HashSet;
 import java.util.List;
@@ -9,7 +9,6 @@ import ru.org.adons.cblock.app.BlockManager;
 import ru.org.adons.cblock.data.BlockListModel;
 import ru.org.adons.cblock.data.CallLogModel;
 import ru.org.adons.cblock.model.CallLogItem;
-import ru.org.adons.cblock.ui.view.AddFragment;
 import ru.org.adons.cblock.utils.Logging;
 import rx.Observable;
 
@@ -23,13 +22,17 @@ public class AddViewModel {
     @Inject BlockListModel blockListModel;
     @Inject BlockManager blockManager;
 
-    public Observable<List<CallLogItem>> getCallLogList() {
+    @Inject
+    AddViewModel() {
+    }
+
+    Observable<List<CallLogItem>> getCallLogList() {
         return callLogModel.getCallLogList()
                 .doOnSubscribe(Logging.subscribe(this.getClass(), "getCallLogList"))
                 .doOnUnsubscribe(Logging.unsubscribe(this.getClass(), "getCallLogList"));
     }
 
-    public Observable<List<CallLogItem>> setBlockedItems(List<CallLogItem> items) {
+    Observable<List<CallLogItem>> setBlockedItems(List<CallLogItem> items) {
         final HashSet<String> filter = new HashSet<>();
         return blockListModel.getBlockedPhones()
                 .doOnSubscribe(Logging.subscribe(this.getClass(), "setBlockedItems"))
@@ -45,7 +48,7 @@ public class AddViewModel {
                 .toList();
     }
 
-    public void addPhones(List<CallLogItem> items) {
+    void addPhones(List<CallLogItem> items) {
         blockManager.addPhones(blockListModel, items);
     }
 

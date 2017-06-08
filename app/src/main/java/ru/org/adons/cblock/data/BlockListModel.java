@@ -10,8 +10,8 @@ import ru.org.adons.cblock.model.BlockListItemDao;
 import ru.org.adons.cblock.model.CallLogItem;
 import ru.org.adons.cblock.model.DaoSession;
 import ru.org.adons.cblock.service.BlockService;
-import ru.org.adons.cblock.ui.adapter.CallLogAdapter;
-import ru.org.adons.cblock.ui.base.ViewScope;
+import ru.org.adons.cblock.ui.view.add.CallLogAdapter;
+import ru.org.adons.cblock.scope.ViewScope;
 import rx.Observable;
 
 /**

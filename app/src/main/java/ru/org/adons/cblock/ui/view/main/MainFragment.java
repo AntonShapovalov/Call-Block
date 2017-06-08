@@ -1,4 +1,4 @@
-package ru.org.adons.cblock.ui.view;
+package ru.org.adons.cblock.ui.view.main;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -20,10 +20,9 @@ import butterknife.ButterKnife;
 import butterknife.Unbinder;
 import ru.org.adons.cblock.R;
 import ru.org.adons.cblock.app.BlockManager;
-import ru.org.adons.cblock.ui.adapter.BlockListAdapter;
-import ru.org.adons.cblock.ui.adapter.IBlockListListener;
-import ru.org.adons.cblock.ui.base.BaseFragment;
-import ru.org.adons.cblock.ui.viewmodel.MainViewModel;
+import ru.org.adons.cblock.ui.activity.IMainListener;
+import ru.org.adons.cblock.ui.fragment.BaseFragment;
+import ru.org.adons.cblock.utils.UiUtils;
 import rx.Observable;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
@@ -33,7 +32,7 @@ import rx.schedulers.Schedulers;
  */
 public class MainFragment extends BaseFragment<IMainListener> implements IBlockListListener {
 
-    static final String MAIN_FRAGMENT_TAG = "MAIN_FRAGMENT_TAG";
+    public static final String MAIN_FRAGMENT_TAG = "MAIN_FRAGMENT_TAG";
     private static final String SWITCH_KEY = "SWITCH_KEY";
 
     @BindView(R.id.recycler_view_block_list) RecyclerView blockList;
@@ -41,12 +40,11 @@ public class MainFragment extends BaseFragment<IMainListener> implements IBlockL
     @BindView(R.id.fab_add) FloatingActionButton fabAdd;
     private Unbinder unbinder;
 
-    @Inject BlockManager blockManager;
-
-    private final MainViewModel mainViewModel = new MainViewModel();
-    private final BlockListAdapter adapter = new BlockListAdapter(this);
-
+    private BlockListAdapter adapter;
     private boolean isSwitchChecked = false;
+
+    @Inject BlockManager blockManager;
+    @Inject MainViewModel mainViewModel;
 
     @Override
     public void onAttach(Activity activity) {
@@ -57,8 +55,7 @@ public class MainFragment extends BaseFragment<IMainListener> implements IBlockL
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        listener.getBaseAppComponent().inject(mainViewModel);
-        listener.getBaseAppComponent().inject(this);
+        listener.getMainComponent().inject(this);
         if (savedInstanceState != null) {
             isSwitchChecked = savedInstanceState.getBoolean(SWITCH_KEY);
         }
@@ -75,7 +72,8 @@ public class MainFragment extends BaseFragment<IMainListener> implements IBlockL
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        initList(getActivity(), blockList, adapter);
+        adapter = new BlockListAdapter(this);
+        UiUtils.initList(getActivity(), blockList, adapter);
         //
         fabAdd.setOnClickListener(v -> listener.showAddFragment());
         //

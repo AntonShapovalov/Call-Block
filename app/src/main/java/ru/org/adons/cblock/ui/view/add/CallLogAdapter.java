@@ -1,4 +1,4 @@
-package ru.org.adons.cblock.ui.adapter;
+package ru.org.adons.cblock.ui.view.add;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -15,8 +15,8 @@ import butterknife.ButterKnife;
 import ru.org.adons.cblock.R;
 import ru.org.adons.cblock.model.CallLogItem;
 
-import static ru.org.adons.cblock.ui.adapter.ListItemDecorator.formatPhoneNumber;
-import static ru.org.adons.cblock.ui.adapter.ListItemDecorator.getDescription;
+import static ru.org.adons.cblock.utils.UiUtils.formatPhoneNumber;
+import static ru.org.adons.cblock.utils.UiUtils.getDescription;
 
 /**
  * Recycler adapter for Call Log list
@@ -61,13 +61,13 @@ public class CallLogAdapter extends RecyclerView.Adapter<CallLogAdapter.ViewHold
         return items.size();
     }
 
-    public void setItems(List<CallLogItem> newItems) {
+    void setItems(List<CallLogItem> newItems) {
         items.clear();
         items.addAll(newItems);
         notifyDataSetChanged();
     }
 
-    public List<CallLogItem> getItems() {
+    List<CallLogItem> getItems() {
         return items;
     }
 

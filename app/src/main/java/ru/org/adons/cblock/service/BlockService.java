@@ -24,9 +24,7 @@ import ru.org.adons.cblock.R;
 import ru.org.adons.cblock.app.BlockManager;
 import ru.org.adons.cblock.app.CBlockApplication;
 import ru.org.adons.cblock.data.BlockListModel;
-import ru.org.adons.cblock.ui.base.BaseAppComponent;
-import ru.org.adons.cblock.ui.base.DaggerBaseAppComponent;
-import ru.org.adons.cblock.ui.view.MainActivity;
+import ru.org.adons.cblock.ui.activity.MainActivity;
 import ru.org.adons.cblock.utils.Logging;
 import ru.org.adons.cblock.utils.SubscriptionUtils;
 import rx.Subscription;
@@ -73,10 +71,10 @@ public class BlockService extends Service {
         super.onCreate();
         // inject dependencies
         CBlockApplication application = (CBlockApplication) getApplication();
-        BaseAppComponent baseAppComponent = DaggerBaseAppComponent.builder()
+        ServiceComponent serviceComponent = DaggerServiceComponent.builder()
                 .applicationComponent(application.applicationComponent())
                 .build();
-        baseAppComponent.inject(this);
+        serviceComponent.inject(this);
 
         // get blocked phones list
         Subscription dataSubscription = blockListModel.getBlockedPhones()

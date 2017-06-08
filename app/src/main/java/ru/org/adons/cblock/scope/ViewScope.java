@@ -1,4 +1,4 @@
-package ru.org.adons.cblock.ui.base;
+package ru.org.adons.cblock.scope;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;

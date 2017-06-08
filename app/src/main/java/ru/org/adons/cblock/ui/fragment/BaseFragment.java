@@ -1,8 +1,6 @@
-package ru.org.adons.cblock.ui.base;
+package ru.org.adons.cblock.ui.fragment;
 
 import android.content.Context;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 
 import com.trello.rxlifecycle.components.RxFragment;
@@ -40,19 +38,6 @@ public abstract class BaseFragment<T extends IBaseFragmentListener> extends RxFr
     protected void onError(Throwable t) {
         Logging.e(Log.getStackTraceString(t));
         listener.showError(t.getLocalizedMessage());
-    }
-
-    /**
-     * Default recycler list initialization
-     *
-     * @param list    recycler view list
-     * @param adapter recycler adapter
-     */
-    protected void initList(Context context, RecyclerView list, RecyclerView.Adapter adapter) {
-        LinearLayoutManager layoutManager = new LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false);
-        layoutManager.setSmoothScrollbarEnabled(true);
-        list.setLayoutManager(layoutManager);
-        list.setAdapter(adapter);
     }
 
 }

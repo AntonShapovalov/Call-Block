@@ -9,7 +9,7 @@ import ru.org.adons.cblock.data.BlockListModel;
 import ru.org.adons.cblock.model.BlockListItem;
 import ru.org.adons.cblock.model.CallLogItem;
 import ru.org.adons.cblock.service.BlockService;
-import ru.org.adons.cblock.ui.view.MainFragment;
+import ru.org.adons.cblock.ui.view.main.MainFragment;
 import ru.org.adons.cblock.utils.Logging;
 import rx.Observable;
 import rx.android.schedulers.AndroidSchedulers;

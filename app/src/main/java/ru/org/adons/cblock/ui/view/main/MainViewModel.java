@@ -1,4 +1,4 @@
-package ru.org.adons.cblock.ui.viewmodel;
+package ru.org.adons.cblock.ui.view.main;
 
 import android.content.Context;
 
@@ -12,13 +12,13 @@ import ru.org.adons.cblock.app.Preferences;
 import ru.org.adons.cblock.data.BlockListModel;
 import ru.org.adons.cblock.model.BlockListItem;
 import ru.org.adons.cblock.service.BlockService;
-import ru.org.adons.cblock.ui.view.MainFragment;
 import ru.org.adons.cblock.utils.Logging;
 import rx.Observable;
 
 /**
  * Main Model View, provide data for {@link MainFragment}
  */
+
 public class MainViewModel {
 
     @Inject Context context;
@@ -26,17 +26,21 @@ public class MainViewModel {
     @Inject BlockListModel blockListModel;
     @Inject BlockManager blockManager;
 
-    public Observable<List<BlockListItem>> getBlockList() {
+    @Inject
+    MainViewModel() {
+    }
+
+    Observable<List<BlockListItem>> getBlockList() {
         return blockListModel.getBlockList()
                 .doOnSubscribe(Logging.subscribe(this.getClass(), "getBlockList"))
                 .doOnUnsubscribe(Logging.unsubscribe(this.getClass(), "getBlockList"));
     }
 
-    public Observable<Boolean> getServiceState() {
+    Observable<Boolean> getServiceState() {
         return Observable.fromCallable(pref::getServiceState);
     }
 
-    public Observable<String> changeServiceState(boolean isEnable) {
+    Observable<String> changeServiceState(boolean isEnable) {
         return Observable.just(isEnable)
                 .map(bool -> {
                     pref.setServiceState(isEnable);
@@ -50,7 +54,7 @@ public class MainViewModel {
                 });
     }
 
-    public void deletePhone(long itemId) {
+    void deletePhone(long itemId) {
         blockManager.deletePhone(blockListModel, itemId);
     }
 

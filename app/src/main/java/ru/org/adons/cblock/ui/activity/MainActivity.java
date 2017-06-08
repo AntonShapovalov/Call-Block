@@ -1,4 +1,4 @@
-package ru.org.adons.cblock.ui.view;
+package ru.org.adons.cblock.ui.activity;
 
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
@@ -15,15 +15,16 @@ import butterknife.ButterKnife;
 import ru.org.adons.cblock.R;
 import ru.org.adons.cblock.app.CBlockApplication;
 import ru.org.adons.cblock.service.BlockService;
-import ru.org.adons.cblock.ui.base.BaseAppComponent;
-import ru.org.adons.cblock.ui.base.DaggerBaseAppComponent;
-import ru.org.adons.cblock.ui.viewmodel.PermViewModel;
+import ru.org.adons.cblock.ui.view.add.AddFragment;
+import ru.org.adons.cblock.ui.view.main.MainFragment;
+import ru.org.adons.cblock.ui.view.perm.PermFragment;
+import ru.org.adons.cblock.ui.view.perm.PermViewModel;
 import ru.org.adons.cblock.utils.Logging;
 import rx.Completable;
 import rx.Observable;
 import rx.schedulers.Schedulers;
 
-public class MainActivity extends AppCompatActivity implements IMainListener, IAddListener {
+public class MainActivity extends AppCompatActivity implements IMainListener {
 
     private static final int PERMISSIONS_REQUEST = 311;
 
@@ -32,7 +33,7 @@ public class MainActivity extends AppCompatActivity implements IMainListener, IA
     private final PermViewModel permViewModel = new PermViewModel();
     private boolean isShowWarning = false;
 
-    private BaseAppComponent baseAppComponent;
+    private MainComponent mainComponent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -92,7 +93,7 @@ public class MainActivity extends AppCompatActivity implements IMainListener, IA
     private void initComponents() {
         showProgress();
         Logging.d(this.getClass() + ":initComponents");
-        Completable.fromAction(this::getBaseAppComponent)
+        Completable.fromAction(this::getMainComponent)
                 .doOnUnsubscribe(this::hideProgress)
                 .subscribeOn(Schedulers.computation())
                 .subscribe(this::onComponentsReady);
@@ -127,16 +128,16 @@ public class MainActivity extends AppCompatActivity implements IMainListener, IA
     }
 
     /**
-     * @return {@link BaseAppComponent} to provide data dependencies fot all View-Models
+     * @return {@link MainComponent} to provide data dependencies fot all View-Models
      */
-    public BaseAppComponent getBaseAppComponent() {
-        if (baseAppComponent == null) {
+    public MainComponent getMainComponent() {
+        if (mainComponent == null) {
             CBlockApplication application = (CBlockApplication) getApplication();
-            baseAppComponent = DaggerBaseAppComponent.builder()
+            mainComponent = DaggerMainComponent.builder()
                     .applicationComponent(application.applicationComponent())
                     .build();
         }
-        return baseAppComponent;
+        return mainComponent;
     }
 
     @Override

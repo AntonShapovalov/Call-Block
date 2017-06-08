@@ -1,4 +1,4 @@
-package ru.org.adons.cblock.ui.view;
+package ru.org.adons.cblock.ui.view.perm;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -15,15 +15,15 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 import ru.org.adons.cblock.R;
-import ru.org.adons.cblock.ui.base.BaseFragment;
-import ru.org.adons.cblock.ui.base.IBaseFragmentListener;
+import ru.org.adons.cblock.ui.fragment.BaseFragment;
+import ru.org.adons.cblock.ui.fragment.IBaseFragmentListener;
 
 /**
  * Permission View, show warning if required permissions were not granted
  */
 public class PermFragment extends BaseFragment<IBaseFragmentListener> {
 
-    static final String PERM_FRAGMENT_TAG = "PERM_FRAGMENT_TAG";
+    public static final String PERM_FRAGMENT_TAG = "PERM_FRAGMENT_TAG";
 
     @BindView(R.id.button_settings) Button buttonSetting;
     private Unbinder unbinder;

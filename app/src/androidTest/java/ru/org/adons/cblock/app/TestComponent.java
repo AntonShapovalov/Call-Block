@@ -3,7 +3,7 @@ package ru.org.adons.cblock.app;
 import dagger.Component;
 import ru.org.adons.cblock.data.BlockListModelTest;
 import ru.org.adons.cblock.data.CallLogModelTest;
-import ru.org.adons.cblock.ui.base.ViewScope;
+import ru.org.adons.cblock.scope.ViewScope;
 
 /**
  * Provide Application and data-model dependencies for test
