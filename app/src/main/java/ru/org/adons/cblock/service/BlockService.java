@@ -85,7 +85,7 @@ public class BlockService extends Service {
 
         // subscribe to block list update from BlockManager
         Subscription updateSubscription = blockManager.getBlockListUpdate()
-                .flatMap(blockListModel::getBlockedPhones)
+                .map(blockListModel::getBlockedPhones)
                 .subscribeOn(Schedulers.computation())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(this::setPhones);
