@@ -9,8 +9,7 @@ import java.util.Date;
 
 import javax.inject.Inject;
 
-import ru.org.adons.cblock.model.BlockListItem;
-import ru.org.adons.cblock.model.CallLogItem;
+import ru.org.adons.cblock.model.BlockListModel;
 import ru.org.adons.cblock.utils.Logging;
 import rx.Observable;
 import rx.observers.TestSubscriber;

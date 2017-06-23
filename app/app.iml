@@ -23,9 +23,18 @@
     </facet>
     <facet type="kotlin-language" name="Kotlin">
       <configuration version="2" platform="JVM 1.6" useProjectSettings="false">
-        <compilerSettings />
+        <compilerSettings>
+          <option name="additionalArguments" value="-no-jdk" />
+        </compilerSettings>
         <compilerArguments>
+          <option name="destination" value="C:\Users\DevLead\Documents\android-github\Android-CBlock\app\build\tmp\kotlin-classes\releaseUnitTest" />
+          <option name="classpath" value="C:\Users\DevLead\.gradle\caches\modules-2\files-2.1\junit\junit\4.12\2973d150c0dc1fefe998f834810d68f278ea58ec\junit-4.12.jar;C:\Users\DevLead\.gradle\caches\modules-2\files-2.1\org.hamcrest\hamcrest-core\1.3\42a25dc3219429f0e5d060061f71acb49bf010a0\hamcrest-core-1.3.jar;C:\Users\DevLead\.gradle\caches\modules-2\files-2.1\com.google.code.findbugs\jsr305\3.0.1\f7be08ec23c21485b9b5a1cf1654c2ec8c58168d\jsr305-3.0.1.jar;C:\Users\DevLead\.android\build-cache\088fe8209529cc8c164479c46d933dbcf080149f\output\jars\classes.jar;C:\Users\DevLead\.android\build-cache\706a144062a81911cd2146bdfcd0b7aad8b3a6f4\output\jars\classes.jar;C:\Users\DevLead\.android\build-cache\232dab8de385ec5480bbbacc91a221238b6692a1\output\jars\classes.jar;C:\Users\DevLead\.android\build-cache\6d406634df955c734164252c940dab4ede56d6c4\output\jars\classes.jar;C:\Users\DevLead\.gradle\caches\modules-2\files-2.1\com.googlecode.libphonenumber\libphonenumber\7.4.5\14fb1e182ec0e28b8be77c84034b8285aac44da9\libphonenumber-7.4.5.jar;C:\Users\DevLead\.gradle\caches\modules-2\files-2.1\com.google.dagger\dagger\2.6\a2e0fb833ba928689fb8b8d9cc92a81298da7c37\dagger-2.6.jar;C:\Users\DevLead\.gradle\caches\modules-2\files-2.1\javax.inject\javax.inject\1\6975da39a7040257bd51d21a231b76c915872d38\javax.inject-1.jar;C:\Users\DevLead\.android\build-cache\06bcbcfadf2dd7bbaa9c385c9a8818d106eacf07\output\jars\classes.jar;C:\Users\DevLead\.android\build-cache\27dd707cc425e448f862fc1a15f11fc102a0175c\output\jars\classes.jar;C:\Users\DevLead\.gradle\caches\modules-2\files-2.1\com.trello\rxlifecycle\1.0\6a38e2cd80f46ecaf6553b2eb5a05eee6d472fdb\rxlifecycle-1.0.jar;C:\Users\DevLead\.android\build-cache\d16a4a1f39a9238838ddfd44b5d13b1a425b1808\output\jars\classes.jar;C:\Users\DevLead\.android\build-cache\31003d20427b6e2a28826febe215349cf7fafeed\output\jars\classes.jar;C:\Users\DevLead\.android\build-cache\fa513becebd98799b4d35a47064e945b815a08b1\output\jars\classes.jar;C:\Users\DevLead\.android\build-cache\2eb1bb439940b6626c19a9dbc9f2506777399212\output\jars\classes.jar;C:\Users\DevLead\.android\build-cache\4e47cb404dff214caddc6613b7643dcb6ad0fe1d\output\jars\classes.jar;C:\Users\DevLead\.android\build-cache\724255384c3f4de7c414946ec19d9a8003a0f55a\output\jars\classes.jar;C:\Users\DevLead\.android\build-cache\77f75f4d04f172dfa9d29efd2a5c0fc7d9f0fa94\output\jars\classes.jar;C:\Users\DevLead\.android\build-cache\fe22165c19d39326b0133a8ac7af81c0aaf76212\output\jars\classes.jar;C:\Users\DevLead\.android\build-cache\f3b425776a4037f530d53f782b0b8123bf259fbd\output\jars\classes.jar;C:\Users\DevLead\.android\build-cache\46a10c03ce15718a06de6744565ae3470ea4dc8d\output\jars\classes.jar;C:\Users\DevLead\.android\build-cache\44fdc78d33a3a8673351996881c734e3c572e5b6\output\jars\classes.jar;C:\Users\DevLead\.android\build-cache\27d6672f0990c4458ae7218d780a1907ba107d3d\output\jars\classes.jar;C:\Users\DevLead\.gradle\caches\modules-2\files-2.1\io.reactivex\rxjava\1.2.3\7fe1a94c1aeb958acc876fe616922cc191f3222c\rxjava-1.2.3.jar;C:\Users\DevLead\.gradle\caches\modules-2\files-2.1\org.greenrobot\greendao\3.2.0\e70040568b2929b8e5869ad1ffca8e4386dc53bc\greendao-3.2.0.jar;C:\Users\DevLead\.gradle\caches\modules-2\files-2.1\org.greenrobot\greendao-api\3.2.0\c6d610abe1d75d758431c9234917a349abc0a0ac\greendao-api-3.2.0.jar;C:\Users\DevLead\.android\build-cache\e1c7c6e11292c2b52345b6ae7609ed729035dd91\output\jars\classes.jar;C:\Users\DevLead\.gradle\caches\modules-2\files-2.1\com.jakewharton\butterknife-annotations\8.4.0\ea392375cf9ff59234a82e7928a204215ccc98cd\butterknife-annotations-8.4.0.jar;C:\Users\DevLead\Documents\android-sdk\extras\android\m2repository\com\android\support\support-annotations\25.3.1\support-annotations-25.3.1.jar;C:\Users\DevLead\.android\build-cache\34e088c7bb17a0aea1f7db94665fef18ee702947\output\jars\classes.jar;C:\Users\DevLead\.gradle\caches\modules-2\files-2.1\commons-cli\commons-cli\1.2\2bf96b7aa8b611c177d329452af1dc933e14501c\commons-cli-1.2.jar;C:\Users\DevLead\.gradle\caches\modules-2\files-2.1\org.jetbrains.kotlin\kotlin-stdlib-jre7\1.1.2-5\6617f5ad8c76e5141fff9da5b8975081cad24ccf\kotlin-stdlib-jre7-1.1.2-5.jar;C:\Users\DevLead\.gradle\caches\modules-2\files-2.1\org.jetbrains.kotlin\kotlin-stdlib\1.1.2-5\508b8b59843653756aeed058a3a421afa0657bcb\kotlin-stdlib-1.1.2-5.jar;C:\Users\DevLead\.gradle\caches\modules-2\files-2.1\org.jetbrains\annotations\13.0\919f0dfe192fb4e063e7dacadee7f8bb9a2672a9\annotations-13.0.jar;C:\Users\DevLead\.gradle\caches\modules-2\files-2.1\javax.annotation\jsr250-api\1.0\5025422767732a1ab45d93abfea846513d742dcf\jsr250-api-1.0.jar;C:\Users\DevLead\.gradle\caches\modules-2\files-2.1\com.google.auto.value\auto-value\1.4-rc1\9347939002003a7a3c3af48271fc2c18734528a4\auto-value-1.4-rc1.jar;C:\Users\DevLead\Documents\android-sdk\platforms\android-25\android.jar" />
+          <option name="noStdlib" value="true" />
+          <option name="noReflect" value="true" />
+          <option name="moduleName" value="app_release" />
           <option name="jvmTarget" value="1.6" />
+          <option name="addCompilerBuiltIns" value="true" />
+          <option name="loadBuiltInsFromDependencies" value="true" />
           <option name="languageVersion" value="1.1" />
           <option name="apiVersion" value="1.1" />
           <option name="pluginClasspaths">
@@ -52,7 +61,6 @@
       <sourceFolder url="file://$MODULE_DIR$/build/generated/source/rs/debug" isTestSource="false" generated="true" />
       <sourceFolder url="file://$MODULE_DIR$/build/generated/res/rs/debug" type="java-resource" />
       <sourceFolder url="file://$MODULE_DIR$/build/generated/res/resValues/debug" type="java-resource" />
-      <sourceFolder url="file://$MODULE_DIR$/build/generated/source/apt/test/debug" isTestSource="true" generated="true" />
       <sourceFolder url="file://$MODULE_DIR$/build/generated/source/apt/androidTest/debug" isTestSource="true" generated="true" />
       <sourceFolder url="file://$MODULE_DIR$/build/generated/source/r/androidTest/debug" isTestSource="true" generated="true" />
       <sourceFolder url="file://$MODULE_DIR$/build/generated/source/aidl/androidTest/debug" isTestSource="true" generated="true" />
@@ -60,6 +68,7 @@
       <sourceFolder url="file://$MODULE_DIR$/build/generated/source/rs/androidTest/debug" isTestSource="true" generated="true" />
       <sourceFolder url="file://$MODULE_DIR$/build/generated/res/rs/androidTest/debug" type="java-test-resource" />
       <sourceFolder url="file://$MODULE_DIR$/build/generated/res/resValues/androidTest/debug" type="java-test-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/build/generated/source/apt/test/debug" isTestSource="true" generated="true" />
       <sourceFolder url="file://$MODULE_DIR$/src/debug/res" type="java-resource" />
       <sourceFolder url="file://$MODULE_DIR$/src/debug/resources" type="java-resource" />
       <sourceFolder url="file://$MODULE_DIR$/src/debug/assets" type="java-resource" />
@@ -125,14 +134,15 @@
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" exported="" name="libphonenumber-7.4.5" level="project" />
     <orderEntry type="library" exported="" scope="TEST" name="runner-0.5" level="project" />
+    <orderEntry type="library" exported="" name="kotlin-stdlib-1.1.2-5" level="project" />
     <orderEntry type="library" exported="" name="rxlifecycle-components-1.0" level="project" />
     <orderEntry type="library" exported="" name="jsr305-3.0.1" level="project" />
+    <orderEntry type="library" exported="" name="kotlin-stdlib-jre7-1.1.2-5" level="project" />
     <orderEntry type="library" exported="" name="rxlifecycle-android-1.0" level="project" />
     <orderEntry type="library" exported="" name="rxlifecycle-1.0" level="project" />
     <orderEntry type="library" exported="" name="transition-25.3.1" level="project" />
     <orderEntry type="library" exported="" name="sqlbrite-1.1.1" level="project" />
     <orderEntry type="library" exported="" name="commons-cli-1.2" level="project" />
-    <orderEntry type="library" exported="" name="kotlin-stdlib-jre7-1.1.2-3" level="project" />
     <orderEntry type="library" exported="" name="design-25.3.1" level="project" />
     <orderEntry type="library" exported="" name="stetho-1.4.2" level="project" />
     <orderEntry type="library" exported="" name="support-core-ui-25.3.1" level="project" />
@@ -155,7 +165,6 @@
     <orderEntry type="library" exported="" scope="TEST" name="junit-4.12" level="project" />
     <orderEntry type="library" exported="" name="dagger-2.6" level="project" />
     <orderEntry type="library" exported="" name="recyclerview-v7-25.3.1" level="project" />
-    <orderEntry type="library" exported="" name="kotlin-stdlib-1.1.2-3" level="project" />
     <orderEntry type="library" exported="" name="butterknife-annotations-8.4.0" level="project" />
     <orderEntry type="library" exported="" name="butterknife-8.4.0" level="project" />
     <orderEntry type="library" exported="" name="support-annotations-25.3.1" level="project" />

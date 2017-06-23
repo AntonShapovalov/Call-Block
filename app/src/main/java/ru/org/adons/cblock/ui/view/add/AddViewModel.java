@@ -6,9 +6,9 @@ import java.util.List;
 import javax.inject.Inject;
 
 import ru.org.adons.cblock.app.BlockManager;
-import ru.org.adons.cblock.data.BlockListModel;
-import ru.org.adons.cblock.data.CallLogModel;
-import ru.org.adons.cblock.model.CallLogItem;
+import ru.org.adons.cblock.model.BlockListModel;
+import ru.org.adons.cblock.model.CallLogModel;
+import ru.org.adons.cblock.data.CallLogItem;
 import ru.org.adons.cblock.utils.Logging;
 import rx.Observable;
 

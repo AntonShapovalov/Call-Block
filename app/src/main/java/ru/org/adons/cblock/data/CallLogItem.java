@@ -1,4 +1,4 @@
-package ru.org.adons.cblock.model;
+package ru.org.adons.cblock.data;
 
 import android.provider.CallLog;
 
@@ -6,7 +6,7 @@ import com.google.auto.value.AutoValue;
 
 import javax.annotation.Nullable;
 
-import ru.org.adons.cblock.data.CallLogModel;
+import ru.org.adons.cblock.model.CallLogModel;
 
 /**
  * Model for {@link CallLog.Calls} item, used in {@link CallLogModel}

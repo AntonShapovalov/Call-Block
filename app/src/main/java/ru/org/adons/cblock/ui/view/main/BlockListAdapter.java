@@ -13,7 +13,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import ru.org.adons.cblock.R;
-import ru.org.adons.cblock.model.BlockListItem;
+import ru.org.adons.cblock.data.BlockListItem;
 
 import static ru.org.adons.cblock.utils.UiUtils.formatPhoneNumber;
 import static ru.org.adons.cblock.utils.UiUtils.getDescription;

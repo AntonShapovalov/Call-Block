@@ -1,11 +1,11 @@
-package ru.org.adons.cblock.model;
+package ru.org.adons.cblock.data;
 
 import org.greenrobot.greendao.annotation.Entity;
 import org.greenrobot.greendao.annotation.Generated;
 import org.greenrobot.greendao.annotation.Id;
 import org.greenrobot.greendao.annotation.Index;
 
-import ru.org.adons.cblock.data.BlockListModel;
+import ru.org.adons.cblock.model.BlockListModel;
 
 /**
  * DB entity for blocked number, used in {@link BlockListModel}
@@ -56,5 +56,4 @@ public class BlockListItem {
     public void setName(String name) {
         this.name = name;
     }
-
 }

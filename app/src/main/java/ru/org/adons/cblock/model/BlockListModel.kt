@@ -1,9 +1,9 @@
-package ru.org.adons.cblock.data
+package ru.org.adons.cblock.model
 
-import ru.org.adons.cblock.model.BlockListItem
-import ru.org.adons.cblock.model.BlockListItemDao
-import ru.org.adons.cblock.model.CallLogItem
-import ru.org.adons.cblock.model.DaoSession
+import ru.org.adons.cblock.data.BlockListItem
+import ru.org.adons.cblock.data.BlockListItemDao
+import ru.org.adons.cblock.data.CallLogItem
+import ru.org.adons.cblock.data.DaoSession
 import ru.org.adons.cblock.scope.ViewScope
 import ru.org.adons.cblock.service.BlockService
 import ru.org.adons.cblock.ui.view.add.CallLogAdapter

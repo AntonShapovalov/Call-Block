@@ -12,7 +12,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-import ru.org.adons.cblock.model.CallLogItem;
+import ru.org.adons.cblock.model.CallLogModel;
 import ru.org.adons.cblock.utils.Logging;
 import ru.org.adons.cblock.utils.SubscriptionUtils;
 import rx.Observable;

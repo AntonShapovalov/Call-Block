@@ -7,7 +7,7 @@ import com.squareup.sqlbrite.BriteContentResolver;
 import javax.inject.Singleton;
 
 import dagger.Component;
-import ru.org.adons.cblock.model.DaoSession;
+import ru.org.adons.cblock.data.DaoSession;
 
 /**
  * Provide application scope dependencies (Context, Preferences, DaoSession)

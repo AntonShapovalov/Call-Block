@@ -17,7 +17,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 import ru.org.adons.cblock.R;
-import ru.org.adons.cblock.model.CallLogItem;
+import ru.org.adons.cblock.data.CallLogItem;
 import ru.org.adons.cblock.ui.activity.IMainListener;
 import ru.org.adons.cblock.ui.fragment.BaseFragment;
 import ru.org.adons.cblock.utils.UiUtils;

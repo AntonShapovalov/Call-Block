@@ -11,8 +11,8 @@ import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
-import ru.org.adons.cblock.model.DaoMaster;
-import ru.org.adons.cblock.model.DaoSession;
+import ru.org.adons.cblock.data.DaoMaster;
+import ru.org.adons.cblock.data.DaoSession;
 import rx.schedulers.Schedulers;
 
 /**

@@ -23,7 +23,7 @@ import javax.inject.Inject;
 import ru.org.adons.cblock.R;
 import ru.org.adons.cblock.app.BlockManager;
 import ru.org.adons.cblock.app.CBlockApplication;
-import ru.org.adons.cblock.data.BlockListModel;
+import ru.org.adons.cblock.model.BlockListModel;
 import ru.org.adons.cblock.ui.activity.MainActivity;
 import ru.org.adons.cblock.utils.Logging;
 import ru.org.adons.cblock.utils.SubscriptionUtils;

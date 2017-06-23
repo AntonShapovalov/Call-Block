@@ -1,4 +1,4 @@
-package ru.org.adons.cblock.data;
+package ru.org.adons.cblock.model;
 
 import android.net.Uri;
 import android.provider.CallLog;
@@ -9,7 +9,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-import ru.org.adons.cblock.model.CallLogItem;
+import ru.org.adons.cblock.data.CallLogItem;
 import ru.org.adons.cblock.scope.ViewScope;
 import rx.Observable;
 
