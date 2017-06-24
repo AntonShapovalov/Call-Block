@@ -5,9 +5,9 @@ import java.util.List;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
-import ru.org.adons.cblock.model.BlockListModel;
 import ru.org.adons.cblock.data.BlockListItem;
 import ru.org.adons.cblock.data.CallLogItem;
+import ru.org.adons.cblock.model.BlockListModel;
 import ru.org.adons.cblock.service.BlockService;
 import ru.org.adons.cblock.ui.view.main.MainFragment;
 import ru.org.adons.cblock.utils.Logging;
@@ -36,10 +36,10 @@ public class BlockManager {
         Observable.from(items)
                 .doOnSubscribe(Logging.subscribe(this.getClass(), "ADD_PHONES:"))
                 .doOnUnsubscribe(Logging.unsubscribe(this.getClass(), "ADD_PHONES"))
-                .filter(item -> item.isSelected)
+                .filter(CallLogItem::isSelected)
                 .map(item -> {
                     blockListModel.addNumber(item);
-                    Logging.d(this.getClass().getSimpleName() + ":" + item.phoneNumber());
+                    Logging.d(this.getClass().getSimpleName() + ":" + item.getPhoneNumber());
                     return item;
                 })
                 .toList()

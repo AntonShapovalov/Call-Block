@@ -15,8 +15,7 @@ import javax.inject.Inject
  */
 
 @ViewScope
-class BlockListModel @Inject
-constructor(private val daoSession: DaoSession) {
+class BlockListModel @Inject constructor(private val daoSession: DaoSession) {
 
     private val blockListDao: BlockListItemDao = daoSession.blockListItemDao
 
@@ -29,14 +28,14 @@ constructor(private val daoSession: DaoSession) {
     fun addNumber(logItem: CallLogItem) {
         daoSession.runInTx {
             var dbItem = blockListDao.queryBuilder()
-                    .where(BlockListItemDao.Properties.PhoneNumber.eq(logItem.phoneNumber()))
+                    .where(BlockListItemDao.Properties.PhoneNumber.eq(logItem.phoneNumber))
                     .limit(1)
                     .unique()
             if (dbItem == null) {
                 dbItem = BlockListItem()
-                dbItem.phoneNumber = logItem.phoneNumber()
-                dbItem.date = logItem.date()
-                dbItem.name = logItem.name()
+                dbItem.phoneNumber = logItem.phoneNumber
+                dbItem.date = logItem.date
+                dbItem.name = logItem.name
                 blockListDao.insert(dbItem)
             }
         }

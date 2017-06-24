@@ -75,10 +75,10 @@ public class CallLogModelTest extends BaseModelTest {
     }
 
     private CallLogItem printItemDetails(CallLogItem item) {
-        Logging.d("id=" + item.id());
-        Logging.d("phoneNumber = " + item.phoneNumber());
-        Logging.d("date = " + item.date());
-        Logging.d("name = " + item.name());
+        Logging.d("id=" + item.getId());
+        Logging.d("phoneNumber = " + item.getPhoneNumber());
+        Logging.d("date = " + item.getDate());
+        Logging.d("name = " + item.getName());
         return item;
     }
 

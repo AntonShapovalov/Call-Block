@@ -34,10 +34,10 @@ public class CallLogAdapter extends RecyclerView.Adapter<CallLogAdapter.ViewHold
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         CallLogItem item = items.get(position);
-        holder.textPhone.setText(formatPhoneNumber(item.phoneNumber()));
-        holder.textDesc.setText(getDescription(item.name(), item.date()));
+        holder.textPhone.setText(formatPhoneNumber(item.getPhoneNumber()));
+        holder.textDesc.setText(getDescription(item.getName(), item.getDate()));
         // disable checkbox if item already in block list
-        if (item.isBlocked) {
+        if (item.isBlocked()) {
             holder.checkBox.setEnabled(false);
             holder.checkBox.setChecked(true);
             holder.itemView.setOnClickListener(null);
@@ -45,7 +45,7 @@ public class CallLogAdapter extends RecyclerView.Adapter<CallLogAdapter.ViewHold
         } else {
             holder.checkBox.setEnabled(true);
             // set selected if list scrolled
-            if (item.isSelected) {
+            if (item.isSelected()) {
                 holder.checkBox.setChecked(true);
             } else {
                 holder.checkBox.setChecked(false);
@@ -72,8 +72,8 @@ public class CallLogAdapter extends RecyclerView.Adapter<CallLogAdapter.ViewHold
     }
 
     private void setSelected(CallLogItem item, CheckBox checkBox) {
-        item.isSelected = !item.isSelected;
-        checkBox.setChecked(item.isSelected);
+        item.setSelected(!item.isSelected());
+        checkBox.setChecked(item.isSelected());
     }
 
     static class ViewHolder extends RecyclerView.ViewHolder {

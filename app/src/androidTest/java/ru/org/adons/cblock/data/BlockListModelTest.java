@@ -102,12 +102,7 @@ public class BlockListModelTest extends BaseModelTest {
     }
 
     private CallLogItem getLogItem(String phoneNumber, String name) {
-        return CallLogItem.builder()
-                .setId(1L)
-                .setPhoneNumber(phoneNumber)
-                .setDate(new Date().getTime())
-                .setName(name)
-                .build();
+        return new CallLogItem(1L, phoneNumber, new Date().getTime(), name, false, false);
     }
 
     private BlockListItem printItemDetails(BlockListItem item) {
