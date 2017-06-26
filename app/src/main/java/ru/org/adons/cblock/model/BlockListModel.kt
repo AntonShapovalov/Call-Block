@@ -4,6 +4,7 @@ import ru.org.adons.cblock.data.BlockListItem
 import ru.org.adons.cblock.data.BlockListItemDao
 import ru.org.adons.cblock.data.CallLogItem
 import ru.org.adons.cblock.data.DaoSession
+import ru.org.adons.cblock.ext.log
 import ru.org.adons.cblock.scope.ViewScope
 import ru.org.adons.cblock.service.BlockService
 import ru.org.adons.cblock.ui.view.add.CallLogAdapter
@@ -37,6 +38,7 @@ class BlockListModel @Inject constructor(private val daoSession: DaoSession) {
                 dbItem.date = logItem.date
                 dbItem.name = logItem.name
                 blockListDao.insert(dbItem)
+                log("added: ${logItem.phoneNumber}")
             }
         }
     }

@@ -23,10 +23,11 @@ import static junit.framework.Assert.assertNotNull;
  */
 public class BlockListModelTest extends BaseModelTest {
 
-    @Inject BlockListModel blockListModel;
     private final String phoneNumber1 = "+380123456789";
     private final String phoneNumber2 = "+380987654321";
     private final String name1 = "Test Name";
+
+    @Inject BlockListModel blockListModel;
 
     @Before
     public void setUp() {
