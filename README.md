@@ -1,4 +1,7 @@
 # Android-CBlock
+
+*Project is under refactoring! Kotlin version coming soon!*
+
 #### Android application to block annoying incoming calls
 
 ![link](../../../img/blob/master/cblock/main_screen.png) &nbsp;&nbsp;&nbsp;&nbsp; ![link](../../../img/blob/master/cblock/add_phone.png)
