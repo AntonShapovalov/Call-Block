@@ -49,7 +49,7 @@ public class AddFragment extends BaseFragment<IMainListener> {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        listener.getMainComponent().inject(this);
+        listener.mainComponent().inject(this);
     }
 
     @Nullable

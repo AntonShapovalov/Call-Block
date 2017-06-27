@@ -8,7 +8,7 @@ import ru.org.adons.cblock.ui.activity.MainComponent;
  */
 public interface IBaseFragmentListener {
 
-    MainComponent getMainComponent();
+    MainComponent mainComponent();
 
     void showProgress();
 

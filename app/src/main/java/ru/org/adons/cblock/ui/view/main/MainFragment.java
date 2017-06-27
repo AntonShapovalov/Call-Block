@@ -55,7 +55,7 @@ public class MainFragment extends BaseFragment<IMainListener> implements IBlockL
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        listener.getMainComponent().inject(this);
+        listener.mainComponent().inject(this);
         if (savedInstanceState != null) {
             isSwitchChecked = savedInstanceState.getBoolean(SWITCH_KEY);
         }

@@ -11,6 +11,10 @@ fun log(message: String) {
     log("LOG", message)
 }
 
+fun Any.logThis(message: String) {
+    log(javaClass.simpleName, ":$message")
+}
+
 fun Any.logSubscribe(message: String) {
     log(javaClass.simpleName, "$message:subscribe")
 }
