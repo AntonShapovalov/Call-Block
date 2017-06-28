@@ -19,9 +19,7 @@ import rx.schedulers.Schedulers
 
 class MainActivity : AppCompatActivity(), IMainListener {
 
-    companion object {
-        private val PERMISSIONS_REQUEST = 311
-    }
+    private val PERMISSIONS_REQUEST = 311
 
     private val permViewModel = PermViewModel()
 

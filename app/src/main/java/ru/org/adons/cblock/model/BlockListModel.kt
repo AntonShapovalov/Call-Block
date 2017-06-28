@@ -18,7 +18,7 @@ import javax.inject.Inject
 @ViewScope
 class BlockListModel @Inject constructor(private val daoSession: DaoSession) {
 
-    private val blockListDao: BlockListItemDao = daoSession.blockListItemDao
+    private val blockListDao = daoSession.blockListItemDao
 
     /**
      * Add phone number (incoming or missed) to block list

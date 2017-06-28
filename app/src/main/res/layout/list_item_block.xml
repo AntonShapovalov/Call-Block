@@ -5,7 +5,7 @@
              android:layout_height="?android:listPreferredItemHeight">
 
     <ImageButton
-        android:id="@+id/image_button_delete"
+        android:id="@+id/buttonDelete"
         style="@style/Widget.AppCompat.ActionButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -22,14 +22,14 @@
         android:paddingStart="16dp">
 
         <TextView
-            android:id="@+id/text_view_phone_number"
+            android:id="@+id/textPhone"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
             tools:text="+38-012-345-67-89"/>
 
         <TextView
-            android:id="@+id/text_view_desc"
+            android:id="@+id/textDesc"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:ellipsize="end"
