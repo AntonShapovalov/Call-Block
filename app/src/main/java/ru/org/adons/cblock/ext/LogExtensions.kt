@@ -12,7 +12,7 @@ fun log(message: String) {
 }
 
 fun Any.logThis(message: String) {
-    log(javaClass.simpleName, ":$message")
+    log(javaClass.simpleName, message)
 }
 
 fun Any.logSubscribe(message: String) {

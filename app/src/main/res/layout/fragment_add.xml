@@ -10,7 +10,7 @@
         android:layout_height="?actionBarSize">
 
         <ImageButton
-            android:id="@+id/image_button_close"
+            android:id="@+id/buttonClose"
             style="@style/Widget.AppCompat.ActionButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -19,7 +19,7 @@
             android:src="@drawable/ic_close"/>
 
         <ImageButton
-            android:id="@+id/image_button_done"
+            android:id="@+id/buttonDone"
             style="@style/Widget.AppCompat.ActionButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -30,7 +30,7 @@
     </android.support.v7.widget.CardView>
 
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/recycler_view_call_log"
+        android:id="@+id/listCallLog"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/cardTitle"

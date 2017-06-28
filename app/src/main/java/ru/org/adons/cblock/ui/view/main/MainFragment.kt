@@ -76,7 +76,7 @@ class MainFragment : BaseFragment<IMainListener>() {
                 .subscribeOn(Schedulers.computation())
                 .observeOn(AndroidSchedulers.mainThread())
                 .compose(bindToLifecycle())
-                .subscribe({ switchService.isChecked = it }, { super.onError(it) })
+                .subscribe({ switchService.isChecked = it }, this::onError)
     }
 
     // change and save Service state on Switch click
@@ -88,7 +88,7 @@ class MainFragment : BaseFragment<IMainListener>() {
                 .subscribeOn(Schedulers.computation())
                 .observeOn(AndroidSchedulers.mainThread())
                 .compose(bindToLifecycle())
-                .subscribe({ toastBottom(it) }, { super.onError(it) })
+                .subscribe(this::toastBottom, this::onError)
     }
 
     // get block list from local DB
@@ -99,14 +99,14 @@ class MainFragment : BaseFragment<IMainListener>() {
                 .compose(bindToLifecycle())
                 .doOnSubscribe { listener.showProgress() }
                 .doOnUnsubscribe { listener.hideProgress() }
-                .subscribe({ adapter.setItems(it) }, { super.onError(it) })
+                .subscribe(adapter::setItems, this::onError)
     }
 
     // get update event from BlockManager
     private fun getBlockListUpdate() {
         blockManager.getBlockListUpdate()
                 .compose(bindToLifecycle())
-                .subscribe { adapter.setItems(it) }
+                .subscribe(adapter::setItems)
     }
 
 }

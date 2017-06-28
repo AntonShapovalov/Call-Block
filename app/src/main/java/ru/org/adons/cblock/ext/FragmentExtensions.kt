@@ -6,7 +6,7 @@ import android.widget.Toast
 import ru.org.adons.cblock.R
 
 /**
- * Extensions for [Toast]
+ * Extensions for [Fragment]
  */
 
 fun Fragment.toastBottom(message: String) {
