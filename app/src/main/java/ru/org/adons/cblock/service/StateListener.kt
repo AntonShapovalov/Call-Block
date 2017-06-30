@@ -11,7 +11,7 @@ import java.util.*
 /**
  * Phone State Listener, used in [BlockService]
  */
-class StateListener(val context: Context, manager: TelephonyManager, val phones: HashSet<String>) : PhoneStateListener() {
+class StateListener(context: Context, manager: TelephonyManager, val phones: HashSet<String>) : PhoneStateListener() {
 
     private val audio: AudioManager = context.getSystemService(Context.AUDIO_SERVICE) as AudioManager
 
@@ -24,8 +24,6 @@ class StateListener(val context: Context, manager: TelephonyManager, val phones:
         log(e.message ?: "getITelephony exception")
         null
     }
-
-
 
     override fun onCallStateChanged(state: Int, incomingNumber: String) {
         super.onCallStateChanged(state, incomingNumber)
