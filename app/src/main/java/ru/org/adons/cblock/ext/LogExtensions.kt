@@ -7,8 +7,12 @@ import ru.org.adons.cblock.BuildConfig
  * Extensions for [Log]
  */
 
-fun log(message: String) {
-    log("LOG", message)
+enum class Type {
+    debug, error
+}
+
+fun log(message: String, type: Type = Type.debug) {
+    log("LOG", message, type)
 }
 
 fun Any.logThis(message: String) {
@@ -23,10 +27,13 @@ fun Any.logUnsubscribe(message: String) {
     log(javaClass.simpleName, "$message:un-subscribe")
 }
 
-private fun log(tag: String, message: String) {
+private fun log(tag: String, message: String, type: Type = Type.debug) {
     val prefix = "***"
     if (BuildConfig.DEBUG) {
         val prefixTag = if (!tag.startsWith(prefix)) "$prefix$tag" else tag
-        Log.d(prefixTag, message)
+        when (type) {
+            Type.error -> Log.e(prefixTag, message)
+            else -> Log.d(prefixTag, message)
+        }
     }
 }

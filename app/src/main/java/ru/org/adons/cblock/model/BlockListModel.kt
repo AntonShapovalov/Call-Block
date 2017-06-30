@@ -53,10 +53,17 @@ class BlockListModel @Inject constructor(private val daoSession: DaoSession) {
     }
 
     /**
-     * @return all blocked numbers list
+     * @return all blocked numbers from DB
+     */
+    fun getNumbersList() : List<BlockListItem> {
+        return blockListDao.queryBuilder().orderDesc(BlockListItemDao.Properties.Date).list()
+    }
+
+    /**
+     * @return all blocked numbers observable list
      */
     fun getBlockList(): Observable<List<BlockListItem>> {
-        return Observable.fromCallable { blockListDao.queryBuilder().orderDesc(BlockListItemDao.Properties.Date).list() }
+        return Observable.fromCallable { getNumbersList() }
     }
 
     /**

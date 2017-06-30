@@ -8,9 +8,9 @@ import android.view.View
 import android.view.ViewGroup
 import kotlinx.android.synthetic.main.fragment_add.*
 import ru.org.adons.cblock.R
+import ru.org.adons.cblock.ext.initList
+import ru.org.adons.cblock.ui.activity.BaseFragment
 import ru.org.adons.cblock.ui.activity.IMainListener
-import ru.org.adons.cblock.ui.fragment.BaseFragment
-import ru.org.adons.cblock.utils.UiUtils
 import rx.android.schedulers.AndroidSchedulers
 import rx.schedulers.Schedulers
 import javax.inject.Inject
@@ -35,7 +35,7 @@ class AddFragment : BaseFragment<IMainListener>() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        listener.mainComponent().inject(this)
+        listener?.mainComponent?.inject(this)
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -44,11 +44,11 @@ class AddFragment : BaseFragment<IMainListener>() {
 
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        UiUtils.initList(activity, listCallLog, adapter)
-        buttonClose.setOnClickListener { listener.onBackPressed() }
+        listCallLog.initList(adapter)
+        buttonClose.setOnClickListener { listener?.onBackPressed() }
         buttonDone.setOnClickListener {
-            addViewModel.addPhones(adapter.items)
-            listener.onBackPressed()
+            addViewModel.addPhones(adapter.getItems())
+            listener?.onBackPressed()
         }
     }
 
@@ -63,8 +63,8 @@ class AddFragment : BaseFragment<IMainListener>() {
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .compose(bindToLifecycle())
-                .doOnSubscribe { listener.showProgress() }
-                .doOnUnsubscribe { listener.hideProgress() }
+                .doOnSubscribe { listener?.showProgress() }
+                .doOnNext { listener?.hideProgress() }
                 .subscribe(adapter::setItems, this::onError)
     }
 

@@ -7,8 +7,8 @@ import android.view.ViewGroup
 import kotlinx.android.synthetic.main.list_item_block.view.*
 import ru.org.adons.cblock.R
 import ru.org.adons.cblock.data.BlockListItem
-import ru.org.adons.cblock.utils.UiUtils.formatPhoneNumber
-import ru.org.adons.cblock.utils.UiUtils.getDescription
+import ru.org.adons.cblock.ext.formatPhoneNumber
+import ru.org.adons.cblock.ext.getDescription
 import java.util.*
 
 /**
@@ -26,8 +26,8 @@ class BlockListAdapter(val deleteItem: (Long) -> Unit) : RecyclerView.Adapter<Bl
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = items[position]
         val view = holder.itemView
-        view.textPhone.text = formatPhoneNumber(item.phoneNumber)
-        view.textDesc.text = getDescription(item.name, item.date)
+        view.textPhone.text = item.phoneNumber.formatPhoneNumber()
+        view.textDesc.text = item.date.getDescription(item.name)
         view.buttonDelete.setOnClickListener { deleteItem(item.id) }
     }
 

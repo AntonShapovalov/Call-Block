@@ -8,10 +8,10 @@ import android.view.ViewGroup
 import kotlinx.android.synthetic.main.fragment_main.*
 import ru.org.adons.cblock.R
 import ru.org.adons.cblock.app.BlockManager
+import ru.org.adons.cblock.ext.initList
 import ru.org.adons.cblock.ext.toastBottom
+import ru.org.adons.cblock.ui.activity.BaseFragment
 import ru.org.adons.cblock.ui.activity.IMainListener
-import ru.org.adons.cblock.ui.fragment.BaseFragment
-import ru.org.adons.cblock.utils.UiUtils
 import rx.Observable
 import rx.android.schedulers.AndroidSchedulers
 import rx.schedulers.Schedulers
@@ -41,7 +41,7 @@ class MainFragment : BaseFragment<IMainListener>() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        listener.mainComponent().inject(this)
+        listener?.mainComponent?.inject(this)
         if (savedInstanceState != null) {
             isSwitchChecked = savedInstanceState.getBoolean(SWITCH_KEY)
         }
@@ -53,8 +53,8 @@ class MainFragment : BaseFragment<IMainListener>() {
 
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        UiUtils.initList(activity, listBlockItems, adapter)
-        fabAdd.setOnClickListener { listener.showAddFragment() }
+        listBlockItems.initList(adapter)
+        fabAdd.setOnClickListener { listener?.showAddFragment() }
         getServiceState()
         switchService.setOnCheckedChangeListener { _, isChecked -> changeServiceState(isChecked) }
     }
@@ -97,8 +97,8 @@ class MainFragment : BaseFragment<IMainListener>() {
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .compose(bindToLifecycle())
-                .doOnSubscribe { listener.showProgress() }
-                .doOnUnsubscribe { listener.hideProgress() }
+                .doOnSubscribe { listener?.showProgress() }
+                .doOnUnsubscribe { listener?.hideProgress() }
                 .subscribe(adapter::setItems, this::onError)
     }
 

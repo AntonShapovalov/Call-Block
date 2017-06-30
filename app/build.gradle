@@ -1,8 +1,7 @@
 apply plugin: 'com.android.application'
-apply plugin: 'com.neenbedankt.android-apt'
-apply plugin: 'me.tatarka.retrolambda'
 apply plugin: 'org.greenrobot.greendao'
 apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
 apply plugin: 'kotlin-android-extensions'
 
 def ext = rootProject.ext
@@ -26,11 +25,6 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
         }
     }
-
-    compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
-    }
 }
 
 greendao {
@@ -51,10 +45,10 @@ dependencies {
     androidTestCompile "com.android.support.test:runner:$testRunnerVersion"
     // dagger
     compile "com.google.dagger:dagger:$daggerVersion"
-    apt "com.google.dagger:dagger-compiler:$daggerVersion"
-    provided "javax.annotation:jsr250-api:$jsrAnnotationVersion"
-    testApt "com.google.dagger:dagger-compiler:$daggerVersion"
-    androidTestApt "com.google.dagger:dagger-compiler:$daggerVersion"
+    kapt "com.google.dagger:dagger-compiler:$daggerVersion"
+
+//    testKapt "com.google.dagger:dagger-compiler:$daggerVersion"
+//    androidTestKapt "com.google.dagger:dagger-compiler:$daggerVersion"
     // rx-java
     compile "io.reactivex:rxandroid:$rxAndroidVersion"
     compile "io.reactivex:rxjava:$rxJavaVersion"
@@ -62,9 +56,6 @@ dependencies {
     compile "com.trello:rxlifecycle-components:$rxLifeCycleVersion"
     // sql-brite
     compile "com.squareup.sqlbrite:$sqlBriteVersion"
-    // butter knife
-    compile "com.jakewharton:butterknife:$butterKnifeVersion"
-    apt "com.jakewharton:butterknife-compiler:$butterKnifeVersion"
     // green dao
     compile "org.greenrobot:greendao:$greenDaoVersion"
     // stetho

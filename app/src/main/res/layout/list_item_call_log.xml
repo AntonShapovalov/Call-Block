@@ -5,7 +5,7 @@
                 android:layout_height="?android:listPreferredItemHeight">
 
     <CheckBox
-        android:id="@+id/checkbox_is_selected"
+        android:id="@+id/checkBox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
@@ -16,20 +16,20 @@
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
         android:layout_gravity="center_vertical"
-        android:layout_toEndOf="@+id/checkbox_is_selected"
+        android:layout_toEndOf="@+id/checkBox"
         android:orientation="vertical"
         android:paddingEnd="16dp"
         android:paddingStart="8dp">
 
         <TextView
-            android:id="@+id/text_view_phone_number"
+            android:id="@+id/textPhoneNumber"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
             tools:text="+38-012-345-67-89"/>
 
         <TextView
-            android:id="@+id/text_view_desc"
+            android:id="@+id/textDescription"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:ellipsize="end"

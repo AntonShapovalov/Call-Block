@@ -23,7 +23,7 @@ class MainActivity : AppCompatActivity(), IMainListener {
 
     private val permViewModel = PermViewModel()
 
-    private val mainComponent: MainComponent by lazy { buildMainComponent() }
+    override val mainComponent: MainComponent by lazy { buildMainComponent() }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -78,15 +78,8 @@ class MainActivity : AppCompatActivity(), IMainListener {
     private fun buildMainComponent(): MainComponent {
         val application = application as CBlockApplication
         return DaggerMainComponent.builder()
-                .applicationComponent(application.applicationComponent())
+                .applicationComponent(application.applicationComponent)
                 .build()
-    }
-
-    /**
-     * @return [MainComponent] to provide data dependencies fot all View-Models
-     */
-    override fun mainComponent(): MainComponent {
-        return mainComponent
     }
 
     override fun showProgress() {
