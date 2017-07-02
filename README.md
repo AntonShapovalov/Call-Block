@@ -1,7 +1,5 @@
 # Android-CBlock
 
-*Project is under refactoring! Kotlin version coming soon!*
-
 #### Android application to block annoying incoming calls
 
 ![link](../../../img/blob/master/cblock/main_screen.png) &nbsp;&nbsp;&nbsp;&nbsp; ![link](../../../img/blob/master/cblock/add_phone.png)
@@ -14,10 +12,13 @@
 
 When Service enabled, notification appears
 
-#### Used libraries
+#### How to install
+
+Please use [apk](./app/app-release.apk) file
+
+#### Used language and libraries
+ * [Kotlin](https://kotlinlang.org/docs/tutorials/kotlin-android.html) - do more with less line of code
  * [RxJava](https://github.com/ReactiveX/RxJava), [RxAndroid](https://github.com/ReactiveX/RxAndroid) - the core of [MVVM](https://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93viewmodel) architecture
  * [Dagger](https://google.github.io/dagger/) - dependency injection framework
  * [SQLBrite](https://github.com/square/sqlbrite) - wrapper around ContentResolver, to get incoming calls list
- * [GreenDao](http://greenrobot.org/greendao/) - ORM, to save blocked phones in local DB
- * [AutoValue](https://github.com/google/auto/tree/master/value) - easy generate Data classes
- * [ButterKnife](http://jakewharton.github.io/butterknife/) - elegant way of view binding
+ * [GreenDao](http://greenrobot.org/greendao/) - ORM, to save blocked phone's numbers in local DB
