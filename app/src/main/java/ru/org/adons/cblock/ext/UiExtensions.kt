@@ -32,6 +32,7 @@ fun String.formatPhoneNumber(): String {
 }
 
 fun Long.getDescription(name: String?): String {
-    return name?.plus(", ") ?: "" + DateUtils.getRelativeTimeSpanString(this)
+    val date = DateUtils.getRelativeTimeSpanString(this)
+    return name?.plus(", $date") ?: date.toString()
 }
 
