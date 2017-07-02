@@ -1,7 +1,6 @@
 package ru.org.adons.cblock.ui.view.add
 
 import android.app.Activity
-import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -28,9 +27,10 @@ class AddFragment : BaseFragment<IMainListener>() {
 
     @Inject lateinit var addViewModel: AddViewModel
 
-    override fun onAttach(context: Context?) {
-        super.onAttach(context)
-        setListener<Activity>(activity, IMainListener::class.java)
+    @Suppress("OverridingDeprecatedMember", "DEPRECATION")
+    override fun onAttach(activity: Activity?) {
+        super.onAttach(activity)
+        activity?.let { setListener(activity, IMainListener::class.java) }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

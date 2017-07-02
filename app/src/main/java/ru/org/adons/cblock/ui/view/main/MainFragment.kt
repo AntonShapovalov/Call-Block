@@ -1,6 +1,6 @@
 package ru.org.adons.cblock.ui.view.main
 
-import android.content.Context
+import android.app.Activity
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -34,17 +34,16 @@ class MainFragment : BaseFragment<IMainListener>() {
     @Inject lateinit var blockManager: BlockManager
     @Inject lateinit var mainViewModel: MainViewModel
 
-    override fun onAttach(context: Context?) {
-        super.onAttach(context)
-        setListener(activity, IMainListener::class.java)
+    @Suppress("OverridingDeprecatedMember", "DEPRECATION")
+    override fun onAttach(activity: Activity?) {
+        super.onAttach(activity)
+        activity?.let { setListener(activity, IMainListener::class.java) }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         listener?.mainComponent?.inject(this)
-        if (savedInstanceState != null) {
-            isSwitchChecked = savedInstanceState.getBoolean(SWITCH_KEY)
-        }
+        savedInstanceState?.let { isSwitchChecked = savedInstanceState.getBoolean(SWITCH_KEY) }
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
