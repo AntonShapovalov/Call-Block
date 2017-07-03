@@ -17,7 +17,7 @@ When Service enabled, notification appears
 Please use [app/app-release.apk](./app/app-release.apk) file
 
 #### Used language and libraries
- * [Kotlin](https://kotlinlang.org/docs/tutorials/kotlin-android.html) - do more with less line of code
+ * [Kotlin](https://kotlinlang.org/docs/tutorials/kotlin-android.html) - do more with less lines of code
  * [RxJava](https://github.com/ReactiveX/RxJava), [RxAndroid](https://github.com/ReactiveX/RxAndroid) - the core of [MVVM](https://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93viewmodel) architecture
  * [Dagger](https://google.github.io/dagger/) - dependency injection framework
  * [SQLBrite](https://github.com/square/sqlbrite) - wrapper around ContentResolver, to get incoming calls list
