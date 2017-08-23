@@ -46,9 +46,8 @@ class MainFragment : BaseFragment<IMainListener>() {
         savedInstanceState?.let { isSwitchChecked = savedInstanceState.getBoolean(SWITCH_KEY) }
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.fragment_main, container, false)
-    }
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? = inflater
+            .inflate(R.layout.fragment_main, container, false)
 
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

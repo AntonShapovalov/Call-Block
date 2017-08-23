@@ -22,16 +22,14 @@ class AddViewModel @Inject internal constructor() {
     /**
      * Get list of incoming or missed calls and set isBlocked flag
      */
-    fun getCallLogList(): Observable<List<CallLogItem>> {
-        return callLogModel.getCallLogList()
-                .doOnSubscribe { logSubscribe("getCallLogList") }
-                .doOnUnsubscribe { logUnsubscribe("getCallLogList") }
-                .doOnNext { setBlockedNumbers(it) }
-    }
+    fun getCallLogList(): Observable<List<CallLogItem>> = callLogModel
+            .getCallLogList()
+            .doOnSubscribe { logSubscribe("getCallLogList") }
+            .doOnUnsubscribe { logUnsubscribe("getCallLogList") }
+            .doOnNext { setBlockedNumbers(it) }
 
-    fun addPhones(items: List<CallLogItem>) {
-        blockManager.addPhones(blockListModel, items)
-    }
+    fun addPhones(items: List<CallLogItem>) = blockManager
+            .addPhones(blockListModel, items)
 
     // set isBlocked flag if phone already blocked, checkbox will disabled in UI
     private fun setBlockedNumbers(items: List<CallLogItem>): List<CallLogItem> {

@@ -9,13 +9,9 @@ import android.widget.Toast
  * Extensions for [Activity]
  */
 
-fun Activity.toast(message: String) {
-    Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
-}
+fun Activity.toast(message: String) = Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
 
-fun Activity.getFragment(tag: String): Fragment? {
-    return fragmentManager.findFragmentByTag(tag)
-}
+fun Activity.getFragment(tag: String): Fragment? = fragmentManager.findFragmentByTag(tag)
 
 fun Activity.replaceFragment(containerId: Int, fragment: Fragment, tag: String) {
     fragmentManager.beginTransaction().replace(containerId, fragment, tag).commit()

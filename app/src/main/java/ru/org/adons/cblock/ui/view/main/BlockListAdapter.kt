@@ -14,7 +14,7 @@ import java.util.*
 /**
  * Recycler adapter for Block list
  */
-class BlockListAdapter(val deleteItem: (Long) -> Unit) : RecyclerView.Adapter<BlockListAdapter.ViewHolder>() {
+class BlockListAdapter(private val deleteItem: (Long) -> Unit) : RecyclerView.Adapter<BlockListAdapter.ViewHolder>() {
 
     private val items = ArrayList<BlockListItem>()
 
@@ -31,9 +31,7 @@ class BlockListAdapter(val deleteItem: (Long) -> Unit) : RecyclerView.Adapter<Bl
         view.buttonDelete.setOnClickListener { deleteItem(item.id) }
     }
 
-    override fun getItemCount(): Int {
-        return items.size
-    }
+    override fun getItemCount(): Int = items.size
 
     fun setItems(newItems: List<BlockListItem>) {
         items.clear()

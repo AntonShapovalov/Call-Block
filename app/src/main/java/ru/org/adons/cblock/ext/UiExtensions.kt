@@ -23,12 +23,10 @@ fun RecyclerView.initList(adapter: RecyclerView.Adapter<*>) {
 
 
 @Suppress("DEPRECATION")
-fun String.formatPhoneNumber(): String {
-    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-        return PhoneNumberUtils.formatNumber(this, Locale.getDefault().country)
-    } else {
-        return PhoneNumberUtils.formatNumber(this)
-    }
+fun String.formatPhoneNumber(): String = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+    PhoneNumberUtils.formatNumber(this, Locale.getDefault().country)
+} else {
+    PhoneNumberUtils.formatNumber(this)
 }
 
 fun Long.getDescription(name: String?): String {

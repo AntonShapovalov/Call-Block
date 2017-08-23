@@ -45,9 +45,7 @@ class CallLogAdapter : RecyclerView.Adapter<CallLogAdapter.ViewHolder>() {
         }
     }
 
-    override fun getItemCount(): Int {
-        return items.size
-    }
+    override fun getItemCount(): Int = items.size
 
     internal fun setItems(newItems: List<CallLogItem>) {
         items.clear()
@@ -55,9 +53,7 @@ class CallLogAdapter : RecyclerView.Adapter<CallLogAdapter.ViewHolder>() {
         notifyDataSetChanged()
     }
 
-    internal fun getItems(): List<CallLogItem> {
-        return items
-    }
+    internal fun getItems(): List<CallLogItem> = items
 
     private fun setSelected(item: CallLogItem, checkBox: CheckBox) {
         item.isSelected = !item.isSelected

@@ -68,9 +68,7 @@ class BlockService : Service() {
         super.onDestroy()
     }
 
-    override fun onBind(intent: Intent): IBinder? {
-        return null
-    }
+    override fun onBind(intent: Intent): IBinder? = null
 
     private fun setPhoneListener() {
         manager = getSystemService(Context.TELEPHONY_SERVICE) as TelephonyManager

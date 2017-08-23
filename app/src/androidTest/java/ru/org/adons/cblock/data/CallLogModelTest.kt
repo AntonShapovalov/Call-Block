@@ -68,14 +68,12 @@ class CallLogModelTest : BaseModelTest() {
         assertTrue(subscription.isUnsubscribed)
     }
 
-    private fun printItemDetails(item: CallLogItem): CallLogItem {
-        return with(item) {
-            log("id=" + id)
-            log("phoneNumber = " + phoneNumber)
-            log("date = " + date)
-            log("name = " + name)
-            item
-        }
+    private fun printItemDetails(item: CallLogItem): CallLogItem = with(item) {
+        log("id=" + id)
+        log("phoneNumber = " + phoneNumber)
+        log("date = " + date)
+        log("name = " + name)
+        item
     }
 
 }

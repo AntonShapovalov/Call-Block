@@ -82,17 +82,11 @@ class MainActivity : AppCompatActivity(), IMainListener {
                 .build()
     }
 
-    override fun showProgress() {
-        runOnUiThread { progress.visibility = View.VISIBLE }
-    }
+    override fun showProgress() = runOnUiThread { progress.visibility = View.VISIBLE }
 
-    override fun hideProgress() {
-        runOnUiThread { progress.visibility = View.INVISIBLE }
-    }
+    override fun hideProgress() = runOnUiThread { progress.visibility = View.INVISIBLE }
 
-    override fun showError(message: String) {
-        runOnUiThread { toast(message) }
-    }
+    override fun showError(message: String) = runOnUiThread { toast(message) }
 
     override fun showAddFragment() {
         var fragment = getFragment(AddFragment.ADD_FRAGMENT_TAG)

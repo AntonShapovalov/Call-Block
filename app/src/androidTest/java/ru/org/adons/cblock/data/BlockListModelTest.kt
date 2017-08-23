@@ -94,18 +94,15 @@ class BlockListModelTest : BaseModelTest() {
         testSubscriber.assertUnsubscribed()
     }
 
-    private fun getLogItem(phoneNumber: String, name: String?): CallLogItem {
-        return CallLogItem(1L, phoneNumber, Date().time, name, false, false)
-    }
+    private fun getLogItem(phoneNumber: String, name: String?): CallLogItem = CallLogItem(
+            1L, phoneNumber, Date().time, name, false, false)
 
-    private fun printItemDetails(item: BlockListItem): BlockListItem {
-        return with(item) {
-            log("id=" + id.toString())
-            log("phone=" + phoneNumber)
-            log("date=" + DateUtils.getRelativeTimeSpanString(date))
-            log("name=" + name)
-            item
-        }
+    private fun printItemDetails(item: BlockListItem): BlockListItem = with(item) {
+        log("id=" + id.toString())
+        log("phone=" + phoneNumber)
+        log("date=" + DateUtils.getRelativeTimeSpanString(date))
+        log("name=" + name)
+        item
     }
 
 }

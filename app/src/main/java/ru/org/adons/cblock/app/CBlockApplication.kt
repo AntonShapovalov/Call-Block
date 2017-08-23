@@ -20,10 +20,9 @@ class CBlockApplication : Application() {
         }
     }
 
-    private fun buildApplicationComponent(): ApplicationComponent {
-        return DaggerApplicationComponent.builder()
-                .applicationModule(ApplicationModule(applicationContext))
-                .build()
-    }
+    private fun buildApplicationComponent(): ApplicationComponent = DaggerApplicationComponent
+            .builder()
+            .applicationModule(ApplicationModule(applicationContext))
+            .build()
 
 }

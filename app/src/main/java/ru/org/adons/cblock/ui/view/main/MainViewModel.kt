@@ -23,32 +23,25 @@ class MainViewModel @Inject constructor() {
     @Inject lateinit var blockListModel: BlockListModel
     @Inject lateinit var blockManager: BlockManager
 
-    fun getBlockList(): Observable<List<BlockListItem>> {
-        return blockListModel.getBlockList()
-                .doOnSubscribe { logSubscribe("getBlockList") }
-                .doOnUnsubscribe { logUnsubscribe("getBlockList") }
-    }
+    fun getBlockList(): Observable<List<BlockListItem>> = blockListModel.getBlockList()
+            .doOnSubscribe { logSubscribe("getBlockList") }
+            .doOnUnsubscribe { logUnsubscribe("getBlockList") }
 
-    fun getServiceState(): Observable<Boolean> {
-        return Observable.fromCallable { pref.serviceState }
-    }
+    fun getServiceState(): Observable<Boolean> = Observable.fromCallable { pref.serviceState }
 
-    fun changeServiceState(isEnable: Boolean): Observable<String> {
-        return Observable.just(isEnable)
-                .map {
-                    pref.serviceState = it
-                    if (it) {
-                        BlockService.start(context)
-                        context.getString(R.string.main_notification_text_enable)
-                    } else {
-                        BlockService.stop(context)
-                        context.getString(R.string.main_toast_text_disable)
-                    }
+    fun changeServiceState(isEnable: Boolean): Observable<String> = Observable
+            .just(isEnable)
+            .map {
+                pref.serviceState = it
+                if (it) {
+                    BlockService.start(context)
+                    context.getString(R.string.main_notification_text_enable)
+                } else {
+                    BlockService.stop(context)
+                    context.getString(R.string.main_toast_text_disable)
                 }
-    }
+            }
 
-    fun deletePhone(itemId: Long) {
-        blockManager.deletePhone(blockListModel, itemId)
-    }
+    fun deletePhone(itemId: Long) = blockManager.deletePhone(blockListModel, itemId)
 
 }

@@ -19,16 +19,14 @@ class CallLogModel @Inject constructor() {
     /**
      * @return list of incoming or missed calls
      */
-    fun getCallLogList(): Observable<List<CallLogItem>> {
-        return resolver.createQuery(CALLS_URI, CALLS_SUMMARY_PROJECTION,
-                CALL_SELECT, null, CallLog.Calls.DEFAULT_SORT_ORDER, false)
-                .mapToList {
-                    CallLogItem(id = it.getLong(COLUMN_ID_INDEX),
-                            phoneNumber = it.getString(COLUMN_NUMBER_INDEX),
-                            date = it.getLong(COLUMN_DATE_INDEX),
-                            name = it.getString(COLUMN_NAME_INDEX))
-                }
-    }
+    fun getCallLogList(): Observable<List<CallLogItem>> = resolver
+            .createQuery(CALLS_URI, CALLS_SUMMARY_PROJECTION, CALL_SELECT, null, CallLog.Calls.DEFAULT_SORT_ORDER, false)
+            .mapToList {
+                CallLogItem(id = it.getLong(COLUMN_ID_INDEX),
+                        phoneNumber = it.getString(COLUMN_NUMBER_INDEX),
+                        date = it.getLong(COLUMN_DATE_INDEX),
+                        name = it.getString(COLUMN_NAME_INDEX))
+            }
 
     companion object {
         private val CALLS_URI = CallLog.Calls.CONTENT_URI

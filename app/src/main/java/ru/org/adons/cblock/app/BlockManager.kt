@@ -58,8 +58,6 @@ class BlockManager @Inject constructor() {
 
      * @return list of blocked phones
      */
-    fun getBlockListUpdate(): Observable<List<BlockListItem>> {
-        return blockListSubject
-    }
+    fun getBlockListUpdate(): Observable<List<BlockListItem>> = blockListSubject
 
 }

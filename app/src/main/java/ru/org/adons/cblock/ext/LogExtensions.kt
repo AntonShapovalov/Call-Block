@@ -11,21 +11,13 @@ enum class Type {
     debug, error
 }
 
-fun log(message: String, type: Type = Type.debug) {
-    log("LOG", message, type)
-}
+fun log(message: String, type: Type = Type.debug) = log("LOG", message, type)
 
-fun Any.logThis(message: String) {
-    log(javaClass.simpleName, message)
-}
+fun Any.logThis(message: String) = log(javaClass.simpleName, message)
 
-fun Any.logSubscribe(message: String) {
-    log(javaClass.simpleName, "$message:subscribe")
-}
+fun Any.logSubscribe(message: String) = log(javaClass.simpleName, "$message:subscribe")
 
-fun Any.logUnsubscribe(message: String) {
-    log(javaClass.simpleName, "$message:un-subscribe")
-}
+fun Any.logUnsubscribe(message: String) = log(javaClass.simpleName, "$message:un-subscribe")
 
 private fun log(tag: String, message: String, type: Type = Type.debug) {
     val prefix = "***"

@@ -18,21 +18,16 @@ internal class ApplicationModule(private val context: Context) {
 
     @Singleton
     @Provides
-    fun provideContext(): Context {
-        return context
-    }
+    fun provideContext(): Context = context
 
     @Singleton
     @Provides
-    fun provideContentResolver(sqlBrite: SqlBrite): BriteContentResolver {
-        return sqlBrite.wrapContentProvider(context.contentResolver, Schedulers.immediate())
-    }
+    fun provideContentResolver(sqlBrite: SqlBrite): BriteContentResolver = sqlBrite
+            .wrapContentProvider(context.contentResolver, Schedulers.immediate())
 
     @Singleton
     @Provides
-    fun provideSqlBrite(): SqlBrite {
-        return SqlBrite.Builder().build()
-    }
+    fun provideSqlBrite(): SqlBrite = SqlBrite.Builder().build()
 
     @Singleton
     @Provides
