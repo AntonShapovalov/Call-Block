@@ -13,7 +13,6 @@ import java.util.*
  * Default recycler list initialization
  * @param adapter recycler adapter
  */
-
 fun RecyclerView.initList(adapter: RecyclerView.Adapter<*>) {
     val layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
     layoutManager.isSmoothScrollbarEnabled = true
@@ -21,12 +20,16 @@ fun RecyclerView.initList(adapter: RecyclerView.Adapter<*>) {
     this.adapter = adapter
 }
 
-
 @Suppress("DEPRECATION")
-fun String.formatPhoneNumber(): String = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-    PhoneNumberUtils.formatNumber(this, Locale.getDefault().country)
-} else {
-    PhoneNumberUtils.formatNumber(this)
+fun String.formatPhoneNumber(): String = try {
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+        PhoneNumberUtils.formatNumber(this, Locale.getDefault().country)
+    } else {
+        PhoneNumberUtils.formatNumber(this)
+    }
+} catch (e: Exception) {
+    e.printStackTrace()
+    "UNKNOWN"
 }
 
 fun Long.getDescription(name: String?): String {

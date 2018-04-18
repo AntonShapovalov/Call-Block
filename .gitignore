@@ -1,9 +1,7 @@
 # Android Studio
 .gradle
 /local.properties
-/.idea/workspace.xml
-/.idea/libraries
-/.idea/dictionaries
+/.idea
 /build
 
 # Windows image file caches
