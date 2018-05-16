@@ -9,7 +9,7 @@ def ext = rootProject.ext
 android {
     compileSdkVersion ext.compileSdkVersion
     defaultConfig {
-        applicationId "ru.org.adons.cblock"
+        applicationId "mobile.addons.cblock"
         minSdkVersion ext.minSdkVersion
         targetSdkVersion ext.targetSdkVersion
         versionCode 2

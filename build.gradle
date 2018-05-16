@@ -1,7 +1,7 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 buildscript {
     ext {
-        kotlinVersion = '1.2.31'
+        kotlinVersion = '1.2.41'
         minSdkVersion = 17
         targetSdkVersion = 27
         compileSdkVersion = 27
@@ -24,7 +24,7 @@ buildscript {
         google()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.1.1'
+        classpath 'com.android.tools.build:gradle:3.1.2'
         classpath 'org.greenrobot:greendao-gradle-plugin:3.2.2'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"
     }
@@ -35,4 +35,8 @@ allprojects {
         jcenter()
         google()
     }
+}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
 }
