@@ -35,7 +35,7 @@ class StateListener(context: Context, manager: TelephonyManager, private val pho
                     val isMuted = mute(ringState)
                     // try to end call
                     endCall()
-                    log("blocked number:" + incomingNumber)
+                    log("blocked number:$incomingNumber")
                     // un-mute
                     if (isMuted) audio.ringerMode = ringState
                 }

@@ -20,7 +20,7 @@ import mobile.addons.cblock.ui.activity.IMainListener
 class PermFragment : BaseFragment<IMainListener>() {
 
     companion object {
-        val PERM_FRAGMENT_TAG = "PERM_FRAGMENT_TAG"
+        const val PERM_FRAGMENT_TAG = "PERM_FRAGMENT_TAG"
     }
 
     @Suppress("OverridingDeprecatedMember", "DEPRECATION")

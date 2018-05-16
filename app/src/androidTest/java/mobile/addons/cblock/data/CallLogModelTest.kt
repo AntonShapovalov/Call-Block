@@ -4,8 +4,6 @@ import android.os.Build
 import android.support.test.InstrumentationRegistry.getInstrumentation
 import android.support.test.InstrumentationRegistry.getTargetContext
 import android.support.test.runner.AndroidJUnit4
-import junit.framework.Assert.assertFalse
-import junit.framework.Assert.assertTrue
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -14,6 +12,8 @@ import mobile.addons.cblock.ext.logSubscribe
 import mobile.addons.cblock.ext.logThis
 import mobile.addons.cblock.ext.safeUnsubscribe
 import mobile.addons.cblock.model.CallLogModel
+import org.junit.Assert.assertFalse
+import org.junit.Assert.assertTrue
 import rx.Observable
 import rx.observers.TestSubscriber
 import javax.inject.Inject
@@ -33,8 +33,8 @@ class CallLogModelTest : BaseModelTest() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             val ui = getInstrumentation().uiAutomation
             val grant = "pm grant " + getTargetContext().packageName
-            ui.executeShellCommand(grant + " android.permission.READ_CALL_LOG")
-            ui.executeShellCommand(grant + " android.permission.WRITE_CALL_LOG")
+            ui.executeShellCommand("$grant android.permission.READ_CALL_LOG")
+            ui.executeShellCommand("$grant android.permission.WRITE_CALL_LOG")
         }
 
         // provide dependencies

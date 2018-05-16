@@ -1,11 +1,12 @@
 package mobile.addons.cblock.data
 
+import android.support.test.runner.AndroidJUnit4
 import android.text.format.DateUtils
-import junit.framework.Assert.*
-import org.junit.Before
-import org.junit.Test
 import mobile.addons.cblock.ext.log
 import mobile.addons.cblock.model.BlockListModel
+import org.junit.Assert.*
+import org.junit.Before
+import org.junit.Test
 import org.junit.runner.RunWith
 import rx.Observable
 import rx.observers.TestSubscriber

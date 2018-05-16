@@ -20,7 +20,7 @@ import javax.inject.Inject
 class AddFragment : BaseFragment<IMainListener>() {
 
     companion object {
-        val ADD_FRAGMENT_TAG = "ADD_FRAGMENT_TAG"
+        const val ADD_FRAGMENT_TAG = "ADD_FRAGMENT_TAG"
     }
 
     private val adapter: CallLogAdapter = CallLogAdapter()

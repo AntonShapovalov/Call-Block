@@ -34,12 +34,12 @@ class CallLogModel @Inject constructor() {
                 CallLog.Calls.NUMBER,
                 CallLog.Calls.DATE,
                 CallLog.Calls.CACHED_NAME)
-        private val COLUMN_ID_INDEX = 0
-        private val COLUMN_NUMBER_INDEX = 1
-        private val COLUMN_DATE_INDEX = 2
-        private val COLUMN_NAME_INDEX = 3
+        private const val COLUMN_ID_INDEX = 0
+        private const val COLUMN_NUMBER_INDEX = 1
+        private const val COLUMN_DATE_INDEX = 2
+        private const val COLUMN_NAME_INDEX = 3
 
-        private val CALL_SELECT = "(${CallLog.Calls.TYPE} = ${CallLog.Calls.INCOMING_TYPE}" +
+        private const val CALL_SELECT = "(${CallLog.Calls.TYPE} = ${CallLog.Calls.INCOMING_TYPE}" +
                 " OR ${CallLog.Calls.TYPE} = ${CallLog.Calls.MISSED_TYPE})"
     }
 

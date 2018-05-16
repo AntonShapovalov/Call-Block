@@ -8,7 +8,7 @@ import mobile.addons.cblock.scope.ViewScope
  * Provide Application and data-model dependencies for Service
  */
 @ViewScope
-@Component(dependencies = arrayOf(ApplicationComponent::class))
+@Component(dependencies = [(ApplicationComponent::class)])
 interface ServiceComponent {
 
     fun inject(service: BlockService)

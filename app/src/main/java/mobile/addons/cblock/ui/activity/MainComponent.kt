@@ -10,7 +10,7 @@ import mobile.addons.cblock.ui.view.main.MainFragment
  * Provide Application and data-model dependencies for View-Models
  */
 @ViewScope
-@Component(dependencies = arrayOf(ApplicationComponent::class))
+@Component(dependencies = [(ApplicationComponent::class)])
 interface MainComponent {
 
     fun inject(mainFragment: MainFragment)

@@ -10,7 +10,7 @@ import javax.inject.Singleton
  * Provide application scope dependencies (Context, Preferences, DaoSession)
  */
 @Singleton
-@Component(modules = arrayOf(ApplicationModule::class))
+@Component(modules = [(ApplicationModule::class)])
 interface ApplicationComponent {
 
     fun context(): Context
