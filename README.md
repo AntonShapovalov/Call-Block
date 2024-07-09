@@ -1,8 +1,8 @@
 # Android-CBlock
 
-#### Android application to block annoying incoming calls
+#### Android application to block annoying incoming calls:
 
-![link](../../../img/blob/master/cblock/main_screen.png) &nbsp;&nbsp;&nbsp;&nbsp; ![link](../../../img/blob/master/cblock/add_phone.png)
+![link](screenshots/main_screen.png) &nbsp;&nbsp;&nbsp;&nbsp; ![link](screenshots/add_phone.png)
 
 #### Add phone in block list in 3 clicks:
 
@@ -10,7 +10,7 @@
 2. Select phones from incoming calls list and click `done`
 3. Click switch `Block Service`
 
-When Service enabled, notification appears
+When Service is enabled, notification appears at the system bar.
 
 #### How to install
 
