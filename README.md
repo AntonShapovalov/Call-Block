@@ -14,7 +14,7 @@ When Service is enabled, notification appears at the system bar.
 
 #### How to install
 
-Please use [app/app-release.apk](./app/app-release.apk) file
+Please use [app/app-release.apk](./app/app-release.apk) file.
 
 #### Used language and libraries
  * [Kotlin](https://kotlinlang.org/docs/tutorials/kotlin-android.html) - do more with less lines of code
