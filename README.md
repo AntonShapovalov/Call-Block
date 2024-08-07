@@ -5,7 +5,7 @@ Android application to block annoying incoming calls.
 #### Screens
 
 Applicaiton contains two screens:
-1. Home screen - contains the list of all blocked numbers.
+1. Home screen - displays the list of all blocked numbers.
 2. Incoming calls screen - allows to select number and add it to the block list.
 
 ![link](screenshots/main_screen.png) &nbsp;&nbsp;&nbsp;&nbsp; ![link](screenshots/add_phone.png)
