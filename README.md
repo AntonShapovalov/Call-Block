@@ -1,6 +1,6 @@
 # Android-CBlock
 
-Android application to block annoying incoming calls.
+Android application blocks annoying incoming calls.
 
 #### Screens
 
